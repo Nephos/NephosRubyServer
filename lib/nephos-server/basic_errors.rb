@@ -5,3 +5,4 @@ class InvalidRouteController < InvalidRoute; end
 class InvalidRouteMethod < InvalidRoute; end
 
 class InvalidApplication < RuntimeError; end
+class NoGitBinary < InvalidApplication; end
