@@ -19,6 +19,15 @@ This is a simple web server, based on rack and puma, with a minimal help:
   - add ressource (elarge urls)
 - Database connection
 
+
+# Start
+
+```sh
+bundle install
+nephos-server -p 8080 # port is not required
+```
+
+
 # Documentation
 
 ## Controller
