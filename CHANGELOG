@@ -3,3 +3,7 @@ v0.1
 	valid gemspec
 	basic working server
 	basic generator
+
+v0.1.1
+	rename src to controllers
+	improve generator
