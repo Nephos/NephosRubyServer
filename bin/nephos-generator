@@ -45,9 +45,16 @@ def initialize_application
   exec("bundle install")
 end
 
+
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
+end.parse!
+
 case ARGV[0]
 when "c", "controller"
-  if not ARGV[1].to_s.empty?
+  if not ARGV[1].to_s.match(/[\w_\-\.]+/)
     generate_controller("#{ARGV[1]}Controller", "src/#{ARGV[1]}.rb")
   end
 when "a", "appli", "application"
@@ -58,6 +65,4 @@ when "a", "appli", "application"
   end
   initialize_application
   puts "Application initialized"
-else
-  puts "help: generate c[ontroller] name"
 end
