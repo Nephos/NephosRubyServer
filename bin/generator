@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+def generate_controller(name, file)
+  f = File.open(file, 'w')
+  f << <<EOF
+class #{name} < Nephos::Controller
+  def root
+    return {plain: "index"}
+  end
+end
+EOF
+end
+
+case ARGV[0]
+when "c", "controller"
+  if not ARGV[1].to_s.empty?
+    generate_controller("#{ARGV[1]}Controller", "src/#{ARGV[1]}.rb")
+  end
+else
+  puts "help: generate c[ontroller] name"
+end
