@@ -1,7 +1,7 @@
 require_relative 'controller'
 
 Dir[File.expand_path "src/*.rb"].each do |f|
-  require_relative(f) and puts "#{f} loaded"
+  load(f) and puts "#{f} loaded"
 end
 puts
 

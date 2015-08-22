@@ -14,4 +14,5 @@ def get what
   puts "get route: #{what}"
 end
 
-require_relative '../../../routes.rb'
+# require_relative '../../../routes.rb'
+load 'routes.rb'
