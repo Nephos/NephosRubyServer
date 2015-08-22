@@ -9,12 +9,15 @@ This is a simple web server, based on rack and puma, with a minimal help:
 
 # TODO
 
+- Create a gem
+  - binaries with right require
 - Improve rendering
   - html support
 - Routing
   - improve get with arguments
   - add post and put (like get)
   - add ressource (elarge urls)
+- Database connection
 
 # Documentation
 
