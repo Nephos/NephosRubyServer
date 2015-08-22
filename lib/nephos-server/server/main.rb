@@ -5,6 +5,7 @@
 require 'open-uri'
 require 'rack'
 
+require_relative 'basic_errors'
 require_relative 'responder'
 require_relative '../routing/execute'
 
