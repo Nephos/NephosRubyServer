@@ -19,7 +19,6 @@ This is a simple web server, based on rack and puma, with a minimal help:
   - html support
 - Routing
   - improve get with arguments
-  - add post and put (like get)
   - add ressource (elarge urls)
 - Database connection
 
