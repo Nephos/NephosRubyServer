@@ -1,6 +1,23 @@
 #!/usr/bin/env ruby
 
+GEMFILE = <<EOF
+source 'https://rubygems.org'
+
+gem 'nephos-server'
+EOF
+
+ROUTE_RB = <<EOF
+#get url: "/", controller: "MainController", method: "root"
+#get url: "/add", controller: "MainController", method: "add_url"
+#get url: "/rm", controller: "MainController", method: "rm_url"
+EOF
+
 def generate_controller(name, file)
+  if File.exists? file
+    print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
+    r = STDIN.gets.to_s.chomp
+    raise "File #{file} already exists" unless r.match(/y(es)?/)
+  end
   f = File.open(file, 'w')
   f << <<EOF
 class #{name} < Nephos::Controller
@@ -11,11 +28,36 @@ end
 EOF
 end
 
+def create_application_dir dir
+  raise "Directory #{dir} already exists" if Dir.exists? dir
+  Dir.mkdir dir
+end
+
+def move_to_application_dir dir
+  Dir.chdir dir
+end
+
+def initialize_application
+  raise "Not an empty dir" unless Dir[File.expand_path "*"].empty?
+  File.write "routes.rb", ROUTE_RB
+  File.write "Gemfile", GEMFILE
+  Dir.mkdir "controllers"
+  exec("bundle install")
+end
+
 case ARGV[0]
 when "c", "controller"
   if not ARGV[1].to_s.empty?
     generate_controller("#{ARGV[1]}Controller", "src/#{ARGV[1]}.rb")
   end
+when "a", "appli", "application"
+  if not ARGV[1].to_s.empty?
+    create_application_dir(ARGV[1])
+    puts "Application #{ARGV[1]} created"
+    move_to_application_dir(ARGV[1])
+  end
+  initialize_application
+  puts "Application initialized"
 else
   puts "help: generate c[ontroller] name"
 end

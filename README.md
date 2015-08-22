@@ -28,6 +28,8 @@ This is a simple web server, based on rack and puma, with a minimal help:
 
 ```sh
 gem install nephos-server
+nephos-generator application MyApp
+cd MyApp
 nephos-server -p 8080 # port is not required
 ```
 
@@ -36,8 +38,8 @@ nephos-server -p 8080 # port is not required
 
 ## Controller
 
-To create a controller, simply add it to ``src/``.
-The basic code of a controller can be generated via ``bin/generate controller NAME``.
+To create a controller, simply add it to ``controllers/``.
+The basic code of a controller can be generated via ``nephos-generator controller NAME``.
 
 ```ruby
 class Example < Nephos::Controller

@@ -1,6 +1,6 @@
 require_relative 'controller'
 
-Dir[File.expand_path "src/*.rb"].each do |f|
+Dir[File.expand_path "controllers/*.rb"].each do |f|
   load(f) and puts "#{f} loaded"
 end
 puts
