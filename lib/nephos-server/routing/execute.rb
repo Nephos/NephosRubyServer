@@ -10,13 +10,13 @@ module Nephos
 
     ALL = []
 
-    # @param: arg [Hash or Symbol]
+    # @params: arg [Hash or Symbol]
     # shortcut to #{Nephos::Responder.render}
     def self.render arg
       Responder.render arg
     end
 
-    # @param: path [Array]
+    # @params: path [Array]
     # find the right route to use from the url
     def self.parse_path path
       route = "/" + path.join("/")

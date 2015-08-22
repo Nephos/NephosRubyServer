@@ -2,7 +2,7 @@ class RoutingError < Exception; end
 class InvalidRoute < RoutingError; end
 class InvalidGetRoute < InvalidRoute; end
 
-# @param: what [Hash]
+# @params: what [Hash]
 def get what
   raise InvalidGetRoute if not what.keys.include? :url
   raise InvalidGetRoute if not what.keys.include? :controller
