@@ -45,24 +45,28 @@ def initialize_application
   exec("bundle install")
 end
 
-
 require 'optparse'
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
-end.parse!
+begin
+  OptionParser.new do |opts|
+    opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
+  end.parse!
 
-case ARGV[0]
-when "c", "controller"
-  if not ARGV[1].to_s.match(/[\w_\-\.]+/)
-    generate_controller("#{ARGV[1]}Controller", "src/#{ARGV[1]}.rb")
+  case ARGV[0]
+  when "c", "controller"
+    if not ARGV[1].to_s.match(/[\w_\-\.]+/)
+      generate_controller("#{ARGV[1]}Controller", "src/#{ARGV[1]}.rb")
+    end
+  when "a", "appli", "application"
+    if not ARGV[1].to_s.empty?
+      create_application_dir(ARGV[1])
+      puts "Application #{ARGV[1]} created"
+      move_to_application_dir(ARGV[1])
+    end
+    initialize_application
+    puts "Application initialized"
   end
-when "a", "appli", "application"
-  if not ARGV[1].to_s.empty?
-    create_application_dir(ARGV[1])
-    puts "Application #{ARGV[1]} created"
-    move_to_application_dir(ARGV[1])
-  end
-  initialize_application
-  puts "Application initialized"
+
+rescue => err
+  puts "Error: #{err.message}"
 end

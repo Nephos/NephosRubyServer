@@ -2,30 +2,35 @@
 
 require 'optparse'
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: nephos-server [-p=port] [--debug]"
+begin
+  OptionParser.new do |opts|
+    opts.banner = "Usage: nephos-server [-p=port] [--debug]"
 
-  $server_port = ENV["SERVER_PORT"] || 8080
-  opts.on("-p=nb", "--port=nb", "Port") do |port|
-    $server_port = Integer(port)
+    $server_port = ENV["SERVER_PORT"] || 8080
+    opts.on("-p=nb", "--port=nb", "Port") do |port|
+      $server_port = Integer(port)
+    end
+
+    opts.on("--debug") do
+      $debug = true
+    end
+
+  end.parse!
+
+  if $debug
+    require_relative "../lib/nephos-server"
+  else
+    require 'nephos-server'
   end
 
-  opts.on("--debug") do
-    $debug = true
+  if not $debug and
+    (not File.exists? "Gemfile.lock" or
+     not File.read("Gemfile.lock").split.index("nephos-server"))
+    raise InvalidApplicationError
   end
 
-end.parse!
+  Nephos::Server.start($server_port)
 
-if $debug
-  require_relative "../lib/nephos-server"
-else
-  require 'nephos-server'
+rescue => err
+  puts "Error: #{err.message}"
 end
-
-if not $debug and
-  (not File.exists? "Gemfile.lock" or
-   not File.read("Gemfile.lock").split.index("nephos-server"))
-  raise InvalidApplicationError
-end
-
-Nephos::Server.start($server_port)
