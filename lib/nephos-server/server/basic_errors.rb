@@ -1,2 +1,1 @@
-
 class InvalidApplicationError < RuntimeError ; end
