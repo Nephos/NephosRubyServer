@@ -18,9 +18,9 @@ module Nephos
 
     # @params: path [Array]
     # find the right route to use from the url
-    def self.parse_path path
+    def self.parse_path path, verb
       route = "/" + path.join("/")
-      return ALL.find{|e| e[:url] == route}
+      return ALL.find{|e| e[:url] == route and e[:verb] == verb}
     end
 
     def self.execute(env)
@@ -33,7 +33,7 @@ module Nephos
       parsed = {route: route, verb: verb, from: from, path: path, args: args}
       call = parse_path(path)
       return render status: 404 if call.nil?
-      call = parse_path(path)
+      call = parse_path(path, verb)
       begin
         controller = Module.const_get(call[:controller]).new(env, parsed)
         return render(controller.send(call[:method]) || {status: 500})
