@@ -1,1 +1,1 @@
-web: bundle exec bin/server -p $PORT
+web: bundle exec bin/nephos-server -p $PORT
