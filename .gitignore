@@ -1,4 +1,3 @@
 *.swp
-src/*.rb
-routes.rb
 *.gem
+routes.rb

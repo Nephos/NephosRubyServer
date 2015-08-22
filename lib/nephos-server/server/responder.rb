@@ -5,6 +5,8 @@ module Nephos
     CT_TP = {'Content-type' => 'text/plain' + CT_CHARSET_}
     CT_TJ = {'Content-type' => 'text/javascript' + CT_CHARSET_}
     CT_TH = {'Content-type' => 'text/html' + CT_CHARSET_}
+
+    # @params: params [Hash, Symbol]
     def self.render params
       if params == :empty
         return [204, CT_TP, [""]]
