@@ -9,8 +9,6 @@ This is a simple web server, based on rack and puma, with a minimal help:
 
 # TODO
 
-- Create a gem
-  - binaries with right require
 - Improve rendering
   - html support
 - Routing
@@ -23,7 +21,7 @@ This is a simple web server, based on rack and puma, with a minimal help:
 # Start
 
 ```sh
-bundle install
+gem install nephos-server
 nephos-server -p 8080 # port is not required
 ```
 

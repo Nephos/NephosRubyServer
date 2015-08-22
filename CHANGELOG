@@ -1,0 +1,5 @@
+v0.1
+	basic routing, rendering, and controllers
+	valid gemspec
+	basic working server
+	basic generator

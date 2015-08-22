@@ -32,4 +32,8 @@ Gem::Specification.new do |s|
   s.license     = 'GNU/GPLv3'
   #s.cert_chain  = ['certs/poulet_a.pem']
   #s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem') if $0 =~ /gem\z/
+
+  s.add_dependency 'nomorebeer', '~> 1.0'
+  s.add_dependency 'rack', '~> 1.6'
+
 end
