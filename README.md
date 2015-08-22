@@ -6,6 +6,18 @@ This is a simple web server, based on rack and puma, with a minimal help:
 - Rendering
 - Routing
 
+
+# TODO
+
+- Improve rendering
+  - html support
+- Routing
+  - improve get with arguments
+  - add post and put (like get)
+  - add ressource (elarge urls)
+
+# Documentation
+
 ## Controller
 
 To create a controller, simply add it to ``src/``.
