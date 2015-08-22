@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
                	  'lib/nephos-server.rb',
                	  'lib/nephos-server/server/main.rb',
                	  'lib/nephos-server/server/responder.rb',
+               	  'lib/nephos-server/server/basic_errors.rb',
                	  'lib/nephos-server/routing/execute.rb',
                	  'lib/nephos-server/routing/load.rb',
                	  'lib/nephos-server/routing/controller.rb',
