@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/server/main"
+
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: main.rb [update] [-t n] [-s n] [-i id]"
+
+  $server_port = ENV["SERVER_PORT"] || 8080
+  opts.on("-p=nb", "--port=nb", "Port") do |port|
+    $server_port = Integer(port)
+  end
+end.parse!
+
+Nephos::Server.start($server_port)
