@@ -1,9 +1,12 @@
 v0.1
-	basic routing, rendering, and controllers
-	valid gemspec
-	basic working server
-	basic generator
+	* basic routing, rendering, and controllers
+	* valid gemspec
+	* basic working server
+	* basic generator
 
 v0.1.1
-	rename src to controllers
-	improve generator
+	* rename src to controllers
+	* improve generator
+
+v0.1.2
+	* fix procfile
