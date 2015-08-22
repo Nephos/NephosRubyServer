@@ -31,9 +31,8 @@ module Nephos
       args = Hash[route.query.to_s.split("&").map{|e| e.split("=")}]
       puts "#{from} [#{verb}] \t ---> \t #{route}"
       parsed = {route: route, verb: verb, from: from, path: path, args: args}
-      call = parse_path(path)
-      return render status: 404 if call.nil?
       call = parse_path(path, verb)
+      return render status: 404 if call.nil?
       begin
         controller = Module.const_get(call[:controller]).new(env, parsed)
         return render(controller.send(call[:method]) || {status: 500})

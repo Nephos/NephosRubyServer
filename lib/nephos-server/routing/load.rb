@@ -7,7 +7,7 @@ module Nephos
 
     def self.add(what, verb)
       Nephos::Route::ALL << what.merge(verb: verb)
-      puts "#{verb} #{what}"
+      puts "[#{verb}] #{what[:url]} \t ---> \t #{what[:controller]}##{what[:method]}"
     end
 
     def self.check!(what)
@@ -23,19 +23,20 @@ end
 # @params: what [Hash]
 def get what
   Nephos::Route.check!(what)
-  Nephos::Route.add(what, :get)
+  Nephos::Route.add(what, "GET")
 end
 
 # @params: what [Hash]
 def post what
   Nephos::Route.check!(what)
-  Nephos::Route.add(what, :post)
+  Nephos::Route.add(what, "POST")
 end
 
 # @params: what [Hash]
 def put what
   Nephos::Route.check!(what)
-  Nephos::Route.add(what, :put)
+  Nephos::Route.add(what, "PUT")
 end
 
 load 'routes.rb'
+puts
