@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/server/main"
+# require_relative "../lib/nephos-server"
+require 'nephos-server'
 
 require 'optparse'
 
