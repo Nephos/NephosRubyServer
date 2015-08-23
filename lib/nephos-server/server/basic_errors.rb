@@ -1,1 +1,1 @@
-class InvalidApplicationError < RuntimeError ; end
+class InvalidApplicationError < RuntimeError; end

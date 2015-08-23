@@ -1,4 +1,4 @@
-class RoutingError < Exception; end
+class RoutingError < StandardError; end
 class InvalidRoute < RoutingError; end
 class InvalidRouteUrl < InvalidRoute; end
 class InvalidRouteController < InvalidRoute; end
@@ -13,9 +13,9 @@ module Nephos
     end
 
     def self.check!(what)
-      raise InvalidRouteUrl if not what.keys.include? :url
-      raise InvalidRouteController if not what.keys.include? :controller
-      raise InvalidRouteMethod if not what.keys.include? :method
+      raise InvalidRouteUrl, "Missing URL" unless what.keys.include? :url
+      raise InvalidRouteController, "Missing Controller" unless what.keys.include? :controller
+      raise InvalidRouteMethod, "Missing Method" unless what.keys.include? :method
       begin
         controller = Module.const_get(what[:controller])
       rescue
@@ -39,6 +39,7 @@ end
 
 # @params what [Hash]
 def get what
+  raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.expand_path File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add(what, "GET")
@@ -46,6 +47,7 @@ end
 
 # @params what [Hash]
 def post what
+  raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add(what, "POST")
@@ -53,6 +55,7 @@ end
 
 # @params what [Hash]
 def put what
+  raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add(what, "PUT")
