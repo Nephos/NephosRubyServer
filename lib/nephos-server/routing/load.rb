@@ -1,6 +1,8 @@
 class RoutingError < Exception; end
 class InvalidRoute < RoutingError; end
-class InvalidGetRoute < InvalidRoute; end
+class InvalidRouteUrl < InvalidRoute; end
+class InvalidRouteController < InvalidRoute; end
+class InvalidRouteMethod < InvalidRoute; end
 
 module Nephos
   module Route
@@ -11,9 +13,9 @@ module Nephos
     end
 
     def self.check!(what)
-      raise InvalidGetRoute if not what.keys.include? :url
-      raise InvalidGetRoute if not what.keys.include? :controller
-      raise InvalidGetRoute if not what.keys.include? :method
+      raise InvalidRouteUrl if not what.keys.include? :url
+      raise InvalidRouteController if not what.keys.include? :controller
+      raise InvalidRouteMethod if not what.keys.include? :method
       # TODO: more check to do
     end
 
