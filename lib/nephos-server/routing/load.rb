@@ -16,7 +16,17 @@ module Nephos
       raise InvalidRouteUrl if not what.keys.include? :url
       raise InvalidRouteController if not what.keys.include? :controller
       raise InvalidRouteMethod if not what.keys.include? :method
-      # TODO: more check to do
+      begin
+        controller = Module.const_get(what[:controller])
+      rescue
+        raise InvalidRouteController, "Controller \"#{what[:controller]}\" doesn't exists"
+      end
+      if not controller.ancestors.include? Nephos::Controller
+        raise InvalidRouteController, "Class \"#{what[:controller]}\" is not a Nephos::Controller"
+      end
+      if not controller.new({}, {}).respond_to? what[:method]
+        raise InvalidRouteMethod, "No method named \"#{what[:method]}\""
+      end rescue raise InvalidRouteController, "Cannot initialize controller"
     end
 
   end
