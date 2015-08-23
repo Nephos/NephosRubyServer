@@ -4,4 +4,4 @@ class InvalidRouteUrl < InvalidRoute; end
 class InvalidRouteController < InvalidRoute; end
 class InvalidRouteMethod < InvalidRoute; end
 
-class InvalidApplicationError < RuntimeError; end
+class InvalidApplication < RuntimeError; end

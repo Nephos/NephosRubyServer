@@ -26,7 +26,7 @@ begin
   if not $debug and
     (not File.exists? "Gemfile.lock" or
      not File.read("Gemfile.lock").split.index("nephos-server"))
-    raise InvalidApplicationError
+    raise InvalidApplication
   end
 
   Nephos::Server.start($server_port)
