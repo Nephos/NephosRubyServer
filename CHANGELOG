@@ -1,6 +1,8 @@
 v0.1.8
 	* improve rendering
 	* add html rendering
+	* improve documentation
+	* improve exceptions
 
 v0.1.7
 	* improve routing error

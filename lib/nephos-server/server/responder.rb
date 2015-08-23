@@ -20,7 +20,9 @@ module Nephos
     # @param params [Hash] containing :type => "kind/type", example: "text/html"
     def self.ct_specific(params)
       kind, type = params[:type].match(/^(\w+)\/(\w+)$/)[1..2]
-      raise InvalidContentType, "params[:type] must match with \"kind/type\"" if kind.nil? or type.nil?
+      if kind.nil? or type.nil?
+        raise InvalidContentType, "params[:type] must match with \"kind/type\""
+      end
       content_type(kind, type)
     end
 
@@ -29,7 +31,7 @@ module Nephos
       if (params.keys & [:status]).empty?
         params[:status] ||= 200
       end
-      if (params.keys & [:plain, :html, :json]).empty?
+      if (params.keys & [:plain, :html, :json, :type]).empty?
         if params[:status].to_s.match(/^[345]\d\d$/)
           params[:plain] ||= "Error: #{params[:status]} code"
         else
@@ -64,7 +66,7 @@ module Nephos
       return [
         params[:status],
         params_content_type_value(params),
-        [params[params_content_type(params)]],
+        [params[params_content_type(params) || :content]],
       ]
     end
 
