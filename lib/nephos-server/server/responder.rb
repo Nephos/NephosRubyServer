@@ -1,28 +1,53 @@
 module Nephos
   module Responder
 
-    CT_CHARSET_ = '; charset=UTF-8'
-    CT_TP = {'Content-type' => 'text/plain' + CT_CHARSET_}
-    CT_TJ = {'Content-type' => 'text/javascript' + CT_CHARSET_}
-    CT_TH = {'Content-type' => 'text/html' + CT_CHARSET_}
+    CT_CHARSET_PREFIX = '; charset='
+
+    def self.content_type(kind, type, charset='UTF-8')
+      {'Content-type' => "#{kind}/#{type}" + CT_CHARSET_PREFIX + charset}
+    end
+
+    def self.plain
+      content_type(:text, :plain)
+    end
+    def self.html
+      content_type(:text, :html)
+    end
+    def self.json
+      content_type(:text, :javascript)
+    end
+
+    def self.set_default_params params
+      if (params.keys & [:status]).empty?
+        params[:status] ||= 200
+      end
+      if (params.keys & [:plain, :html, :json]).empty?
+        if params[:status].to_s.match(/^[345]\d\d$/)
+          params[:plain] ||= "Error: #{params[:status]} code"
+        else
+          params[:plain] ||= "ok"
+        end
+      end
+      params
+    end
+
+    def self.params_content_type params
+      (params.keys & [:plain, :html, :json]).first
+    end
+
+    def self.params_content_type_value params
+      self.send(params_content_type(params))
+    end
 
     # @params params [Hash, Symbol]
     def self.render params
-      if params == :empty
-        return [204, CT_TP, [""]]
-      elsif params[:status] == 404
-        return [404, CT_TP, ['Error 404 : Not found !']]
-      elsif params[:status] == 500
-        return [500, CT_TP, ['Error 5OO : Internal Server Error !']]
-      elsif params[:status].is_a? Fixnum
-        return [params[:status], CT_TP, ["Error #{params[:status]}"]]
-      elsif params[:json]
-        return [200, CT_TJ, [params[:json].to_json]]
-      elsif params[:plain]
-        return [200, CT_TJ, [params[:plain].to_s]]
-      else
-        render(:empty)
-      end
+      return [204, plain(), [""]] if params == :empty
+      params = set_default_params(params)
+      return [
+        params[:status],
+        params_content_type_value(params),
+        [params[params_content_type(params)]],
+      ]
     end
 
   end

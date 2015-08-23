@@ -15,8 +15,6 @@ This is a simple web server, based on rack and puma, with a minimal help:
 
 # TODO
 
-- Improve rendering
-  - html support
 - Routing
   - improve get with arguments
   - add ressource (elarge urls)
