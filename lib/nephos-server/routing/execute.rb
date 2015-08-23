@@ -19,7 +19,7 @@ module Nephos
     # @params: path [Array]
     # find the right route to use from the url
     def self.parse_path path, verb
-      route = "/" + path.join("/")
+      route = File.join(["/"] + path)
       return ALL.find{|e| e[:url] == route and e[:verb] == verb}
     end
 

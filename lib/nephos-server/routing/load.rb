@@ -20,22 +20,37 @@ module Nephos
   end
 end
 
+def route_prefix
+  @route_prefix ||= []
+  File.join(["/"] + @route_prefix)
+end
+
 # @params: what [Hash]
 def get what
+  what[:url] = File.expand_path File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add(what, "GET")
 end
 
 # @params: what [Hash]
 def post what
+  what[:url] = File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add(what, "POST")
 end
 
 # @params: what [Hash]
 def put what
+  what[:url] = File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add(what, "PUT")
+end
+
+def resource(name, &block)
+  @route_prefix ||= []
+  @route_prefix << name
+  block.call
+  @route_prefix.pop
 end
 
 load 'routes.rb'

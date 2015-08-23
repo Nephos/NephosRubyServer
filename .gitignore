@@ -1,3 +1,4 @@
 *.swp
 *.gem
 routes.rb
+controllers/
