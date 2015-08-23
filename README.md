@@ -64,7 +64,10 @@ return :empty
 Like in ``/routes.rb``, you have to route manually the api.
 
 ```ruby
-get url: "/", controller: "MainController", method: "root"
-get url: "/add", controller: "MainController", method: "add_url"
-get url: "/rm", controller: "MainController", method: "rm_url"
+get url: "/", controller: "MainController", method: "root"       # /
+get url: "/add", controller: "MainController", method: "add_url" # /add
+get url: "/rm", controller: "MainController", method: "rm_url"   # /rm
+resource "infos" do
+  get url: "/", controller: "MainController", method: "root" # generate /infos
+end
 ```
