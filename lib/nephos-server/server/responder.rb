@@ -39,7 +39,7 @@ module Nephos
       self.send(params_content_type(params))
     end
 
-    # @params params [Hash, Symbol]
+    # @param params [Hash, Symbol]
     def self.render params
       return [204, plain(), [""]] if params == :empty
       params = set_default_params(params)

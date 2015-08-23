@@ -9,7 +9,7 @@ module Nephos
 
     attr_accessor :port
 
-    # @params port [Integer] port to listen
+    # @param port [Integer] port to listen
     def initialize port
       @port = Integer(port)
     end

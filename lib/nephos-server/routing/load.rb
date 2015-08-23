@@ -37,7 +37,7 @@ def route_prefix
   File.join(["/"] + @route_prefix)
 end
 
-# @params what [Hash]
+# @param what [Hash]
 def get what
   raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.expand_path File.join(route_prefix, what[:url])
@@ -45,7 +45,7 @@ def get what
   Nephos::Route.add(what, "GET")
 end
 
-# @params what [Hash]
+# @param what [Hash]
 def post what
   raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.join(route_prefix, what[:url])
@@ -53,7 +53,7 @@ def post what
   Nephos::Route.add(what, "POST")
 end
 
-# @params what [Hash]
+# @param what [Hash]
 def put what
   raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.join(route_prefix, what[:url])
