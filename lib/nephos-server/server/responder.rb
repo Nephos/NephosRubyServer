@@ -32,10 +32,12 @@ module Nephos
         params[:status] ||= 200
       end
       if (params.keys & [:plain, :html, :json, :type]).empty?
-        if params[:status].to_s.match(/^[345]\d\d$/)
+        if params[:status].to_s.match(/^[45]\d\d$/)
           params[:plain] ||= "Error: #{params[:status]} code"
+        elsif params[:status].to_s.match(/^[3]\d\d$/)
+          params[:plain] ||= "Redirected: #{params[:status]} code"
         else
-          params[:plain] ||= "ok"
+          params[:plain] ||= "Status: #{params[:status]} code"
         end
       end
       params
