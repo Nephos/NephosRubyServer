@@ -19,3 +19,5 @@ v0.1.4
 
 v0.1.5
 	* improve routing (resource and matching)
+v0.1.6
+	* fix documentation
