@@ -21,3 +21,5 @@ v0.1.5
 	* improve routing (resource and matching)
 v0.1.6
 	* fix documentation
+v0.1.7
+	* improve routing error
