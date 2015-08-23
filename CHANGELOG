@@ -1,25 +1,26 @@
+v0.1.7
+	* improve routing error
+
+v0.1.6
+	* fix documentation
+
+v0.1.5
+	* improve routing (resource and matching)
+
+v0.1.4
+	* improve routing
+
+v0.1.3
+	* improve generators (errors and arguments)
+
+v0.1.2
+	* fix procfile
+
+v0.1.1
+	* rename src to controllers
+	* improve generator
 v0.1
 	* basic routing, rendering, and controllers
 	* valid gemspec
 	* basic working server
 	* basic generator
-
-v0.1.1
-	* rename src to controllers
-	* improve generator
-
-v0.1.2
-	* fix procfile
-
-v0.1.3
-	* improve generators (errors and arguments)
-
-v0.1.4
-	* improve routing
-
-v0.1.5
-	* improve routing (resource and matching)
-v0.1.6
-	* fix documentation
-v0.1.7
-	* improve routing error
