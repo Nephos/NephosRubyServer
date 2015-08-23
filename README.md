@@ -17,7 +17,6 @@ This is a simple web server, based on rack and puma, with a minimal help:
 
 - Routing
   - improve get with arguments
-  - add ressource (elarge urls)
 - Database connection
 
 
@@ -52,8 +51,10 @@ In a controller, use:
 
 ```ruby
 return {status: code}
-return {json: {...}}
+return {json: {status: "resource created"}, status: 201}
 return {plain: "text"}
+return {html: "<html><body><h1>:D</h1></body></html>"}
+return {type: "image/jpeg", content: File.read("images/photo.jpg")}
 return :empty
 ```
 
