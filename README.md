@@ -15,7 +15,9 @@ This is a simple web server, based on rack and puma, with a minimal help:
 No templating, no database by default. They are extensions of your choice.
 
 
-# TODO v0.2
+# TODO
+
+## TODO v0.2
 
 - Test
   - Unitary tests
@@ -25,7 +27,7 @@ No templating, no database by default. They are extensions of your choice.
   - Render Api
   - Routing
 
-# TODO v1
+## TODO v1
 - Improved Routing (more helper options)
 - Improved Rendering (more options)
 - Guide about
