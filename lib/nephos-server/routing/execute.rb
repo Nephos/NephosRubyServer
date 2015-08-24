@@ -23,6 +23,14 @@ module Nephos
       return ALL.find{|e| e[:match] =~ route and e[:verb] == verb}
     end
 
+    def parse_env
+      verb = env["REQUEST_METHOD"]
+      from = env["REMOTE_ADDR"]
+      path = route.path.split("/").select{|e|not e.to_s.empty?}
+      args = Hash[route.query.to_s.split("&").map{|e| e.split("=")}]
+      return {route: route, verb: verb, from: from, path: path, args: args}
+    end
+
     def self.execute(env)
       begin
         route = URI.parse(env['REQUEST_URI'])
@@ -30,14 +38,10 @@ module Nephos
         puts "uri err #{err.message}".red
         return render(status: 500)
       end
-      verb = env["REQUEST_METHOD"]
-      from = env["REMOTE_ADDR"]
-      path = route.path.split("/").select{|e|not e.to_s.empty?}
-      args = Hash[route.query.to_s.split("&").map{|e| e.split("=")}]
+      parsed = parse_env
       puts "#{from} [#{verb}] \t ---> \t #{route}"
-      parsed = {route: route, verb: verb, from: from, path: path, args: args}
       call = parse_path(path, verb)
-      return render status: 404 if call.nil?
+      return render(status: 404) if call.nil?
       begin
         controller = Module.const_get(call[:controller]).new(env, parsed, call)
         return render(controller.send(call[:method]) || {status: 500})
