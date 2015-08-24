@@ -5,3 +5,4 @@ class TestNephosServer < Test::Unit::TestCase
 end
 
 require_relative 'responder'
+require_relative 'routing'

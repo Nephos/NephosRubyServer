@@ -3,7 +3,9 @@ module Nephos
 
     def self.add(what, verb)
       Nephos::Route::ALL << what.merge(verb: verb)
-      puts "[#{verb}] #{what[:url]} \t ---> \t #{what[:controller]}##{what[:method]}"
+      display = "[#{verb}] #{what[:url]} \t ---> \t #{what[:controller]}##{what[:method]}"
+      puts display unless what[:silent]
+      return display
     end
 
     def self.add_params!(what)

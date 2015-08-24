@@ -1,5 +1,5 @@
 
-class TestNephosServer < Test::Unit::TestCase
+class TestNephosServerResponder < Test::Unit::TestCase
 
   def test_content_type
     assert_equal(
