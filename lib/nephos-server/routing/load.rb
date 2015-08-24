@@ -11,6 +11,7 @@ module Nephos
         p.match(/:\w+/) ? {p: "[[:graph:]]+", name: p} : {p: p, name: nil}
       end
       url = params.map{|e| e[:p]}.join("/")
+      url = "/" if url.empty?
       what[:match] = /^#{url}$/
       what[:params] = params.map{|e| e[:name] && e[:name][1..-1]}[1..-1]
     end
