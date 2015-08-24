@@ -1,13 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    nomorebeer (1.0)
+    colorize (0.7.7)
+    nomorebeer (1.1)
     rack (1.6.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  colorize
   nomorebeer
   rack
 
