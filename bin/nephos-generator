@@ -42,6 +42,14 @@ def initialize_application
   File.write "routes.rb", ROUTE_RB
   File.write "Gemfile", GEMFILE
   Dir.mkdir "controllers"
+  begin
+    `git init .`
+    puts "Git repository initialized"
+  rescue Errno::ENOENT => err
+    puts "Warning: git repository not initialized"
+  rescue => err
+    puts "Error: #{err.message}"
+  end
   exec("bundle install")
 end
 
