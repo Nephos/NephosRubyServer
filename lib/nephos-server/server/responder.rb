@@ -8,15 +8,7 @@ module Nephos
     def self.content_type(kind, type, charset='UTF-8')
       {'Content-type' => "#{kind}/#{type}" + CT_CHARSET_PREFIX + charset}
     end
-    def self.ct_plain
-      content_type(:text, :plain)
-    end
-    def self.ct_html
-      content_type(:text, :html)
-    end
-    def self.ct_json
-      content_type(:text, :javascript)
-    end
+
     # @param params [Hash] containing :type => "kind/type", example: "text/html"
     def self.ct_specific(params)
       kind, type = params[:type].match(/^(\w+)\/(\w+)$/)[1..2]
@@ -26,39 +18,49 @@ module Nephos
       content_type(kind, type)
     end
 
-    # Fill params with default parameters (status, plain errors)
-    def self.set_default_params params
+    PRESET_CT = {
+      plain: "text/plain",
+      html: "text/html",
+      json: "text/javascript",
+    }
+
+    private
+    # if not :status entry, set to 200
+    def self.set_default_params_status params
       if (params.keys & [:status]).empty?
         params[:status] ||= 200
       end
-      if (params.keys & [:plain, :html, :json, :type]).empty?
+    end
+
+    def self.set_default_params_type params
+      return if not params[:type].nil?
+      params[:type] = PRESET_CT[(params.keys & [:plain, :html, :json]).first || :plain]
+      params[:type] = ct_specific(params)
+    end
+
+    def self.set_default_params_content params
+      type = (params.keys & [:plain, :html, :json, :content]).first
+      if type.nil?
         if params[:status].to_s.match(/^[45]\d\d$/)
-          params[:plain] ||= params[:content] || "Error: #{params[:status]} code"
+          params[:content] = "Error: #{params[:status]} code"
         elsif params[:status].to_s.match(/^[3]\d\d$/)
-          params[:plain] ||= params[:content] || "Redirected: #{params[:status]} code"
+          params[:content] = "Redirected: #{params[:status]} code"
         else
-          params[:plain] ||= params[:content] || "Status: #{params[:status]} code"
+          params[:content] = "Status: #{params[:status]} code"
         end
-      end
-      params
-    end
-
-    # @return [Symbol, nil] :plain, :html, :json, or nil
-    # search the content type
-    def self.params_content_type params
-      (params.keys & [:plain, :html, :json]).first
-    end
-
-    # search the content to render from the params,
-    # based on content_type (plain, html, ...).
-    # If not, check for specific type
-    def self.params_content_type_value params
-      type = params_content_type(params)
-      if type
-        self.send("ct_#{type}")
       else
-        self.send("ct_specific", params)
+        params[type] = params[type].to_json if type == :json
+        params[:content] = params[type]
       end
+    end
+    public
+
+    # Fill params with default parameters (status, plain errors)
+    def self.set_default_params params
+      set_default_params_status(params)
+      set_default_params_type(params)
+      set_default_params_content(params)
+      params
     end
 
     # @param params [Hash, Symbol]
@@ -67,8 +69,8 @@ module Nephos
       params = set_default_params(params)
       return [
         params[:status],
-        params_content_type_value(params),
-        [params[params_content_type(params) || :content]],
+        params[:type],
+        [params[:content]],
       ]
     end
 
