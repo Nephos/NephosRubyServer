@@ -11,7 +11,7 @@ module Nephos
 
     # @param params [Hash] containing :type => "kind/type", example: "text/html"
     def self.ct_specific(params)
-      kind, type = params[:type].match(/^(\w+)\/(\w+)$/)[1..2]
+      kind, type = params[:type].to_s.match(/^(\w+)\/(\w+)$/) && Regexp.last_match[1..2]
       if kind.nil? or type.nil?
         raise InvalidContentType, "params[:type] must match with \"kind/type\""
       end
@@ -27,14 +27,13 @@ module Nephos
     private
     # if not :status entry, set to 200
     def self.set_default_params_status params
-      if (params.keys & [:status]).empty?
-        params[:status] ||= 200
-      end
+      params[:status] ||= 200
     end
 
     def self.set_default_params_type params
-      return if not params[:type].nil?
-      params[:type] = PRESET_CT[(params.keys & [:plain, :html, :json]).first || :plain]
+      if params[:type].nil?
+        params[:type] = PRESET_CT[(params.keys & [:plain, :html, :json]).first || :plain]
+      end
       params[:type] = ct_specific(params)
     end
 
@@ -65,7 +64,7 @@ module Nephos
 
     # @param params [Hash, Symbol]
     def self.render params
-      return [204, plain(), [""]] if params == :empty
+      return [204, ct_specific({type: PRESET_CT[:plain]}), [""]] if params == :empty
       params = set_default_params(params)
       return [
         params[:status],
