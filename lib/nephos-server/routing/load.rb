@@ -61,31 +61,27 @@ def route_prefix
   File.join(["/"] + @route_prefix)
 end
 
-# @param what [Hash]
-def get what
+def add_route(what, verb)
   raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.expand_path File.join(route_prefix, what[:url])
   Nephos::Route.check!(what)
   Nephos::Route.add_params!(what)
-  Nephos::Route.add(what, "GET")
+  Nephos::Route.add(what, verb)
+end
+
+# @param what [Hash]
+def get what
+  add_route what, "GET"
 end
 
 # @param what [Hash]
 def post what
-  raise InvalidRoute unless what.is_a? Hash
-  what[:url] = File.join(route_prefix, what[:url])
-  Nephos::Route.check!(what)
-  Nephos::Route.add_params!(what)
-  Nephos::Route.add(what, "POST")
+  add_route what, "POST"
 end
 
 # @param what [Hash]
 def put what
-  raise InvalidRoute unless what.is_a? Hash
-  what[:url] = File.join(route_prefix, what[:url])
-  Nephos::Route.check!(what)
-  Nephos::Route.add_params!(what)
-  Nephos::Route.add(what, "PUT")
+  add_route what, "PUT"
 end
 
 def resource(name, &block)
