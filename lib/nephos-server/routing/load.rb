@@ -16,10 +16,13 @@ module Nephos
       what[:params] = params.map{|e| e[:name] && e[:name][1..-1]}[1..-1] || []
     end
 
-    def self.check!(what)
+    def self.check_keys! what
       raise InvalidRouteUrl, "Missing URL" unless what.keys.include? :url
       raise InvalidRouteController, "Missing Controller" unless what.keys.include? :controller
       raise InvalidRouteMethod, "Missing Method" unless what.keys.include? :method
+    end
+
+    def self.check_controller! what
       begin
         controller = Module.const_get(what[:controller])
       rescue
@@ -28,9 +31,24 @@ module Nephos
       if not controller.ancestors.include? Nephos::Controller
         raise InvalidRouteController, "Class \"#{what[:controller]}\" is not a Nephos::Controller"
       end
-      if not controller.new.respond_to? what[:method]
+      begin
+        instance = controller.new
+      rescue
+        raise InvalidRouteController, "Cannot initialize controller"
+      end
+      return instance
+    end
+
+    def self.check_method! what, instance
+      if not instance.respond_to? what[:method]
         raise InvalidRouteMethod, "No method named \"#{what[:method]}\""
-      end rescue raise InvalidRouteController, "Cannot initialize controller"
+      end
+    end
+
+    def self.check!(what)
+      check_keys! what
+      instance = check_controller! what
+      check_method! what, instance
     end
 
   end
