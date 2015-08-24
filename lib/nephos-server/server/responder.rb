@@ -33,11 +33,11 @@ module Nephos
       end
       if (params.keys & [:plain, :html, :json, :type]).empty?
         if params[:status].to_s.match(/^[45]\d\d$/)
-          params[:plain] ||= "Error: #{params[:status]} code"
+          params[:plain] ||= params[:content] || "Error: #{params[:status]} code"
         elsif params[:status].to_s.match(/^[3]\d\d$/)
-          params[:plain] ||= "Redirected: #{params[:status]} code"
+          params[:plain] ||= params[:content] || "Redirected: #{params[:status]} code"
         else
-          params[:plain] ||= "Status: #{params[:status]} code"
+          params[:plain] ||= params[:content] || "Status: #{params[:status]} code"
         end
       end
       params

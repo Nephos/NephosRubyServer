@@ -38,9 +38,9 @@ class MainController < Nephos::Controller
     dir = File.expand_path('controllers/')
     file = File.expand_path(params["image"], dir)
     if not file[0..(dir.size-1)] == dir
-      return {status: 500, plain: "invalid path #{params['image']}"}
+      return {status: 500, content: "invalid path #{params['image']}"}
     elsif not File.exists? file
-      return {status: 404, plain: "invalid path #{params['image']}"}
+      return {status: 404, content: "invalid path #{params['image']}"}
     else
       return {type: 'image/jpeg', content: File.read(file)}
     end
