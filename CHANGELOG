@@ -1,3 +1,10 @@
+v0.1.12
+	* fix regressions from v0.1.11 and previous (routing)
+	* add complet unitary tests (rendering)
+	* add partial unitary tests (routing)
+	* update gemspec
+	* factorize some code
+
 v0.1.11
 	* fix regressions from v0.1.10
 	* improve rendering code
