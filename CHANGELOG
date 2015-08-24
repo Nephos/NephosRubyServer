@@ -1,3 +1,7 @@
+v0.1.10
+	* improve status content
+	* add url's parameters like /u/:param
+
 v0.1.9
 	* minor fixes
 	* improve exceptions

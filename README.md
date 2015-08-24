@@ -51,6 +51,7 @@ In a controller, use:
 
 ```ruby
 return {status: code}
+return {status: code, content: "Not today"}
 return {json: {status: "resource created"}, status: 201}
 return {plain: "text"}
 return {html: "<html><body><h1>:D</h1></body></html>"}
@@ -65,7 +66,9 @@ Like in ``/routes.rb``, you have to route manually the api.
 ```ruby
 get url: "/", controller: "MainController", method: "root"       # /
 get url: "/add", controller: "MainController", method: "add_url" # /add
+get url: "/add/:url", controller: "MainController", method: "add_url" # /add
 get url: "/rm", controller: "MainController", method: "rm_url"   # /rm
+get url: "/rm/:url", controller: "MainController", method: "rm_url"   # /rm
 resource "infos" do
   get url: "/", controller: "MainController", method: "root" # generate /infos
 end
