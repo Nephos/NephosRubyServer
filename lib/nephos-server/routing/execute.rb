@@ -20,11 +20,16 @@ module Nephos
     # find the right route to use from the url
     def self.parse_path path, verb
       route = File.join(["/"] + path)
-      return ALL.find{|e| e[:url] == route and e[:verb] == verb}
+      return ALL.find{|e| e[:match] =~ route and e[:verb] == verb}
     end
 
     def self.execute(env)
-      route = URI.parse(env['REQUEST_URI']) rescue (puts "uri err"; return render(status: 500))
+      begin
+        route = URI.parse(env['REQUEST_URI'])
+      rescue => err
+        puts "uri err #{err.message}".red
+        return render(status: 500)
+      end
       verb = env["REQUEST_METHOD"]
       from = env["REMOTE_ADDR"]
       path = route.path.split("/").select{|e|not e.to_s.empty?}
@@ -34,10 +39,9 @@ module Nephos
       call = parse_path(path, verb)
       return render status: 404 if call.nil?
       begin
-        controller = Module.const_get(call[:controller]).new(env, parsed)
+        controller = Module.const_get(call[:controller]).new(env, parsed, call)
         return render(controller.send(call[:method]) || {status: 500})
       rescue => err
-        # require 'pry'; binding.pry
         return render(status: 500)
       end
     end
