@@ -34,10 +34,11 @@ class MainController < Nephos::Controller
     {html: "<html><body><h1>hello world</h1><p>lol</p></body></html>"}
   end
 
+  AUTH_IMG_EXT = %w(.jpg .jpeg .png .gif)
   def image
     dir = File.expand_path('controllers/')
     file = File.expand_path(params["image"], dir)
-    if not file[0..(dir.size-1)] == dir
+    if not file[0..(dir.size-1)] == dir or not AUTH_IMG_EXT.include?(File.extname(file))
       return {status: 500, content: "invalid path #{params['image']}"}
     elsif not File.exists? file
       return {status: 404, content: "invalid path #{params['image']}"}
