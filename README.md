@@ -79,9 +79,10 @@ end
 # Developers: TODO
 
 ## TODO v0.3
-- Improve documentation (fix, coverage)
+- Improve documentation (fix english, increase coverage, ...)
 - Improve unitary test coverage
 - Improve syntax coherence (router/render, file position, ...)
+- Directory app instead of controllers
 
 ## TODO v1
 - Improved Routing (more helper options)
