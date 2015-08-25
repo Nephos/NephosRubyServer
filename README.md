@@ -49,7 +49,14 @@ nephos-server -p 8080 # port is not required
 
 # Documentation
 
-## Controller
+## Guides
+
+### [Render API](DOCUMENTATION/API_RENDER.md)
+### [Routing GUIDE](DOCUMENTATION/GUIDE_ROUTING.md)
+
+## Examples
+
+### Controller
 
 To create a controller, simply add it to ``controllers/``.
 The basic code of a controller can be generated via ``nephos-generator controller NAME``.
@@ -62,7 +69,7 @@ class Example < Nephos::Controller
 end
 ```
 
-## Rendering
+### Rendering
 
 In a controller, use:
 
@@ -76,7 +83,7 @@ return {type: "image/jpeg", content: File.read("images/photo.jpg")}
 return :empty
 ```
 
-## Routing
+### Routing
 
 Like in ``/routes.rb``, you have to route manually the api.
 
