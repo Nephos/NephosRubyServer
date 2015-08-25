@@ -13,6 +13,8 @@ To use the API, you have to create a new controller.
 The controller must be placed or requires in the ``controllers/`` directory, via a ``file.rb`` file. It must contain a class, wich inherit from ``Nephos::Controller``.
 Each public method can be an entry point, defined in the ``routes.rb`` file. [Routing doc](GUIDE_ROUTING.md).
 
+In the controller, you can use few helpers, like the method ``params()``, ``env()``, and ``infos()``
+
 The methods used as entry point must return a ``Hash`` described in the following lines.
 
 ### Render
