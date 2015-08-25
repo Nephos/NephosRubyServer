@@ -14,29 +14,6 @@ This is a simple web server, based on rack and puma, with a minimal help:
 
 No templating, no database by default. They are extensions of your choice.
 
-
-# TODO
-
-## TODO v0.2
-
-- Test
-  - Unitary tests
-    - rendering
-    - routing
-- Documentation
-  - Render Api
-  - Routing
-
-## TODO v1
-- Improved Routing (more helper options)
-- Improved Rendering (more options)
-- Guide about
-  - Controllers
-  - Routing
-  - Api Creation
-  - Database creation
-  - Web HTML with templating
-
 # Start
 
 ```sh
@@ -97,3 +74,21 @@ resource "infos" do
   get url: "/", controller: "MainController", method: "root" # generate /infos
 end
 ```
+
+
+# Developers: TODO
+
+## TODO v0.3
+- Improve documentation (fix, coverage)
+- Improve unitary test coverage
+- Improve syntax coherence (router/render, file position, ...)
+
+## TODO v1
+- Improved Routing (more helper options)
+- Improved Rendering (more options)
+- Guide about
+  - Controllers
+  - Routing
+  - Api Creation
+  - Database creation
+  - Web HTML with templating

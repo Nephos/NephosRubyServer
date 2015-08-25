@@ -1,3 +1,6 @@
+v0.2.0
+	* add documentation
+
 v0.1.12
 	* fix regressions from v0.1.11 and previous (routing)
 	* add complet unitary tests (rendering)
