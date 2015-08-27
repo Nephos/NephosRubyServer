@@ -45,7 +45,7 @@ class Example < Nephos::Controller
       return {plain: "index"}
     else
 	  return :empty
-	ebd
+	end
   end
 end
 ```
