@@ -10,7 +10,7 @@ module Nephos
       @infos= parsed
       @callpath= callpath
       @params= parsed[:args]
-      @params.merge! Hash[callpath[:params].zip @infos[:path]]
+      @params.merge! Params.new(Hash[callpath[:params].zip @infos[:path]])
       @params.select!{|k,v|k}
     end
 

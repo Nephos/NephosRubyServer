@@ -1,5 +1,3 @@
-require_relative 'controller'
-
 Dir[File.expand_path "controllers/*.rb"].each do |f|
   load(f) and puts "#{f} loaded"
 end
