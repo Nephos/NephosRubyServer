@@ -27,6 +27,8 @@ version
 test/test.rb
 test/responder.rb
 test/routing.rb
+test/params.rb
+test/controller.rb
 routes.rb
 controllers/dataset.rb
 controllers/image.jpg
