@@ -1,6 +1,8 @@
 v0.2.3
 	* add class params
-	* change some file place
+	* change file place (controller)
+	* improve controller
+	* add unitary tests (params, controller)
 
 v0.2.2
 	* minor fix bug
