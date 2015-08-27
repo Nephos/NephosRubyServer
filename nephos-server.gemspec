@@ -41,5 +41,6 @@ bin/nephos-generator
 
   s.add_dependency 'nomorebeer', '~> 1.0'
   s.add_dependency 'rack', '~> 1.6'
+  s.add_dependency 'colorize', '~> 0.7'
 
 end
