@@ -7,3 +7,6 @@ class InvalidRouteMethod < InvalidRoute; end
 class InvalidApplication < RuntimeError; end
 class InvalidGit < InvalidApplication; end
 class NoGitBinary < InvalidGit; end
+
+class ParsingError < StandardError; end
+class MissingKey < ParsingError; end

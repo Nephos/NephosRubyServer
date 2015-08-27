@@ -6,3 +6,5 @@ end
 
 require_relative 'responder'
 require_relative 'routing'
+require_relative 'controller'
+require_relative 'params'

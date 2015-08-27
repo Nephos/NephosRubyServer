@@ -1,4 +1,3 @@
-
 class TestNephosServerResponder < Test::Unit::TestCase
 
   def test_content_type

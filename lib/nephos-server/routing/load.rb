@@ -27,7 +27,7 @@ module Nephos
     def self.check_controller! what
       begin
         controller = Module.const_get(what[:controller])
-      rescue
+      rescue => err
         raise InvalidRouteController, "Controller \"#{what[:controller]}\" doesn't exists"
       end
       if not controller.ancestors.include? Nephos::Controller
@@ -35,7 +35,7 @@ module Nephos
       end
       begin
         instance = controller.new
-      rescue
+      rescue => err
         raise InvalidRouteController, "Cannot initialize controller"
       end
       return instance
