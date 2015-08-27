@@ -76,7 +76,7 @@ end
 ```
 
 
-# Developers: TODO
+# Developers: Roadmap
 
 ## TODO v0.3
 - Improve documentation (fix english, increase coverage, ...)
