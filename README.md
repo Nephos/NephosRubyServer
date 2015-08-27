@@ -41,7 +41,11 @@ The basic code of a controller can be generated via ``nephos-generator controlle
 ```ruby
 class Example < Nephos::Controller
   def root
-    return {plain: "index"}
+    if params["index"] == "true"
+      return {plain: "index"}
+    else
+	  return :empty
+	ebd
   end
 end
 ```
