@@ -2,7 +2,7 @@ module Nephos
   module Route
 
     def self.add(what, verb)
-      Nephos::Route::ALL << what.merge(verb: verb)
+      Nephos::Router::ROUTES << what.merge(verb: verb)
       display = "[#{verb}] #{what[:url]} \t ---> \t #{what[:controller]}##{what[:method]}"
       puts display unless what[:silent]
       return display

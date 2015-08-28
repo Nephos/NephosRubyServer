@@ -1,5 +1,4 @@
 require_relative 'responder'
-require_relative '../routing/execute'
 
 module Nephos
   class Server

@@ -4,9 +4,9 @@ end
 puts
 
 module Nephos
-  module Route
+  module Router
 
-    ALL = []
+    ROUTES = []
 
     # @param arg [Hash or Symbol]
     # shortcut to #{Nephos::Responder.render}
@@ -18,7 +18,7 @@ module Nephos
     # find the right route to use from the url
     def self.parse_path path, verb
       route = File.join(["/"] + path)
-      return ALL.find{|e| e[:match] =~ route and e[:verb] == verb}
+      return ROUTES.find{|e| e[:match] =~ route and e[:verb] == verb}
     end
 
     def self.parse_env(env, route)
