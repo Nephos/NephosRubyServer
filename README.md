@@ -29,7 +29,7 @@ nephos-server -p 8080 # port is not required
 ## Guides
 
 ### [Render API](DOCUMENTATION/API_RENDER.md)
-### [Routing GUIDE](DOCUMENTATION/GUIDE_ROUTING.md)
+### [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
 
 ## Examples
 
@@ -85,8 +85,6 @@ end
 ## TODO v0.3
 - Improve documentation (fix english, increase coverage, ...)
 - Improve unitary test coverage
-- Improve syntax coherence (router/render, file position, ...)
-- Directory app instead of controllers
 
 ## TODO v1
 - Improved Routing (more helper options)

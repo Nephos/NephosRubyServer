@@ -46,4 +46,4 @@ It will generate the route ``/home/index``, calling the ``MainController#root`` 
 
 ## URL Parameters
 
-place a ``/:param``
+place a ``/:param`` in your route. The parameter will be placed in the controller in the ``params`` method

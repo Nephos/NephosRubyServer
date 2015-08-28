@@ -4,10 +4,10 @@ class TestController < Nephos::Controller
   end
 end
 
-class TestNephosServerRouting < Test::Unit::TestCase
+class TestNephosServerRouter < Test::Unit::TestCase
 
   # remove all seeds
-  Nephos::Route::ALL = []
+  Nephos::Router::ROUTES = []
 
   def test_valid_routes
     get url: "/", controller: "TestController", method: "method", silent: true

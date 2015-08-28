@@ -1,5 +1,5 @@
 module Nephos
-  module Route
+  module Router
 
     def self.add(what, verb)
       Nephos::Router::ROUTES << what.merge(verb: verb)
@@ -64,9 +64,9 @@ end
 def add_route(what, verb)
   raise InvalidRoute unless what.is_a? Hash
   what[:url] = File.expand_path File.join(route_prefix, what[:url])
-  Nephos::Route.check!(what)
-  Nephos::Route.add_params!(what)
-  Nephos::Route.add(what, verb)
+  Nephos::Router.check!(what)
+  Nephos::Router.add_params!(what)
+  Nephos::Router.add(what, verb)
 end
 
 # @param what [Hash]

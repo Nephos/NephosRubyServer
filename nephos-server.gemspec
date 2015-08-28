@@ -15,7 +15,7 @@ lib/nephos-server/params.rb
 lib/nephos-server/controller.rb
 lib/nephos-server/server/main.rb
 lib/nephos-server/server/responder.rb
-lib/nephos-server/routing/execute.rb
+lib/nephos-server/routing/main.rb
 lib/nephos-server/routing/load.rb
 README.md
 Rakefile
@@ -26,7 +26,7 @@ nephos-server.gemspec
 version
 test/test.rb
 test/responder.rb
-test/routing.rb
+test/router.rb
 test/params.rb
 test/controller.rb
 routes.rb

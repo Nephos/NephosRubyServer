@@ -3,7 +3,7 @@ require_relative 'responder'
 module Nephos
   class Server
 
-    SERVER = lambda {|env| return Route.execute(env)}
+    SERVER = lambda {|env| return Router.execute(env)}
 
     attr_accessor :port
 
