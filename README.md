@@ -35,7 +35,7 @@ nephos-server -p 8080 # port is not required
 
 ### Controller
 
-To create a controller, simply add it to ``controllers/``.
+To create a controller, simply add a ruby code file to ``app/``, with a class inherited by ``Nephos::Controller``
 The basic code of a controller can be generated via ``nephos-generator controller NAME``.
 
 ```ruby

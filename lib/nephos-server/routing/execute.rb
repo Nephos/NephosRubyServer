@@ -1,4 +1,4 @@
-Dir[File.expand_path "controllers/*.rb"].each do |f|
+Dir[File.expand_path "app/*.rb"].each do |f|
   load(f) and puts "#{f} loaded"
 end
 puts

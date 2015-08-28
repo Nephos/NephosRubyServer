@@ -26,6 +26,7 @@ class #{name} < Nephos::Controller
   end
 end
 EOF
+  puts "Controller \"#{name}\" created at location \"#{file}\""
 end
 
 def create_application_dir dir
@@ -41,7 +42,7 @@ def initialize_application
   raise "Not an empty dir" unless Dir[File.expand_path "*"].empty?
   File.write "routes.rb", ROUTE_RB
   File.write "Gemfile", GEMFILE
-  Dir.mkdir "controllers"
+  Dir.mkdir "app"
   begin
     `git init .`
     puts "Git repository initialized"
@@ -62,8 +63,10 @@ begin
 
   case ARGV[0]
   when "c", "controller"
-    if not ARGV[1].to_s.match(/[\w_\-\.]+/)
-      generate_controller("#{ARGV[1]}Controller", "src/#{ARGV[1]}.rb")
+    if ARGV[1].to_s.match(/[\w_\-\.]+/)
+      generate_controller("#{ARGV[1].capitalize}Controller", "app/#{ARGV[1].downcase}.rb")
+    else
+      puts "error"
     end
   when "a", "appli", "application"
     if not ARGV[1].to_s.empty?
@@ -73,6 +76,8 @@ begin
     end
     initialize_application
     puts "Application initialized"
+  else
+    puts "\"#{ARGV[0]}\" not recognized has a command"
   end
 
 rescue => err
