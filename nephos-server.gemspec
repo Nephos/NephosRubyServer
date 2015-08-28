@@ -15,8 +15,8 @@ lib/nephos-server/params.rb
 lib/nephos-server/controller.rb
 lib/nephos-server/server/main.rb
 lib/nephos-server/server/responder.rb
-lib/nephos-server/routing/main.rb
-lib/nephos-server/routing/load.rb
+lib/nephos-server/router/main.rb
+lib/nephos-server/router/load.rb
 README.md
 Rakefile
 Procfile
@@ -30,9 +30,9 @@ test/router.rb
 test/params.rb
 test/controller.rb
 routes.rb
-controllers/dataset.rb
-controllers/image.jpg
-controllers/main.rb
+app/dataset.rb
+app/image.jpg
+app/main.rb
 bin/nephos-server
 bin/nephos-generator
 )
