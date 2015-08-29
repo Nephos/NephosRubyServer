@@ -84,4 +84,13 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert_equal /^\/home\/[[:graph:]]+$/, first[:match]
   end
 
+    def test_valid_resources_params2
+    reset_routes!
+    resource "/:id" do
+      get url: "/show", controller: "TestController", method: "method", silent: true
+    end
+    assert_equal "/:id/show", first[:url]
+    assert_equal /^\/[[:graph:]]+\/show$/, first[:match]
+  end
+
 end
