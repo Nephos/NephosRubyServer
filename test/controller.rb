@@ -16,4 +16,10 @@ class TestNephosServerController < Test::Unit::TestCase
     assert_raise do Nephos::Controller.new({}, {path: [], args: nil}, {params: {}}) end
   end
 
+  def test_controller_params
+    c = Nephos::Controller.new(env={}, {path: ["value"], args: {}}, {params: ["param"]})
+    assert_equal "value", c.params[:param]
+    assert_equal "value", c.params["param"]
+  end
+
 end

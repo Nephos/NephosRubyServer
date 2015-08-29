@@ -1,7 +1,7 @@
 module Nephos
   class Controller
 
-    attr_reader :env, :infos, :callpath
+    attr_reader :env, :infos, :callpath, :params
 
     # @param env [Hash] env extracted from the http request
     # @param parsed [Hash] pre-parsed env with parameters, ...
@@ -16,14 +16,10 @@ module Nephos
       @infos= parsed
       @callpath= callpath
       @params= parsed[:args]
-      @params.merge! Params.new(Hash[callpath[:params].zip @infos[:path]])
-      @params.select!{|k,v|k}
+      @params.merge! Hash[callpath[:params].zip @infos[:path]]
+      @params.select!{|k,v| not k.to_s.empty?}
+      @params = Params.new(@params)
     end
-
-    def arguments
-      @params
-    end
-    alias :params :arguments
 
   end
 end

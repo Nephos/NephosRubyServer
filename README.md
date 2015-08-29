@@ -97,9 +97,6 @@ end
 # Developers: Roadmap
 
 ## TODO v0.4
-- url parameters as resource
-
-## TODO v0.5
 - improve generator with application status, tests, more generation (routing, ...)
 
 ## TODO v1
