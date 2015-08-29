@@ -39,7 +39,7 @@ nephos-server -p 8080 # start the server. port is not required
 
 Theses guides will provide you knowlegde about everything you can use in the application.
 
-- **TODO** [Generator GUIDE](DOCUMENTATION/GUIDE_GENERATOR.md)
+- [Generator GUIDE](DOCUMENTATION/GUIDE_GENERATOR.md)
 - [Render API](DOCUMENTATION/API_RENDER.md)
 - [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
 
