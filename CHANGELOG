@@ -1,5 +1,6 @@
-v0.2.5
-	* improve documentation
+v0.3.0
+	* improve documentation (and fix it)
+	* add documentation (guide for slim, sequel, generator)
 
 v0.2.4
 	* improve global coherence (file, class, consts names)

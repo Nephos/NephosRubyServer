@@ -96,12 +96,11 @@ end
 
 # Developers: Roadmap
 
-## TODO v0.3
-- Improve documentation (fix english, increase coverage, ...)
-- Improve unitary test coverage
-
 ## TODO v0.4
 - url parameters as resource
+
+## TODO v0.5
+- improve generator with application status, tests, more generation (routing, ...)
 
 ## TODO v1
 - Improved Routing (more helper options)
