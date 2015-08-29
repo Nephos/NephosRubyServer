@@ -1,11 +1,16 @@
 # Render API
 
-The render API is designed to control the http response.
-It includes:
+## Understand the API
+
+The render API is a simple system to allows you to render HTTP responses to a client.
+The API allows you to customize differents parts of the response:
 
 - HTTP status
 - HTTP Content-Type
 - Content
+
+The API use the returns of the Controllers methods to build the HTTP responses.
+
 
 ## Use the API
 
@@ -17,7 +22,7 @@ In the controller, you can use few helpers, like the method ``params()``, ``env(
 
 The methods used as entry point must return a ``Hash`` described in the following lines.
 
-### Render
+## Options
 
 The returns can include the following keys:
 
@@ -44,43 +49,53 @@ class MyController < Nephos::Controller
 end
 ```
 
-#### Content
+The following sections will describe how each key works and modify the HTTP response.
+
+### Content
 
 The ``:content`` key must be associated with a ``String`` (or ``Hash`` is json).
 
-**Optionnal** : default value in function of the status
+**Optionnal**:
+a default value is provided, based on the ``:status`` if no ``:content`` if specified.
 
-#### Type
+### Type
 
-The ``:type`` key has to be associated with a ``String`` matching with **"kind/type"**, where:
+The ``:type`` key has to be associated with a ``String`` matching with **"kind/type"**.
 
-**Optionnal** : default value is "text/plain"
+**Optionnal**:
+the default value is ``text/plain``
 
-Kind:
+Kinds and Types (called type and sub-type by w3c) are described here:
+[the w3c documentation](http://www.w3.org/Protocols/rfc1341/4_Content-Type.html)
+
+#### Kind:
 
 - image
 - text
-- ... (see [the w3c documentation](http://www.w3.org/Protocols/rfc1341/4_Content-Type.html))
+- ...
 
-Type:
+#### Type:
 
 - plain
 - javascript
 - jpeg
 - ...
 
-#### Status
+
+### Status
 
 The ``:status`` key is associable with an Integer. It must represent the HTTP status code.
 
-**Optionnal** : it's default value is 200.
+**Optionnal**:
+The default value is 200.
 
 [The complete HTTP status code list](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 
 
-#### Plain, HTML, JSON
+### Plain, HTML, JSON
 
-The keys ``:plain``, ``:html``, ``:json`` can replace both ``:content`` ``:type``. It is associated like ``:content`` and replace automaticaly it's type.
+The keys ``:plain``, ``:html``, ``:json`` can replace both ``:content`` ``:type``.
+It is associated like ``:content`` and **replace automaticaly the type**.
 
 key | type
 ---|---

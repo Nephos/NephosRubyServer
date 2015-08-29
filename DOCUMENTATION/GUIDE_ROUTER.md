@@ -1,42 +1,58 @@
 # Routing Guide
 
-## Why using routes ?
+## How the routes are inputed by the client ?
 
-If you begin on the web, you must understand that a request on "web.com/path" will not "take the file and render to the client". The request will be handled by the server (Nephos) to compute and render the rights data (maybe the content of a file).
+Each HTTP request made by the client will contains a **REQUEST_URI** value.
+The web server receive this information, and will choose what to do,
+based on the rules you will define.
 
-You will have to specifie the routes usables by the user.
+## How to define the rules ?
 
-## Create a route
+You have to write the rules in the ``/routes.rb`` file.
+Few helpers are provided to make the job easier.
+They will be described in the following section.
 
-To do it, checkout the ``routes.rb`` file.
+## The helpers
 
-Nephos-Server allows you to use 5 helpers:
-
-### get, post, put
-
-The 3 calls add_route with your parameters + the HTTP verb (GET, POST, or PUT).
-It take has parameter 1 ``Hash``. See ``add_route`` just on the following lines.
+As every HTTP request requires an HTTP verb, there is 4 helpers to handle them.
+``get``, ``post``, ``put``, ``add_route``. Indeed, there is 3 main verbs (GET POST PUT).
+But as you can need to create other verbs (DELETE, PATCH, ...), we allows you to handle them.
 
 ### add_route
 
-``add_route(what, verb)`` takes 2 parameters:
+The method ``add_route`` take 2 arguments.
 
-- what: ``Hash``. It requires 3 keys:
-  - ``:url``: specifies the url that will be used to match with the user request.
-  - ``:controller``: specifies the controller class that will be used.
-  - ``:method``: specifies the method of the controller that will be used to compute and render a result to the user.
-- verb: ``String``. It can be **GET**, **POST**, **PUT**, **DELETE**, or anything you like. But try to respect the standards.
+1. verb (has to be a string, upcase as possible, like **GET**)
+2. option (a **Hash** with 3 required keys)
+
+The option argument must contains the 3 following keys:
+
+- ``:url``: the url to handle (client input)
+- ``:controller``: the controller to use
+- ``:method``: the method of the controller that will be used to compute and render a result to the client.
+
+As example, yuo can write:
+
+```ruby
+add_route "GET", url: "/tmp", controller: "MyController", method: "tmp"
+```
+
+### get post put
+
+Theses 3 helpers allows you to use ``add_route`` without the first argument.
 
 ### resource
 
-resource take 1 parameter and 1 block. The parameter is a partial url, and the bloc, other routes.
+This method takes 1 parameter and 1 block.
+The parameter is a partial url, and the bloc, other routes.
 
-resource can be chained many times. For Example, you can do this:
+Resource can be chained many times.
+For Example, you can do this:
 
 ```ruby
-resource "home" do
-  resource "/index" do
-    get url: "/", controller: "MainController", method: "root"
+resource "user" do
+  resource "informations" do
+    get url: "/index", controller: "UserController", method: "show" # /user/informations/index
   end
 end
 ```
@@ -45,5 +61,7 @@ It will generate the route ``/home/index``, calling the ``MainController#root`` 
 
 
 ## URL Parameters
+
+**TODO**
 
 place a ``/:param`` in your route. The parameter will be placed in the controller in the ``params`` method

@@ -6,7 +6,7 @@
 
 [![Code Climate](https://codeclimate.com/github/pouleta/NephosRubyServer/badges/gpa.svg)](https://codeclimate.com/github/pouleta/NephosRubyServer)
 
-This is a minimal web server, based on rack and puma.
+This is a minimal web server, based on [rack](TODO LINK) and [puma](TODO LINK).
 It is written in ruby. It also gives you a minimal architecture
 to speed up your application creation.
 
@@ -99,6 +99,9 @@ end
 ## TODO v0.3
 - Improve documentation (fix english, increase coverage, ...)
 - Improve unitary test coverage
+
+## TODO v0.4
+- url parameters as resource
 
 ## TODO v1
 - Improved Routing (more helper options)
