@@ -6,21 +6,30 @@
 
 [![Code Climate](https://codeclimate.com/github/pouleta/NephosRubyServer/badges/gpa.svg)](https://codeclimate.com/github/pouleta/NephosRubyServer)
 
-This is a simple web server, based on rack and puma, with a minimal help:
+This is a minimal web server, based on rack and puma.
+It is written in ruby. It also gives you a minimal architecture
+to speed up your application creation.
 
-- Controllers
-- Rendering
-- Routing
+Features provided:
 
-No templating, no database by default. They are extensions of your choice.
+- Controllers: gives you a resource logic.
+- Render: easier render content to the client.
+- Router: create a robust and simple routing system, with url variables.
+
+Features wich will not be provided by nephos-server:
+
+- Templating (HTML with variables, loops, ...): It already exists and they are easy to implement.
+  - **TODO** [Slim](DOCUMENTATION/TEMPLATING/SLIM.md)
+- Database orm and connector: It already exists and simple to implement
+  - **TODO** [Sequel](DOCUMENTATION/DATABASE/SEQUEL.md)
 
 # Start
 
 ```sh
-gem install nephos-server
-nephos-generator application MyApp
-cd MyApp
-nephos-server -p 8080 # port is not required
+gem install nephos-server # download the server
+nephos-generator application MyApp # generate the application
+cd MyApp # go in
+nephos-server -p 8080 # start the server. port is not required
 ```
 
 
@@ -28,14 +37,17 @@ nephos-server -p 8080 # port is not required
 
 ## Guides
 
-### [Render API](DOCUMENTATION/API_RENDER.md)
-### [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
+Theses guides will provide you knowlegde about everything you can use in the application.
+
+- **TODO** [Generator GUIDE](DOCUMENTATION/GUIDE_GENERATOR.md)
+- [Render API](DOCUMENTATION/API_RENDER.md)
+- [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
 
 ## Examples
 
 ### Controller
 
-To create a controller, simply add a ruby code file to ``app/``, with a class inherited by ``Nephos::Controller``
+To create a controller, add a ruby file to ``app/``, with a class inherited by ``Nephos::Controller``
 The basic code of a controller can be generated via ``nephos-generator controller NAME``.
 
 ```ruby
@@ -52,7 +64,7 @@ end
 
 ### Rendering
 
-In a controller, use:
+To render a content to the client, you can return informations from a Controller method:
 
 ```ruby
 return {status: code}
@@ -66,16 +78,18 @@ return :empty
 
 ### Routing
 
-Like in ``/routes.rb``, you have to route manually the api.
+The routing (rules to execute the action the user wants), you have to write the ``/routes.rb`` file.
+if the user try to access to an url not described in the file, it will automaticaly render a 404 not found.
 
 ```ruby
 get url: "/", controller: "MainController", method: "root"       # /
 get url: "/add", controller: "MainController", method: "add_url" # /add
-get url: "/add/:url", controller: "MainController", method: "add_url" # /add
+get url: "/add/:url", controller: "MainController", method: "add_url" # /add with parameter :url
 get url: "/rm", controller: "MainController", method: "rm_url"   # /rm
-get url: "/rm/:url", controller: "MainController", method: "rm_url"   # /rm
+get url: "/rm/:url", controller: "MainController", method: "rm_url"   # /rm with parameter :url
 resource "infos" do
   get url: "/", controller: "MainController", method: "root" # generate /infos
+  get url: "/abbout", controller: "MainController", method: "root" # generate /infos/about
 end
 ```
 
@@ -89,6 +103,7 @@ end
 ## TODO v1
 - Improved Routing (more helper options)
 - Improved Rendering (more options)
+- Customisable errors (404 noticely, and 500)
 - Guide about
   - Controllers
   - Routing
