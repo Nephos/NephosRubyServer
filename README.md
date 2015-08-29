@@ -19,9 +19,9 @@ Features provided:
 Features wich will not be provided by nephos-server:
 
 - Templating (HTML with variables, loops, ...): It already exists and they are easy to implement.
-  - **TODO** [Slim](DOCUMENTATION/TEMPLATING/SLIM.md)
+  - [Slim](DOCUMENTATION/TEMPLATING/SLIM.md)
 - Database orm and connector: It already exists and simple to implement
-  - **TODO** [Sequel](DOCUMENTATION/DATABASE/SEQUEL.md)
+  - [Sequel](DOCUMENTATION/DATABASE/SEQUEL.md)
 
 # Start
 

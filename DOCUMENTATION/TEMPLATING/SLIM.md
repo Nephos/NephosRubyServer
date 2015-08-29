@@ -1,6 +1,7 @@
 # Slim
 
 Slim is a HTML templating langage, simple to implement in the Nephos Server.
+[Slim documentation](http://slim-lang.com)
 
 ## Installation
 
