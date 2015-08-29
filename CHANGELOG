@@ -1,3 +1,7 @@
+v0.3.1
+	* fix controller parameters
+	* add new unitary tests
+
 v0.3.0
 	* improve documentation (and fix it)
 	* add documentation (guide for slim, sequel, generator)
