@@ -1,4 +1,8 @@
 v0.3.1
+	* fix gem
+	* add tests for generator
+
+v0.3.1
 	* fix controller parameters
 	* add new unitary tests
 

@@ -17,6 +17,7 @@ lib/nephos-server/server/main.rb
 lib/nephos-server/server/responder.rb
 lib/nephos-server/router/main.rb
 lib/nephos-server/router/load.rb
+lib/nephos-server/router/helpers.rb
 README.md
 Rakefile
 Procfile
