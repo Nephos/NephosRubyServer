@@ -36,8 +36,13 @@ app/image.jpg
 app/main.rb
 bin/nephos-server
 bin/nephos-generator
+bin/nephos-status
 )
-  s.executables = ['nephos-server', 'nephos-generator']
+  s.executables = %w(
+nephos-server
+nephos-generator
+nephos-status
+)
   s.homepage    = 'https://github.com/pouleta/NephosRubyServer'
   s.license     = 'GNU/GPLv3'
   #s.cert_chain  = ['certs/poulet_a.pem']

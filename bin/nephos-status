@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: nephos-status [appli directory]"
+end.parse!
+
+$dir = ARGV[0] || "."
+
+begin
+  if Dir.exists? $dir
+    $gfl = File.expand_path "Gemfile.lock", $dir
+    if not File.exists? $gfl or
+       not File.read($gfl).split.index("nephos-server")
+      raise "\"#{$dir}\" is not a valid nephos-server application"
+    else
+      i = File.read($gfl).split.index("nephos-server") + 1
+      version = File.read($gfl).split[i]
+      path = $gfl.gsub(/Gemfile\.lock$/, "")
+      puts "Full path: #{path}"
+      puts "Installed nephos-version: #{version}"
+    end
+  else
+    raise "\"#{$dir}\" is not a valid directory"
+  end
+
+rescue => err
+  puts err.message
+end
