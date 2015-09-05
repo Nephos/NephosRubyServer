@@ -16,7 +16,7 @@ ROUTE_RB = <<EOF
 EOF
 
 def generate_route(verb, url, dest_c, dest_m=nil)
-  #raise "You are not in a valid application directory" if not Nephos::Bin.is_a_valid_application?
+  raise "You are not in a valid application directory" if not Nephos::Bin.is_a_valid_application?
   raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
   raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
   raise "Option dest_m is not avaiable for now" if not dest_m.nil?
