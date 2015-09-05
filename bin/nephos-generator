@@ -93,7 +93,7 @@ def initialize_application
 end
 
 begin
-  OptionParser.new do |opts|
+  opt = OptionParser.new do |opts|
     opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
 
     opts.on("--debug") do
@@ -102,25 +102,25 @@ begin
 
   end.parse!
 
-  case ARGV[0]
+  case opt[0]
   when "c", "controller"
-    if ARGV[1].to_s.match(/[\w\-\.]+/)
-      generate_controller("#{ARGV[1].capitalize}Controller", "app/#{ARGV[1].downcase}.rb")
+    if opt[1].to_s.match(/[\w\-\.]+/)
+      generate_controller("#{opt[1].capitalize}Controller", "app/#{opt[1].downcase}.rb")
     else
       puts "error"
     end
   when "a", "appli", "application"
-    if not ARGV[1].to_s.empty?
-      create_application_dir(ARGV[1])
-      puts "Application #{ARGV[1]} created"
-      move_to_application_dir(ARGV[1])
+    if not opt[1].to_s.empty?
+      create_application_dir(opt[1])
+      puts "Application #{opt[1]} created"
+      move_to_application_dir(opt[1])
     end
     initialize_application
     puts "Application initialized"
   when "r", "route"
-    generate_route(*(ARGV[1..4]))
+    generate_route(*(opt[1..4]))
   else
-    puts "\"#{ARGV[0]}\" not recognized has a command"
+    puts "\"#{opt[0]}\" not recognized has a command"
   end
 
 rescue => err
