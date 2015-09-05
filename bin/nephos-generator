@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'colorize'
 require 'optparse'
 require 'nephos-server/bin-helpers'
 
@@ -15,8 +16,25 @@ ROUTE_RB = <<EOF
 #get url: "/rm", controller: "MainController", method: "rm_url"
 EOF
 
+def raise_invalid_appli
+  if not Nephos::Bin.is_a_valid_application? and not $debug
+    raise "You are not in a valid application directory"
+  end
+end
+
+def route_exists? line
+  File.read("routes.rb").split("\n").include? line
+end
+
+def write_route! line
+  File.open("routes.rb", "a") do |f|
+    f.puts line
+  end
+  puts("Route created: ".green + line)
+end
+
 def generate_route(verb, url, dest_c, dest_m=nil)
-  raise "You are not in a valid application directory" if not Nephos::Bin.is_a_valid_application?
+  raise_invalid_appli
   raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
   raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
   raise "Option dest_m is not avaiable for now" if not dest_m.nil?
@@ -24,13 +42,15 @@ def generate_route(verb, url, dest_c, dest_m=nil)
   controller = dest_c.split("#")[0]
   method = dest_c.split("#")[1]
   line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
-  File.open("routes.rb", "a") do |f|
-    f.puts line
+  if route_exists? line
+    puts("Route already exists: ".yellow + line)
+  else
+    write_route!(line)
   end
 end
 
 def generate_controller(name, file)
-  raise "You are not in a valid application directory" if not Nephos::Bin.is_a_valid_application?
+  raise_invalid_appli
   if File.exists? file
     print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
     r = STDIN.gets.to_s.chomp
@@ -75,6 +95,11 @@ end
 begin
   OptionParser.new do |opts|
     opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
+
+    opts.on("--debug") do
+      $debug = true
+    end
+
   end.parse!
 
   case ARGV[0]
