@@ -13,6 +13,7 @@ lib/nephos-server.rb
 lib/nephos-server/basic_errors.rb
 lib/nephos-server/params.rb
 lib/nephos-server/controller.rb
+lib/nephos-server/bin-helpers.rb
 lib/nephos-server/server/main.rb
 lib/nephos-server/server/responder.rb
 lib/nephos-server/router/main.rb

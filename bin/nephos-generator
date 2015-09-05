@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+require 'nephos-server/bin-helpers'
+
 GEMFILE = <<EOF
 source 'https://rubygems.org'
 
@@ -12,7 +15,22 @@ ROUTE_RB = <<EOF
 #get url: "/rm", controller: "MainController", method: "rm_url"
 EOF
 
+def generate_route(verb, url, dest_c, dest_m=nil)
+  #raise "You are not in a valid application directory" if not Nephos::Bin.is_a_valid_application?
+  raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
+  raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
+  raise "Option dest_m is not avaiable for now" if not dest_m.nil?
+  raise "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/)
+  controller = dest_c.split("#")[0]
+  method = dest_c.split("#")[1]
+  line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
+  File.open("routes.rb", "a") do |f|
+    f.puts line
+  end
+end
+
 def generate_controller(name, file)
+  raise "You are not in a valid application directory" if not Nephos::Bin.is_a_valid_application?
   if File.exists? file
     print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
     r = STDIN.gets.to_s.chomp
@@ -54,8 +72,6 @@ def initialize_application
   exec("bundle install")
 end
 
-require 'optparse'
-
 begin
   OptionParser.new do |opts|
     opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
@@ -63,7 +79,7 @@ begin
 
   case ARGV[0]
   when "c", "controller"
-    if ARGV[1].to_s.match(/[\w_\-\.]+/)
+    if ARGV[1].to_s.match(/[\w\-\.]+/)
       generate_controller("#{ARGV[1].capitalize}Controller", "app/#{ARGV[1].downcase}.rb")
     else
       puts "error"
@@ -76,6 +92,8 @@ begin
     end
     initialize_application
     puts "Application initialized"
+  when "r", "route"
+    generate_route(*(ARGV[1..4]))
   else
     puts "\"#{ARGV[0]}\" not recognized has a command"
   end

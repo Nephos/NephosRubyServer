@@ -25,3 +25,11 @@ nephos-generator controller <name>
 ```
 
 Generate a file ``/app/<downcasename.rb>`` with a class named ``CapitalizeNameController`` inherited by ``Nephos::Controller``.
+
+### Generate new route
+
+```bash
+nephos-generator route VERB "/url" "Controller#Method"
+```
+
+Generate a new route based on the parameters, added to the ``routes.rb`` files.

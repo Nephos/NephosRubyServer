@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
+require 'nephos-server/bin-helpers'
 
 OptionParser.new do |opts|
   opts.banner = "Usage: nephos-status [appli directory]"
