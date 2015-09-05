@@ -1,5 +1,6 @@
 v0.4.0
 	* add nephos-status executable
+	* add nephos-generator route option
 
 v0.3.2
 	* fix gem
