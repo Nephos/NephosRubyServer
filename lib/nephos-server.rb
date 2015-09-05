@@ -13,3 +13,7 @@ require_relative 'nephos-server/controller'
 require_relative 'nephos-server/router/main'
 # server
 require_relative 'nephos-server/server/main'
+
+module Nephos
+  VERSION = File.read("version").strip
+end

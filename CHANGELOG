@@ -1,3 +1,7 @@
+v0.4.2
+	* add version to code
+	* fix a file permissions
+
 v0.4.1
 	* fix regression for binary with --debug feature
 	* improve routes generator
