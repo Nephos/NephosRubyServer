@@ -3,11 +3,20 @@
 require 'optparse'
 require 'nephos-server/bin-helpers'
 
-OptionParser.new do |opts|
+opt = OptionParser.new do |opts|
   opts.banner = "Usage: nephos-status [appli directory]"
+
+  opts.on("--rm") do
+    $remove = true
+  end
+
+  opts.on("--debug") do
+    $debug = true
+  end
+
 end.parse!
 
-$dir = ARGV[0] || "."
+$dir = opt[0] || "."
 
 begin
   if Dir.exists? $dir
@@ -19,8 +28,13 @@ begin
       i = File.read($gfl).split.index("nephos-server") + 1
       version = File.read($gfl).split[i]
       path = $gfl.gsub(/Gemfile\.lock$/, "")
+      n_controllers = 0
+      Dir[File.expand_path 'app/*.rb'].each do |f|
+        n_controllers += 1 if File.read(f).include? "< Nephos::Controller"
+      end
       puts "Full path: #{path}"
       puts "Installed nephos-version: #{version}"
+      puts "Controllers (#{n_controllers})"
     end
   else
     raise "\"#{$dir}\" is not a valid directory"
