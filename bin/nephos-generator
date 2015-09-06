@@ -41,10 +41,14 @@ module Nephos
         raise_invalid_appli
         raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
         raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
-        raise "Option dest_m is not avaiable for now" if not dest_m.nil?
-        raise "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/)
-        controller = dest_c.split("#")[0]
-        method = dest_c.split("#")[1]
+        raise "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/) and dest_m.nil?
+        raise "Option dest_c must match with \"controllerName\"" if not dest_m.nil? and not dest_c.match(/^\w+$/)
+        raise "Option dest_m must match with \"methodName\"" if not dest_m.nil? and not dest_c.match(/^\w+$/)
+        controller, method = dest_c, dest_m
+        if dest_m.nil?
+          controller = dest_c.split("#")[0]
+          method = dest_c.split("#")[1]
+        end
         line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
         if exists? line
           if $remove
