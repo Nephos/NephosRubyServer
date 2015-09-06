@@ -22,74 +22,109 @@ def raise_invalid_appli
   end
 end
 
-def route_exists? line
-  File.read("routes.rb").split("\n").include? line
-end
+module Nephos
+  module Generator
 
-def write_route! line
-  File.open("routes.rb", "a") do |f|
-    f.puts line
-  end
-  puts("Route created: ".green + line)
-end
+    module Route
+      def self.exists? line
+        File.read("routes.rb").split("\n").include? line
+      end
 
-def generate_route(verb, url, dest_c, dest_m=nil)
-  raise_invalid_appli
-  raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
-  raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
-  raise "Option dest_m is not avaiable for now" if not dest_m.nil?
-  raise "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/)
-  controller = dest_c.split("#")[0]
-  method = dest_c.split("#")[1]
-  line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
-  if route_exists? line
-    puts("Route already exists: ".yellow + line)
-  else
-    write_route!(line)
-  end
-end
+      def self.write! line
+        File.open("routes.rb", "a") do |f|
+          f.puts line
+        end
+        puts("Route created: ".green + line)
+      end
 
-def generate_controller(name, file)
-  raise_invalid_appli
-  if File.exists? file
-    print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
-    r = STDIN.gets.to_s.chomp
-    raise "File #{file} already exists" unless r.match(/y(es)?/)
-  end
-  f = File.open(file, 'w')
-  f << <<EOF
+      def self.generate!(verb, url, dest_c, dest_m=nil)
+        raise_invalid_appli
+        raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
+        raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
+        raise "Option dest_m is not avaiable for now" if not dest_m.nil?
+        raise "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/)
+        controller = dest_c.split("#")[0]
+        method = dest_c.split("#")[1]
+        line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
+        if exists? line
+          puts("Route already exists: ".yellow + line)
+        else
+          write!(line)
+        end
+      end
+    end
+
+    module Controller
+      def self.generate!(name, file)
+        raise_invalid_appli
+        if File.exists? file
+          print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
+          r = STDIN.gets.to_s.chomp
+          raise "File #{file} already exists" unless r.match(/y(es)?/)
+        end
+        f = File.open(file, 'w')
+        f << <<EOF
 class #{name} < Nephos::Controller
   def root
     return {plain: "index"}
   end
 end
 EOF
-  puts "Controller \"#{name}\" created at location \"#{file}\""
-end
+        puts "Controller \"#{name}\" created at location \"#{file}\""
+      end
+    end
 
-def create_application_dir dir
-  raise "Directory #{dir} already exists" if Dir.exists? dir
-  Dir.mkdir dir
-end
+    module Application
+      def self.create_application_dir dir
+        raise "Directory #{dir} already exists" if Dir.exists? dir
+        Dir.mkdir dir
+      end
 
-def move_to_application_dir dir
-  Dir.chdir dir
-end
+      def self.move_to_application_dir dir
+        Dir.chdir dir
+      end
 
-def initialize_application
-  raise "Not an empty dir" unless Dir[File.expand_path "*"].empty?
-  File.write "routes.rb", ROUTE_RB
-  File.write "Gemfile", GEMFILE
-  Dir.mkdir "app"
-  begin
-    `git init .`
-    puts "Git repository initialized"
-  rescue Errno::ENOENT => err
-    puts "Warning: git repository not initialized"
-  rescue => err
-    puts "Error: #{err.message}"
+      def self.initialize!
+        raise "Not an empty dir" unless Dir[File.expand_path "*"].empty?
+        File.write "routes.rb", ROUTE_RB
+        File.write "Gemfile", GEMFILE
+        Dir.mkdir "app"
+        begin
+          `git init .`
+          puts "Git repository initialized"
+        rescue Errno::ENOENT => err
+          puts "Warning: git repository not initialized"
+        rescue => err
+          puts "Error: #{err.message}"
+        end
+        exec("bundle install")
+      end
+    end
+
+    def self.main opt
+      case opt[0]
+      when "c", "controller"
+        if opt[1].to_s.match(/[\w\-\.]+/)
+          Controller.generate!("#{opt[1].capitalize}Controller", "app/#{opt[1].downcase}.rb")
+        else
+          puts "error"
+        end
+      when "a", "appli", "application"
+        if not opt[1].to_s.empty?
+          Application.create_application_dir(opt[1])
+          puts "Application #{opt[1]} created"
+          Application.move_to_application_dir(opt[1])
+        end
+        Application.initialize!
+        puts "Application initialized"
+      when "r", "route"
+        Route.generate!(*(opt[1..4]))
+      else
+        puts "\"#{opt[0]}\" not recognized has a command"
+      end
+    end
+
   end
-  exec("bundle install")
 end
 
 begin
@@ -102,27 +137,9 @@ begin
 
   end.parse!
 
-  case opt[0]
-  when "c", "controller"
-    if opt[1].to_s.match(/[\w\-\.]+/)
-      generate_controller("#{opt[1].capitalize}Controller", "app/#{opt[1].downcase}.rb")
-    else
-      puts "error"
-    end
-  when "a", "appli", "application"
-    if not opt[1].to_s.empty?
-      create_application_dir(opt[1])
-      puts "Application #{opt[1]} created"
-      move_to_application_dir(opt[1])
-    end
-    initialize_application
-    puts "Application initialized"
-  when "r", "route"
-    generate_route(*(opt[1..4]))
-  else
-    puts "\"#{opt[0]}\" not recognized has a command"
-  end
+  Nephos::Generator.main(opt)
 
 rescue => err
-  puts "Error: #{err.message}"
+  puts "Error:".red + " #{err.message}"
+  puts err.backtrace
 end
