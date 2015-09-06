@@ -31,6 +31,7 @@ test/responder.rb
 test/router.rb
 test/params.rb
 test/controller.rb
+test/generator.rb
 routes.rb
 app/dataset.rb
 app/image.jpg
