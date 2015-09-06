@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name        = 'nephos-server'
   s.version     = File.read("version")
   s.date        = Time.now.getgm.to_s.split.first
-  s.summary     = 'See Changelog'
+  s.summary     = File.read("CHANGELOG").match(/^v[^\n]+\n((\t[^\n]+\n)+)/m)[1].split("\t").join
   s.description = ' a minimalist server, based on rack/puma, with routing, rendering, and controllers. Designed for quick api.'
   s.authors     = [
     'poulet_a'
@@ -20,6 +20,7 @@ lib/nephos-server/router/main.rb
 lib/nephos-server/router/load.rb
 lib/nephos-server/router/helpers.rb
 README.md
+CHANGELOG
 Rakefile
 Procfile
 Gemfile
