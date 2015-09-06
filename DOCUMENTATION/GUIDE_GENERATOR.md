@@ -32,4 +32,12 @@ Generate a file ``/app/<downcasename.rb>`` with a class named ``CapitalizeNameCo
 nephos-generator route VERB "/url" "Controller#Method"
 ```
 
-Generate a new route based on the parameters, added to the ``routes.rb`` files.
+Generate a new route based on the parameters, added to the ``routes.rb`` file.
+
+### Remove a route
+
+```bash
+nephos-generator --rm route VERB "/url" "Controller#Method"
+```
+
+It will remove a route, generator by the generator, from the ``routes.rb`` file.

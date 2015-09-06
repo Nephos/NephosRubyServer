@@ -47,9 +47,19 @@ module Nephos
         method = dest_c.split("#")[1]
         line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
         if exists? line
-          puts("Route already exists: ".yellow + line)
+          if $remove
+            routes = File.read("routes.rb").split("\n")
+            puts "Route deleted: ".green + routes.delete(line).to_s
+            File.write("routes.rb", routes.join("\n") + "\n")
+          else
+            puts("Route already exists: ".yellow + line)
+          end
         else
-          write!(line)
+          if $remove
+            puts("Route doesn't exists: ".yellow + line)
+          else
+            write!(line)
+          end
         end
       end
     end
@@ -131,10 +141,13 @@ begin
   opt = OptionParser.new do |opts|
     opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
 
+    opts.on("--rm") do
+      $remove = true
+    end
+
     opts.on("--debug") do
       $debug = true
     end
-
   end.parse!
 
   Nephos::Generator.main(opt)
