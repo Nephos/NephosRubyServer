@@ -15,5 +15,6 @@ require_relative 'nephos-server/router/main'
 require_relative 'nephos-server/server/main'
 
 module Nephos
-  VERSION = File.read("version").strip
+  VERSION_FILE = __FILE__.split("/")[0..-3].join("/") + "/version"
+  VERSION = File.read(VERSION_FILE).strip
 end
