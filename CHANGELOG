@@ -3,6 +3,7 @@ v0.4.2
 	* fix a file permissions
 	* add generator route --rm
 	* add test for generator (routes and route --rm)
+	* improve routes generator with a 4th optional argument
 
 v0.4.1
 	* fix regression for binary with --debug feature

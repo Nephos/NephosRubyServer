@@ -30,6 +30,8 @@ Generate a file ``/app/<downcasename.rb>`` with a class named ``CapitalizeNameCo
 
 ```bash
 nephos-generator route VERB "/url" "Controller#Method"
+# or also
+nephos-generator route VERB "/url" Controller Method
 ```
 
 Generate a new route based on the parameters, added to the ``routes.rb`` file.
