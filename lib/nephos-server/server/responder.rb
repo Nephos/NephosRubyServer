@@ -65,6 +65,7 @@ module Nephos
     # @param params [Hash, Symbol]
     def self.render params
       return [204, ct_specific({type: PRESET_CT[:plain]}), [""]] if params == :empty
+      return render(status: params) if params.is_a? Integer
       params = set_default_params(params)
       return [
         params[:status],
