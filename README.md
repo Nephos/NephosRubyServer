@@ -67,6 +67,7 @@ end
 To render a content to the client, you can return informations from a Controller method:
 
 ```ruby
+return 404
 return {status: code}
 return {status: code, content: "Not today"}
 return {json: {status: "resource created"}, status: 201}
