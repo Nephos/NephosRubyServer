@@ -98,6 +98,12 @@ end
 
 ## TODO v0.4
 - improve generator with application status, tests, more generation (routing, ...)
+- improved render status
+
+## TODO v0.5
+- improve documentation (bin)
+- executables with version
+- improve executables (tests, arguments)
 
 ## TODO v1
 - Improved Routing (more helper options)

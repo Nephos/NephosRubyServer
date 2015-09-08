@@ -33,7 +33,8 @@ begin
   Nephos::Server.start($server_port)
 
 rescue RoutingError => err
-  puts "#{err.class}. Check out the documentation and `routes.rb` file: #{err.message}"
+  puts "#{err.class}. Check out the documentation and `routes.rb` file."
+  puts err.message
 
 rescue => err
   puts "Error: #{err.message}"
