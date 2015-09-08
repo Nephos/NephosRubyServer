@@ -49,6 +49,7 @@ module Nephos
           controller = dest_c.split("#")[0]
           method = dest_c.split("#")[1]
         end
+        verb = verb.upcase
         line = "add_route \"#{verb}\", url: \"#{url}\", controller: \"#{controller}\", method: \"#{method}\""
         if exists? line
           if $remove
