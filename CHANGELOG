@@ -1,5 +1,8 @@
 v0.4.3
 	* improve gemspec changelog
+	* improve generator
+	* improve responder (with integer argument)
+	* fix router helpers
 
 v0.4.2
 	* add version to code
