@@ -24,7 +24,7 @@ Create a directory name ``<name>``, initialize a git repository and create basic
 nephos-generator controller <name>
 ```
 
-Generate a file ``/app/<downcasename.rb>`` with a class named ``CapitalizeNameController`` inherited by ``Nephos::Controller``.
+Generate a file ``/app/<downcasename_controller.rb>`` with a class named ``CapitalizeNameController`` inherited by ``Nephos::Controller``.
 
 ### Generate new route
 

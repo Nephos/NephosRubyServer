@@ -120,7 +120,7 @@ EOF
       case opt[0]
       when "c", "controller"
         if opt[1].to_s.match(/[\w\-\.]+/)
-          Controller.generate!("#{opt[1].capitalize}Controller", "app/#{opt[1].downcase}.rb")
+          Controller.generate!("#{opt[1].capitalize}Controller", "app/#{opt[1].downcase}_controller.rb")
         else
           puts "error"
         end
