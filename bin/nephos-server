@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
+require 'colorize'
 require 'optparse'
+
+class RoutingError < StandardError; end
 
 begin
   OptionParser.new do |opts|
@@ -33,9 +36,9 @@ begin
   Nephos::Server.start($server_port)
 
 rescue RoutingError => err
-  puts "#{err.class}. Check out the documentation and `routes.rb` file."
-  puts err.message
+  puts "Routing Error: Check out the documentation and `routes.rb` file.".yellow
+  puts "#{err.class}: #{err.message}".red
 
 rescue => err
-  puts "Error: #{err.message}"
+  puts "#{err.class}: #{err.message}".red
 end

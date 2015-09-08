@@ -1,3 +1,6 @@
+v0.4.5
+	* fix server executable
+
 v0.4.4
 	* improve errors
 	* fix unitary tests about controller generator
