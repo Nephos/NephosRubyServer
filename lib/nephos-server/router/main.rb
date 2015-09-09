@@ -53,8 +53,6 @@ module Nephos
       call = parse_path(parsed[:path], parsed[:verb])
       return error(404, "404 not found \"#{route}\"") if call.nil?
       begin
-        require 'pry'
-        binding.pry
         controller = Module.const_get(call[:controller]).new(env, parsed, call)
         return render(controller.send(call[:method]))
       rescue => err
