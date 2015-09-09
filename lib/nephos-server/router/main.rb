@@ -25,8 +25,9 @@ module Nephos
       verb = env["REQUEST_METHOD"]
       from = env["REMOTE_ADDR"]
       path = route.path.split("/").select{|e|not e.to_s.empty?}
-      args = Hash[route.query.to_s.split("&").map{|e| e.split("=")}]
-      return {route: route, verb: verb, from: from, path: path, args: args}
+      params = Rack::Request.new(env).params
+      # Hash[route.query.to_s.split("&").map{|e| e.split("=")}]
+      return {route: route, verb: verb, from: from, path: path, params: params}
     end
 
     def self.error(code, err=nil)
@@ -52,6 +53,8 @@ module Nephos
       call = parse_path(parsed[:path], parsed[:verb])
       return error(404, "404 not found \"#{route}\"") if call.nil?
       begin
+        require 'pry'
+        binding.pry
         controller = Module.const_get(call[:controller]).new(env, parsed, call)
         return render(controller.send(call[:method]))
       rescue => err

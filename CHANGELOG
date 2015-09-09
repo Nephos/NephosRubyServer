@@ -1,4 +1,7 @@
 v0.4.7
+	* fix parameters
+
+v0.4.7
 	* improve controller generator (names)
 	* add puma to change the default web server
 	* add environments
