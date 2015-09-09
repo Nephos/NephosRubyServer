@@ -29,7 +29,7 @@ Features wich will not be provided by nephos-server:
 gem install nephos-server # download the server
 nephos-generator application MyApp # generate the application
 cd MyApp # go in
-nephos-server -p 8080 # start the server. port is not required
+nephos-server -p 8080 -h 0.0.0.0 # start the server. port is not required, neither host
 ```
 
 
@@ -44,6 +44,11 @@ Theses guides will provide you knowlegde about everything you can use in the app
 - [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
 
 ## Examples
+
+### Production
+
+To avoid information leaks from your application, set the environment variable ``export ENVIRONMENT=production``.
+It will disable ruby error messages when an error occurs in the controller.
 
 ### Controller
 
@@ -100,11 +105,13 @@ end
 ## TODO v0.4
 - improve generator with application status, tests, more generation (routing, ...)
 - improved render status
+- improve executables (tests, arguments)
+- improve documentation (bin)
 
 ## TODO v0.5
-- improve documentation (bin)
 - executables with version
-- improve executables (tests, arguments)
+- cookies, ...
+- usage of rack parsers (Rack::Request.new(env) etc.)
 
 ## TODO v1
 - Improved Routing (more helper options)

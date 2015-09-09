@@ -1,3 +1,8 @@
+v0.4.6
+	* improve router errors
+	* improve documentation (production mode)
+	* add listen network parameter to run the server
+
 v0.4.5
 	* fix server executable
 

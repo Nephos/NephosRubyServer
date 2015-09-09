@@ -34,7 +34,7 @@ module Nephos
         return render(status: code)
       elsif err
         #TODO: improve this
-        return render(status: code, content: err.is_a?(String) ? err : err.message)
+        return render(status: code, content: "Error: #{code}\n" + (err.is_a?(String) ? err : err.message))
       else
         return render(status: code)
       end

@@ -7,17 +7,21 @@ class RoutingError < StandardError; end
 
 begin
   OptionParser.new do |opts|
-    opts.banner = "Usage: nephos-server [-p=port] [--debug]"
+    opts.banner = "Usage: nephos-server [-p=port] [-h=listen] [--debug]"
 
     $server_port = ENV["SERVER_PORT"] || 8080
     opts.on("-p=nb", "--port=nb", "Port") do |port|
       $server_port = Integer(port)
     end
 
+    $server_host = ENV["SERVER_HOST"] || "0.0.0.0"
+    opts.on("-h=listen", "--host=listen", "Listen on the network") do |host|
+      $server_host = host
+    end
+
     opts.on("--debug") do
       $debug = true
     end
-
   end.parse!
 
   if $debug
@@ -33,7 +37,7 @@ begin
   end
 
   puts "Running Nephos::Server version #{Nephos::VERSION}"
-  Nephos::Server.start($server_port)
+  Nephos::Server.start($server_port, $server_host)
 
 rescue RoutingError => err
   puts "Routing Error: Check out the documentation and `routes.rb` file.".yellow
