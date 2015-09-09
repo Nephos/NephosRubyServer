@@ -32,6 +32,12 @@ cd MyApp # go in
 nephos-server -p 8080 -h 0.0.0.0 # start the server. port is not required, neither host
 ```
 
+``nephos-server`` is a binary designed to start the server easly. It can take few arguments, all optionnal:
+
+- ``-p``: port to listen
+- ``-h``: host to listen (network address)
+- ``-e``: environment (default is development, can be set to production)
+
 
 # Documentation
 
@@ -107,16 +113,22 @@ end
 - improved render status
 - improve executables (tests, arguments)
 - improve documentation (bin)
+- improve controller generator (names's case)
+- environnementable
 
 ## TODO v0.5
 - executables with version
 - cookies, ...
 - usage of rack parsers (Rack::Request.new(env) etc.)
 
-## TODO v1
-- Improved Routing (more helper options)
-- Improved Rendering (more options)
-- Customisable errors (404 noticely, and 500)
+## TODO v0.6
+- startable as daemon
+- hooks for controller
+
+## v1 requierements
+- Environement, Daemons, Port, Listen Host, Routables, Arguments
+- Generator readables and powerfull
+- At least 80% tests coverage
 - Guide about
   - Controllers
   - Routing
