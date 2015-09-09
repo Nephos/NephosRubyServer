@@ -54,5 +54,6 @@ nephos-status
   s.add_dependency 'nomorebeer', '~> 1.1'
   s.add_dependency 'rack', '~> 1.6'
   s.add_dependency 'colorize', '~> 0.7'
+  s.add_dependency 'puma', '~> 2.13'
 
 end

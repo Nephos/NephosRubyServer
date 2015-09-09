@@ -1,5 +1,6 @@
 v0.4.7
 	* improve controller generator (names)
+	* add puma to change the default web server
 
 v0.4.6
 	* improve router errors
