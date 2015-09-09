@@ -1,3 +1,6 @@
+v0.4.7
+	* improve controller generator (names)
+
 v0.4.6
 	* improve router errors
 	* improve documentation (production mode)

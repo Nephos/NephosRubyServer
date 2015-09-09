@@ -70,7 +70,10 @@ module Nephos
     end
 
     module Controller
-      def self.generate!(name, file)
+      def self.generate!(ctr)
+        uname = "#{ctr[0].upcase}#{ctr[1..-1]}Controller".gsub(/ControllerController$/, "Controller")
+        lname = uname.gsub(/([A-Z])/, '_\1')[1..-1].downcase
+        file = "app/#{lname}.rb"
         raise_invalid_appli
         if File.exists? file
           print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
@@ -79,7 +82,7 @@ module Nephos
         end
         f = File.open(file, 'w')
         f << <<EOF
-class #{name} < Nephos::Controller
+class #{uname} < Nephos::Controller
   def root
     return {plain: "index"}
   end
@@ -120,7 +123,7 @@ EOF
       case opt[0]
       when "c", "controller"
         if opt[1].to_s.match(/[\w\-\.]+/)
-          Controller.generate!("#{opt[1].capitalize}Controller", "app/#{opt[1].downcase}_controller.rb")
+          Controller.generate!(opt[1])
         else
           puts "error"
         end
