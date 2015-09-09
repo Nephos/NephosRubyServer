@@ -19,6 +19,11 @@ begin
       $server_host = host
     end
 
+    $server_env = ENV["ENVIRONMENT"] || "development"
+    opts.on("-e=env", "--env=env", "Environment") do |env|
+      $server_env = env
+    end
+
     opts.on("--debug") do
       $debug = true
     end
@@ -36,7 +41,7 @@ begin
     raise InvalidApplication
   end
 
-  puts "Running Nephos::Server version #{Nephos::VERSION}"
+  puts "Running Nephos::Server version #{Nephos::VERSION} (#{Nephos.env})"
   Nephos::Server.start($server_port, $server_host)
 
 rescue RoutingError => err

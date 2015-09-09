@@ -109,12 +109,9 @@ end
 # Developers: Roadmap
 
 ## TODO v0.4
-- improve generator with application status, tests, more generation (routing, ...)
-- improved render status
+- improve generator with application tests
 - improve executables (tests, arguments)
 - improve documentation (bin)
-- improve controller generator (names's case)
-- environnementable
 
 ## TODO v0.5
 - executables with version
