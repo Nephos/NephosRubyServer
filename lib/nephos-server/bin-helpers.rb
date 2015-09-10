@@ -11,3 +11,5 @@ module Nephos
 
   end
 end
+
+class BinError < StandardError; end

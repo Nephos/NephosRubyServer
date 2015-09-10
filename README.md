@@ -111,8 +111,7 @@ end
 
 ## TODO v0.4
 - improve generator with application tests
-- improve executables (tests, arguments)
-- improve documentation (bin)
+- improve executables (tests)
 - fix routing match (bug reported via ABear project)
 
 ## TODO v0.5

@@ -17,8 +17,8 @@ ROUTE_RB = <<EOF
 EOF
 
 def raise_invalid_appli
-  if not Nephos::Bin.is_a_valid_application? and not $debug
-    raise "You are not in a valid application directory"
+  if not Nephos::Bin.is_a_valid_application? and not $test
+    raise BinError, "You are not in a valid application directory"
   end
 end
 
@@ -39,11 +39,11 @@ module Nephos
 
       def self.generate!(verb, url, dest_c, dest_m=nil)
         raise_invalid_appli
-        raise InvalidVerb, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
-        raise InvalidUrl if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
-        raise "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/) and dest_m.nil?
-        raise "Option dest_c must match with \"controllerName\"" if not dest_m.nil? and not dest_c.match(/^\w+$/)
-        raise "Option dest_m must match with \"methodName\"" if not dest_m.nil? and not dest_c.match(/^\w+$/)
+        raise BinError, "\"#{verb}\" doesn't match with /\w+/" if not verb.to_s.match(/^\w+$/)
+        raise BinError, "\"#{url}\" is not a valid url" if not url.match(/^\/?(:?\w+)(\/:?\w+)*\/?$/)
+        raise BinError, "Option dest_c must match with \"controller#method\"" if not dest_c.match(/^\w+\#\w+$/) and dest_m.nil?
+        raise BinError, "Option dest_c must match with \"controllerName\"" if not dest_m.nil? and not dest_c.match(/^\w+$/)
+        raise BinError, "Option dest_m must match with \"methodName\"" if not dest_m.nil? and not dest_c.match(/^\w+$/)
         controller, method = dest_c, dest_m
         if dest_m.nil?
           controller = dest_c.split("#")[0]
@@ -54,14 +54,14 @@ module Nephos
         if exists? line
           if $remove
             routes = File.read("routes.rb").split("\n")
-            puts "Route deleted: ".green + routes.delete(line).to_s
+            puts "Success: ".green + "Route deleted: " + routes.delete(line).to_s
             File.write("routes.rb", routes.join("\n") + "\n")
           else
-            puts("Route already exists: ".yellow + line)
+            puts("Warning: ".yellow + "Route already exists: " + line)
           end
         else
           if $remove
-            puts("Route doesn't exists: ".yellow + line)
+            puts("Warning: ".yellow + "Route doesn't exists: " + line)
           else
             write!(line)
           end
@@ -75,26 +75,35 @@ module Nephos
         lname = uname.gsub(/([A-Z])/, '_\1')[1..-1].downcase
         file = "app/#{lname}.rb"
         raise_invalid_appli
-        if File.exists? file
-          print "The file #{file} already exists. Are you sure to erase it ? (y/N)"
-          r = STDIN.gets.to_s.chomp
-          raise "File #{file} already exists" unless r.match(/y(es)?/)
-        end
-        f = File.open(file, 'w')
-        f << <<EOF
+        if $remove
+          if File.exists?(file) and File.read(file).include? "class #{uname} < Nephos::Controller"
+            File.delete(file)
+            puts "Success: ".yellow + "\"#{file}\" removed"
+          else
+            raise BinError, "\"#{file}\" is not a valid Controller file."
+          end
+        else
+          if File.exists? file
+            print "Warning: ".yellow + "The file #{file} already exists. Are you sure to erase it ? (y/N) : "
+            r = STDIN.gets.to_s.chomp
+            raise BinError, "File #{file} already exists" unless r.match(/y(es)?/)
+          end
+          f = File.open(file, 'w')
+          f << <<EOF
 class #{uname} < Nephos::Controller
   def root
     return {plain: "index"}
   end
 end
 EOF
-        puts "Controller \"#{name}\" created at location \"#{file}\""
+          puts "Success: ".green + "Controller \"#{uname}\" created at location \"#{file}\""
+        end
       end
     end
 
     module Application
       def self.create_application_dir dir
-        raise "Directory #{dir} already exists" if Dir.exists? dir
+        raise BinError, "Directory #{dir} already exists" if Dir.exists? dir
         Dir.mkdir dir
       end
 
@@ -103,7 +112,7 @@ EOF
       end
 
       def self.initialize!
-        raise "Not an empty dir" unless Dir[File.expand_path "*"].empty?
+        raise BinError, "Not an empty dir" unless Dir[File.expand_path "*"].empty?
         File.write "routes.rb", ROUTE_RB
         File.write "Gemfile", GEMFILE
         Dir.mkdir "app"
@@ -111,34 +120,32 @@ EOF
           `git init .`
           puts "Git repository initialized"
         rescue Errno::ENOENT => err
-          puts "Warning: git repository not initialized"
+          puts "Git Init Error: ".yellow + "git repository not initialized"
         rescue => err
-          puts "Error: #{err.message}"
-        end
+          puts "Git Init Error: ".yellow + " #{err.message}"
+        end if $git
         exec("bundle install")
       end
     end
 
     def self.main opt
-      case opt[0]
-      when "c", "controller"
-        if opt[1].to_s.match(/[\w\-\.]+/)
-          Controller.generate!(opt[1])
-        else
-          puts "error"
-        end
-      when "a", "appli", "application"
-        if not opt[1].to_s.empty?
-          Application.create_application_dir(opt[1])
-          puts "Application #{opt[1]} created"
-          Application.move_to_application_dir(opt[1])
+      case $mode
+      when :controller
+        raise BinError, "Invalid Controller name" if not opt[0].to_s.match(/[\w\-\.]+/)
+        Controller.generate!(opt[0])
+      when :application
+        if not opt[0].to_s.empty?
+          Application.create_application_dir(opt[0])
+          puts "Application #{opt[0]} created"
+          Application.move_to_application_dir(opt[0])
         end
         Application.initialize!
         puts "Application initialized"
-      when "r", "route"
-        Route.generate!(*(opt[1..4]))
+      when :route
+        raise BinError, "Need more arguments (verb url controller method)" if opt.size < 3
+        Route.generate!(*(opt[0..3]))
       else
-        puts "\"#{opt[0]}\" not recognized has a command"
+        puts "nephos-generator --help"
       end
     end
 
@@ -147,18 +154,42 @@ end
 
 begin
   opt = OptionParser.new do |opts|
-    opts.banner = "Usage: nephos-generator [controller name] [appli [name]]"
+    opts.banner = "Usage: nephos-generator"
 
-    opts.on("--rm") do
+    $git = true
+    opts.on("--no-git", "Disable the git initialization when create new application") do
+      $git = false
+    end
+
+    opts.on("--application", "-a", "Create new application") do
+      $mode = :application
+    end
+
+    opts.on("--route", "-r", "Create and remove routes") do
+      $mode = :route
+    end
+
+    opts.on("--controller", "-c", "Create and remove controller") do
+      $mode = :controller
+    end
+
+    opts.on("--rm", "Remove") do
       $remove = true
     end
 
-    opts.on("--debug") do
+    opts.on("--debug", "Enable debugging mode") do
       $debug = true
+    end
+
+    opts.on("--test", "Enable testing mode (for nephos developpers)") do
+      $test = true
     end
   end.parse!
 
   Nephos::Generator.main(opt)
+
+rescue BinError => err
+  puts "Error:".red + " #{err.message}"
 
 rescue => err
   puts "Error:".red + " #{err.message}"
