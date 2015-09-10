@@ -8,7 +8,7 @@
 
 This is a minimal web server, based on [rack](TODO LINK) and [puma](TODO LINK).
 It is written in ruby. It also gives you a minimal architecture
-to speed up your application creation.
+to speed up your application bootstrap.
 
 Features provided:
 
@@ -16,11 +16,11 @@ Features provided:
 - Render: easier render content to the client.
 - Router: create a robust and simple routing system, with url variables.
 
-Features wich will not be provided by nephos-server:
+Features which will not be provided by nephos-server:
 
-- Templating (HTML with variables, loops, ...): It already exists and they are easy to implement.
+- Templating (HTML with variables, loops, ...): It already exists and it is easy to implement.
   - [Slim](DOCUMENTATION/TEMPLATING/SLIM.md)
-- Database orm and connector: It already exists and simple to implement
+- Database orm and connector: It already exists and simple to implement too.
   - [Sequel](DOCUMENTATION/DATABASE/SEQUEL.md)
 
 # Start
@@ -32,7 +32,7 @@ cd MyApp # go in
 nephos-server -p 8080 -h 0.0.0.0 # start the server. port is not required, neither host
 ```
 
-``nephos-server`` is a binary designed to start the server easly. It can take few arguments, all optionnal:
+``nephos-server`` is an executable designed to start the server easly. It can take few arguments, all optionnal:
 
 - ``-p``: port to listen
 - ``-h``: host to listen (network address)
@@ -53,7 +53,8 @@ Theses guides will provide you knowlegde about everything you can use in the app
 
 ### Production
 
-To avoid information leaks from your application, set the environment variable ``export ENVIRONMENT=production``.
+To avoid information leaks from your application, set the environment variable ``export ENVIRONMENT=production``,
+or run the server with ``-e production`` parameter.
 It will disable ruby error messages when an error occurs in the controller.
 
 ### Controller
@@ -91,17 +92,17 @@ return :empty
 ### Routing
 
 The routing (rules to execute the action the user wants), you have to write the ``/routes.rb`` file.
-if the user try to access to an url not described in the file, it will automaticaly render a 404 not found.
+If the user try to access an url not described in the file, it will automaticaly render a 404 not found.
 
 ```ruby
 get url: "/", controller: "MainController", method: "root"       # /
-get url: "/add", controller: "MainController", method: "add_url" # /add
-get url: "/add/:url", controller: "MainController", method: "add_url" # /add with parameter :url
-get url: "/rm", controller: "MainController", method: "rm_url"   # /rm
-get url: "/rm/:url", controller: "MainController", method: "rm_url"   # /rm with parameter :url
+post url: "/add", controller: "MainController", method: "add_url" # /add
+post url: "/add/:url", controller: "MainController", method: "add_url" # /add with parameter :url
+put url: "/rm", controller: "MainController", method: "rm_url"   # /rm
+put url: "/rm/:url", controller: "MainController", method: "rm_url"   # /rm with parameter :url
 resource "infos" do
   get url: "/", controller: "MainController", method: "root" # generate /infos
-  get url: "/abbout", controller: "MainController", method: "root" # generate /infos/about
+  get url: "/about", controller: "MainController", method: "root" # generate /infos/about
 end
 ```
 
@@ -123,6 +124,7 @@ end
 - startable as daemon
 - hooks for controller
 - feature to change HTTP header from controller
+- customisable default 404 errors and 500 errors
 
 ## v1 requierements
 - Environement, Daemons, Port, Listen Host, Routables, Arguments
