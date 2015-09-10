@@ -11,7 +11,7 @@ class MainController < Nephos::Controller
   end
 
   def add_url
-    url = arguments["url"]
+    url = params["url"]
     if url
       Dataset << url
       return {plain: "#{url} added"}
@@ -21,7 +21,7 @@ class MainController < Nephos::Controller
   end
 
   def rm_url
-    url = arguments[:url]
+    url = params[:url]
     if url
       Dataset.rm url
       return {plain: "#{url} removed"}

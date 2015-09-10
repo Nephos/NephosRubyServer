@@ -1,8 +1,8 @@
 resource "home" do
   resource "/index" do
     get url: "/", controller: "MainController", method: "root"
-    get url: "/add", controller: "MainController", method: "add_url"
-    get url: "/rm", controller: "MainController", method: "rm_url"
+    post url: "/add", controller: "MainController", method: "add_url"
+    put url: "/rm", controller: "MainController", method: "rm_url"
   end
   get url: "/", controller: "MainController", method: "root"
 end

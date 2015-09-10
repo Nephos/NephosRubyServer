@@ -112,6 +112,7 @@ end
 - improve generator with application tests
 - improve executables (tests, arguments)
 - improve documentation (bin)
+- fix routing match (bug reported via ABear project)
 
 ## TODO v0.5
 - executables with version
@@ -121,6 +122,7 @@ end
 ## TODO v0.6
 - startable as daemon
 - hooks for controller
+- feature to change HTTP header from controller
 
 ## v1 requierements
 - Environement, Daemons, Port, Listen Host, Routables, Arguments
