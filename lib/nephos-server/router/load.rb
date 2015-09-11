@@ -10,7 +10,7 @@ module Nephos
 
     def self.add_params!(what)
       params = what[:url].split('/').map do |p|
-        p.match(/:\w+/) ? {p: "[[:graph:]]+", name: p} : {p: p, name: nil}
+        p.match(/:\w+/) ? {p: "[^\/]+", name: p} : {p: p, name: nil}
       end
       url = params.map{|e| e[:p]}.join("/")
       url = "/" if url.empty?
