@@ -1,5 +1,11 @@
 v0.4.9
-	* improve generator (parameters, help, display)
+	* fix route matching
+	* improve generator (help and display)
+	* improve generator (usage of optparser)
+	* improve documentation (and update)
+	* add lot of unitary tests on router
+	* add test on application generator
+	* add generator option (--no-build, --no-git, ...)
 
 v0.4.8
 	* fix parameters
