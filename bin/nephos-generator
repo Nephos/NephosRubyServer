@@ -154,7 +154,7 @@ end
 
 begin
   opt = OptionParser.new do |opts|
-    opts.banner = "Usage: nephos-generator"
+    opts.banner = "Usage: nephos-generator <options>"
 
     $git = true
     opts.on("--no-git", "Disable the git initialization when create new application") do

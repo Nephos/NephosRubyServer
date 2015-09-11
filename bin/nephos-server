@@ -7,10 +7,10 @@ class RoutingError < StandardError; end
 
 begin
   OptionParser.new do |opts|
-    opts.banner = "Usage: nephos-server [-p=port] [-h=listen] [--debug]"
+    opts.banner = "Usage: nephos-server <options>"
 
     $server_port = ENV["SERVER_PORT"] || 8080
-    opts.on("-p=nb", "--port=nb", "Port") do |port|
+    opts.on("-p=nb", "--port=nb", "Port to listen") do |port|
       $server_port = Integer(port)
     end
 
@@ -24,18 +24,22 @@ begin
       $server_env = env
     end
 
-    opts.on("--debug") do
+    opts.on("--debug", "Enable debugging mode") do
       $debug = true
+    end
+
+    opts.on("--test", "Enable testing mode (for nephos developpers)") do
+      $test = true
     end
   end.parse!
 
-  if $debug
+  if $test
     require_relative "../lib/nephos-server"
   else
     require 'nephos-server'
   end
 
-  if not $debug and
+  if not $test and
     (not File.exists? "Gemfile.lock" or
      not File.read("Gemfile.lock").split.index("nephos-server"))
     raise InvalidApplication

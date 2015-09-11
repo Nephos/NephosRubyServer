@@ -3,6 +3,7 @@ v0.4.9
 	* improve generator (help and display)
 	* improve generator (usage of optparser)
 	* improve documentation (and update)
+	* change generator option --debug with --test
 	* add lot of unitary tests on router
 	* add test on application generator
 	* add generator option (--no-build, --no-git, ...)
