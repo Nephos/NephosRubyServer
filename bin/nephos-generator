@@ -124,7 +124,7 @@ EOF
         rescue => err
           puts "Git Init Error: ".yellow + " #{err.message}"
         end if $git
-        exec("bundle install")
+        exec("bundle install") if $build
       end
     end
 
@@ -159,6 +159,11 @@ begin
     $git = true
     opts.on("--no-git", "Disable the git initialization when create new application") do
       $git = false
+    end
+
+    $build = true
+    opts.on("--no-build", "Disable the `bundle install` execution when create new application") do
+      $build = false
     end
 
     opts.on("--application", "-a", "Create new application") do

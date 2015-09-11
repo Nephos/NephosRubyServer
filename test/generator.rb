@@ -1,9 +1,16 @@
 class TestNephosServerGenerator < Test::Unit::TestCase
 
   def test_generator_application
-    # Dir.chdir("/tmp")
-    # name = Time.now.to_i.to_s
-    # `nephos-server a #{name}`
+    `rm -rf /tmp/nephos-server-test 2> /tmp/null`
+
+    `./bin/nephos-generator -a /tmp/nephos-server-test --no-build --no-git`
+    assert(Dir.exists? "/tmp/nephos-server-test")
+    assert(File.exists? "/tmp/nephos-server-test/Gemfile")
+    assert(File.exists? "/tmp/nephos-server-test/routes.rb")
+    assert(Dir.exists? "/tmp/nephos-server-test/app")
+    gemfile_data = File.read("/tmp/nephos-server-test/Gemfile").split("\n")
+    assert(gemfile_data.include? "gem 'nephos-server'")
+    `rm -rf /tmp/nephos-server-test 2> /tmp/null`
   end
 
   def test_generator_controller
