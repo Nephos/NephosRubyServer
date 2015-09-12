@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+
+exec("bundle exec nephos-server #{ARGV.join ' '}")

@@ -3,11 +3,14 @@
 require 'colorize'
 require 'optparse'
 
+require 'nephos-server/version'
+require 'nephos-server/bin-helpers'
+
 class RoutingError < StandardError; end
 
 begin
   OptionParser.new do |opts|
-    opts.banner = "Usage: nephos-server <options>"
+    opts.banner = "Usage<#{Nephos::VERSION}>: nephos-server <options>"
 
     $server_port = ENV["SERVER_PORT"] || 8080
     opts.on("-p=nb", "--port=nb", "Port to listen") do |port|

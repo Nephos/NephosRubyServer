@@ -2,7 +2,7 @@
 
 [![GitHub version](https://badge.fury.io/gh/pouleta%2FNephosRubyServer.svg)](http://badge.fury.io/gh/pouleta%2FNephosRubyServer)
 
-[![Gem Version](https://badge.fury.io/rb/nephos-server.svg)](http://badge.fury.io/rb/nephos-server)
+[![Gem Version](https://badge.fury.io/rb/nserver.svg)](http://badge.fury.io/rb/nserver)
 
 [![Code Climate](https://codeclimate.com/github/pouleta/NephosRubyServer/badges/gpa.svg)](https://codeclimate.com/github/pouleta/NephosRubyServer)
 
@@ -16,7 +16,7 @@ Features provided:
 - Render: easier render content to the client.
 - Router: create a robust and simple routing system, with url variables.
 
-Features which will not be provided by nephos-server:
+Features which will not be provided by nserver:
 
 - Templating (HTML with variables, loops, ...): It already exists and it is easy to implement.
   - [Slim](DOCUMENTATION/TEMPLATING/SLIM.md)
@@ -26,13 +26,13 @@ Features which will not be provided by nephos-server:
 # Start
 
 ```sh
-gem install nephos-server # download the server
-nephos-generator application MyApp # generate the application
+gem install nserver # download the server
+ngenerator application MyApp # generate the application
 cd MyApp # go in
-nephos-server -p 8080 -h 0.0.0.0 # start the server. port is not required, neither host
+nserver -p 8080 -h 0.0.0.0 # start the server. port is not required, neither host
 ```
 
-``nephos-server`` is an executable designed to start the server easly. It can take few arguments, all optionnal:
+``nserver`` is an executable designed to start the server easly. It can take few arguments, all optionnal:
 
 - ``-p``: port to listen
 - ``-h``: host to listen (network address)
@@ -60,7 +60,7 @@ It will disable ruby error messages when an error occurs in the controller.
 ### Controller
 
 To create a controller, add a ruby file to ``app/``, with a class inherited by ``Nephos::Controller``
-The basic code of a controller can be generated via ``nephos-generator controller NAME``.
+The basic code of a controller can be generated via ``ngenerator controller NAME``.
 
 ```ruby
 class Example < Nephos::Controller

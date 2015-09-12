@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
+
+require 'nephos-server/version'
 require 'nephos-server/bin-helpers'
 
 opt = OptionParser.new do |opts|
-  opts.banner = "Usage: nephos-status [appli directory]"
+  opts.banner = "Usage<#{Nephos::VERSION}>: nephos-status [appli directory]"
 
   opts.on("--rm") do
     $remove = true

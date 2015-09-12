@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    colorize (0.7.7)
+    nephos-server (0.5.0)
+      colorize (~> 0.7)
+      nomorebeer (~> 1.1)
+      puma (~> 2.13)
+      rack (~> 1.6)
+    nomorebeer (1.1)
+    puma (2.13.4)
+    rack (1.6.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  nephos-server
+  nomorebeer
+
+BUNDLED WITH
+   1.10.5

@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.email       = 'poulet_a@epitech.eu',
   s.files       = %w(
 lib/nephos-server.rb
+lib/nephos-server/version.rb
 lib/nephos-server/basic_errors.rb
 lib/nephos-server/params.rb
 lib/nephos-server/controller.rb
@@ -51,6 +52,7 @@ nephos-status
   #s.cert_chain  = ['certs/poulet_a.pem']
   #s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem') if $0 =~ /gem\z/
 
+  s.add_dependency 'nephos', '~> 1.0'
   s.add_dependency 'nomorebeer', '~> 1.1'
   s.add_dependency 'rack', '~> 1.6'
   s.add_dependency 'colorize', '~> 0.7'

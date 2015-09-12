@@ -1,19 +1,19 @@
 # Generator Guide
 
-The ``nephos-generator`` is a lite application designed to make easier the application management.
+The ``ngenerator`` is a lite application designed to make easier the application management.
 
 Actually, it allows you to create new application and controller.
 
 ## Usage
 
 ```bash
-nephos-generator --mode <options>
+ngenerator --mode <options>
 ```
 
 ### Generate new application
 
 ```bash
-nephos-generator --application <name>
+ngenerator --application <name>
 ```
 
 Create a directory name ``<name>``, initialize a git repository and create basic files.
@@ -21,7 +21,7 @@ Create a directory name ``<name>``, initialize a git repository and create basic
 ### Generate new controller
 
 ```bash
-nephos-generator --controller <name>
+ngenerator --controller <name>
 ```
 
 Generate a file ``/app/<downcasename_controller.rb>`` with a class named ``CapitalizeNameController`` inherited by ``Nephos::Controller``.
@@ -29,8 +29,8 @@ Generate a file ``/app/<downcasename_controller.rb>`` with a class named ``Capit
 ### Generate new route
 
 ```bash
-nephos-generator --route VERB "/url" "Controller#Method" # or also
-nephos-generator --route VERB "/url" Controller Method
+ngenerator --route VERB "/url" "Controller#Method" # or also
+ngenerator --route VERB "/url" Controller Method
 ```
 
 Generate a new route based on the parameters, added to the ``routes.rb`` file.
@@ -38,7 +38,7 @@ Generate a new route based on the parameters, added to the ``routes.rb`` file.
 ### Remove a route
 
 ```bash
-nephos-generator --rm --route VERB "/url" "Controller#Method"
+ngenerator --rm --route VERB "/url" "Controller#Method"
 ```
 
 It will remove a route, generator by the generator, from the ``routes.rb`` file.
