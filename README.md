@@ -26,7 +26,7 @@ Features which will not be provided by nserver:
 # Start
 
 ```sh
-gem install nserver # download the server
+gem install nephos # download the server and executables
 ngenerator application MyApp # generate the application
 cd MyApp # go in
 nserver -p 8080 -h 0.0.0.0 # start the server. port is not required, neither host
