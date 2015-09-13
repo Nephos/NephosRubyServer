@@ -1,7 +1,7 @@
 v0.5.0
 	* improve executables: version taking in count
 
-v0.4.9
+v0.4
 	* fix route matching
 	* improve generator (help and display)
 	* improve generator (usage of optparser)
@@ -10,124 +10,73 @@ v0.4.9
 	* add lot of unitary tests on router
 	* add test on application generator
 	* add generator option (--no-build, --no-git, ...)
-
-v0.4.8
 	* fix parameters
-
-v0.4.7
 	* improve controller generator (names)
 	* add puma to change the default web server
 	* add environments
-
-v0.4.6
 	* improve router errors
 	* improve documentation (production mode)
 	* add listen network parameter to run the server
-
-v0.4.5
 	* fix server executable
-
-v0.4.4
 	* improve errors
 	* fix unitary tests about controller generator
-
-v0.4.3
 	* improve gemspec changelog
 	* improve generator
 	* improve responder (with integer argument)
 	* fix router helpers
-
-v0.4.2
 	* add version to code
 	* fix a file permissions
 	* add generator route --rm
 	* add test for generator (routes and route --rm)
 	* improve routes generator with a 4th optional argument
-
-v0.4.1
 	* fix regression for binary with --debug feature
 	* improve routes generator
-
-v0.4.0
 	* add nephos-status executable
 	* add nephos-generator route option
 
-v0.3.2
+v0.3
 	* fix gem
 	* add tests for generator
-
-v0.3.1
 	* fix controller parameters
 	* add new unitary tests
-
-v0.3.0
 	* improve documentation (and fix it)
 	* add documentation (guide for slim, sequel, generator)
 
-v0.2.4
+v0.2
 	* improve global coherence (file, class, consts names)
 	* rename directory "controllers/" -> "app/"
-
-v0.2.3
 	* add class params
 	* change file place (controller)
 	* improve controller
 	* add unitary tests (params, controller)
-
-v0.2.2
 	* minor fix bug
-
-v0.2.0
 	* add documentation
 
-v0.1.12
+v0.1
 	* fix regressions from v0.1.11 and previous (routing)
 	* add complet unitary tests (rendering)
 	* add partial unitary tests (routing)
 	* update gemspec
 	* factorize some code
-
-v0.1.11
 	* fix regressions from v0.1.10
 	* improve rendering code
-
-v0.1.10
 	* improve status content
 	* add url's parameters like /u/:param
-
-v0.1.9
 	* minor fixes
 	* improve exceptions
 	* improve generator
-
-v0.1.8
 	* improve rendering
 	* add html rendering
 	* improve documentation
 	* improve exceptions
-
-v0.1.7
 	* improve routing error
-
-v0.1.6
 	* fix documentation
-
-v0.1.5
 	* improve routing (resource and matching)
-
-v0.1.4
 	* improve routing
-
-v0.1.3
 	* improve generators (errors and arguments)
-
-v0.1.2
 	* fix procfile
-
-v0.1.1
 	* rename src to controllers
 	* improve generator
-v0.1
 	* basic routing, rendering, and controllers
 	* valid gemspec
 	* basic working server
