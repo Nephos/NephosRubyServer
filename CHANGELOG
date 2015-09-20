@@ -1,5 +1,6 @@
 v0.5.1
 	* fix nephos gem (binaries can be used out of an application)
+	* improve documentation
 
 v0.5.0
 	* improve executables: version taking in count

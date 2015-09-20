@@ -2,3 +2,5 @@
 *.gem
 # routes.rb
 # controllers/
+doc
+.yardoc/

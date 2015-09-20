@@ -48,7 +48,7 @@ Theses guides will provide you knowlegde about everything you can use in the app
 - [Generator GUIDE](DOCUMENTATION/GUIDE_GENERATOR.md)
 - [Render API](DOCUMENTATION/API_RENDER.md)
 - [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
-- [Code documentation on RubyDoc.info](http://www.rubydoc.info/gems/nephos-server/toplevel)
+- [Code documentation on RubyDoc.info](http://www.rubydoc.info/gems/nephos-server/toplevel) -> **Note: you can also generate local documentation via yard**
 
 ## Examples
 
