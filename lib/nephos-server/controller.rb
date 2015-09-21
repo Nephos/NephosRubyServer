@@ -1,4 +1,9 @@
 module Nephos
+
+  # This class must be inherited by the other Controllers.
+  # It contains a constructor (you should not rewrite it)
+  # It contains some helpers too, like an access to the environment,
+  # and the parameters.
   class Controller
 
     attr_reader :env, :infos, :callpath, :params

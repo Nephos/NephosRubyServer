@@ -114,9 +114,9 @@ end
 # Developers: Roadmap
 
 ## TODO v0.5
-- executables with version
 - cookies, ...
 - usage of rack parsers (Rack::Request.new(env) etc.)
+- improved code documentation
 
 ## TODO v0.6
 - startable as daemon
