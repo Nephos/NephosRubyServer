@@ -4,18 +4,23 @@ end
 puts
 
 module Nephos
+
+  # The {Router} provides an interface between the {Controller} and the client
+  # queries.
   module Router
 
     ROUTES = []
 
     # @param arg [Hash or Symbol]
-    # shortcut to #{Nephos::Responder.render}
+    #
+    # Shortcut to #{Nephos::Responder.render}
     def self.render arg
       Responder.render arg
     end
 
     # @param path [Array]
-    # find the right route to use from the url
+    #
+    # Find the right route to use from the url
     def self.parse_path path, verb
       route = File.join(["/"] + path)
       return ROUTES.find{|e| e[:match] =~ route and e[:verb] == verb}
@@ -41,6 +46,8 @@ module Nephos
       end
     end
 
+    # Interface which handle the client query (stored in env), calls the
+    # {Controller} method (using the routes) and render it's return
     def self.execute(env)
       begin
         route = URI.parse(env['REQUEST_URI'])

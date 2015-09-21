@@ -9,7 +9,7 @@ end
 #   - :controller
 #   - :method
 #
-# The method create a valid route, set in Nephos::Router::ALL
+# The method create a valid route, set in Nephos::Router::ROUTES
 # it will call the method from the controller, based on the parameters
 # if the client request match with the verb and the url provided.
 #
