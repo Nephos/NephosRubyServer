@@ -67,11 +67,12 @@ module Nephos
       return [204, ct_specific({type: PRESET_CT[:plain]}), [""]] if params == :empty
       return render(status: params) if params.is_a? Integer
       params = set_default_params(params)
-      return [
-        params[:status],
-        params[:type],
-        [params[:content]],
-      ]
+      resp = Rack::Response.new
+      resp.status = params[:status]
+      resp["Content-Type"] = params[:type]
+      resp.body = [params[:content]]
+      #resp.set_cookies ...
+      return resp
     end
 
   end
