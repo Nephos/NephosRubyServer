@@ -9,7 +9,7 @@
 [![Nephos Executables](https://badge.fury.io/rb/nephos.svg)](http://badge.fury.io/rb/nephos)
 
 
-This is a minimal web server, based on [rack](TODO LINK) and [puma](TODO LINK).
+This is a minimal web server, based on [rack](https://github.com/rack/rack) and [puma](https://github.com/puma/puma).
 It is written in ruby. It also gives you a minimal architecture
 to speed up your application bootstrap.
 
