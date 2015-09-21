@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'colorize'
 require 'optparse'
 
 require 'nephos-server/version'
@@ -43,5 +44,6 @@ begin
   end
 
 rescue => err
-  puts err.message
+  puts "Error:".red + " #{err.message}"
+  puts err.backtrace
 end
