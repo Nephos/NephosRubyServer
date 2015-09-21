@@ -2,9 +2,12 @@
 
 [![GitHub version](https://badge.fury.io/gh/pouleta%2FNephosRubyServer.svg)](http://badge.fury.io/gh/pouleta%2FNephosRubyServer)
 
-[![Gem Version](https://badge.fury.io/rb/nserver.svg)](http://badge.fury.io/rb/nserver)
+[![Gem Version](https://badge.fury.io/rb/nephos-server.svg)](http://badge.fury.io/rb/nephos-server)
 
 [![Code Climate](https://codeclimate.com/github/pouleta/NephosRubyServer/badges/gpa.svg)](https://codeclimate.com/github/pouleta/NephosRubyServer)
+
+[![Nephos Executables](https://badge.fury.io/rb/nserver.svg)](http://badge.fury.io/rb/nserver)
+
 
 This is a minimal web server, based on [rack](TODO LINK) and [puma](TODO LINK).
 It is written in ruby. It also gives you a minimal architecture
