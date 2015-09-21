@@ -6,7 +6,7 @@
 
 [![Code Climate](https://codeclimate.com/github/pouleta/NephosRubyServer/badges/gpa.svg)](https://codeclimate.com/github/pouleta/NephosRubyServer)
 
-[![Nephos Executables](https://badge.fury.io/rb/nserver.svg)](http://badge.fury.io/rb/nserver)
+[![Nephos Executables](https://badge.fury.io/rb/nephos.svg)](http://badge.fury.io/rb/nephos)
 
 
 This is a minimal web server, based on [rack](TODO LINK) and [puma](TODO LINK).
