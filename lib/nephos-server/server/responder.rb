@@ -21,7 +21,7 @@ module Nephos
     PRESET_CT = {
       plain: "text/plain",
       html: "text/html",
-      json: "text/javascript",
+      json: "application/json",
     }
 
     private
