@@ -6,7 +6,7 @@ module Nephos
     CT_CHARSET_PREFIX = '; charset='
 
     def self.content_type(kind, type, charset='UTF-8')
-      {'Content-type' => "#{kind}/#{type}" + CT_CHARSET_PREFIX + charset}
+      "#{kind}/#{type}" + CT_CHARSET_PREFIX + charset
     end
 
     # @param params [Hash] containing :type => "kind/type", example: "text/html"
