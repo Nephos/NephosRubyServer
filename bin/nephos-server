@@ -9,7 +9,7 @@ require 'nephos-server/bin-helpers'
 class RoutingError < StandardError; end
 
 begin
-  OptionParser.new do |opts|
+  opts = OptionParser.new do |opts|
     opts.banner = "Usage<#{Nephos::VERSION}>: nephos-server <options>"
 
     $server_port = ENV["SERVER_PORT"] || 8080
@@ -34,6 +34,7 @@ begin
     opts.on("--test", "Enable testing mode (for nephos developpers)") do
       $test = true
     end
+
   end.parse!
 
   if $test
@@ -41,6 +42,8 @@ begin
   else
     require 'nephos-server'
   end
+
+  Dir.cd(opts[0]) if not opts.empty?
 
   if not $test and
     (not File.exists? "Gemfile.lock" or
