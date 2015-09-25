@@ -43,7 +43,7 @@ begin
     require 'nephos-server'
   end
 
-  Dir.cd(opts[0]) if not opts.empty?
+  Dir.chdir(opts[0]) if not opts.empty?
 
   if not $test and
     (not File.exists? "Gemfile.lock" or
