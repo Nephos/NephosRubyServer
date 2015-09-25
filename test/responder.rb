@@ -70,7 +70,7 @@ class TestNephosServerResponder < Test::Unit::TestCase
     Nephos::Responder.set_default_params_type(p4)
     Nephos::Responder.set_default_params_type(p5)
     plain = Nephos::Responder.ct_specific({type: "text/plain"})
-    json = Nephos::Responder.ct_specific({type: "text/javascript"})
+    json = Nephos::Responder.ct_specific({type: "application/json"})
     html = Nephos::Responder.ct_specific({type: "text/html"})
     assert_equal plain, p1[:type]
     assert_equal html, p2[:type]
