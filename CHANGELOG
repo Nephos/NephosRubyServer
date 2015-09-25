@@ -1,3 +1,6 @@
+v0.5.2
+	* fix regression on content-type from v0.4
+
 v0.5.1
 	* fix nephos gem (binaries can be used out of an application)
 	* improve code documentation (annotations above the methods and classes)
