@@ -29,5 +29,9 @@ module Nephos
       @hash[i.to_s] = v.to_s
     end
 
+    def to_h
+      return @hash
+    end
+
   end
 end
