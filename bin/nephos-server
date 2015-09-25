@@ -37,13 +37,13 @@ begin
 
   end.parse!
 
+  Dir.chdir(opts[0]) if not opts.empty?
+
   if $test
     require_relative "../lib/nephos-server"
   else
     require 'nephos-server'
   end
-
-  Dir.chdir(opts[0]) if not opts.empty?
 
   if not $test and
     (not File.exists? "Gemfile.lock" or
