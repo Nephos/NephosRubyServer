@@ -1,3 +1,8 @@
+v0.5.3
+	* add continuous integration with gitlab
+	* fix executables requirements to be testable
+	* add cookies management
+
 v0.5.2
 	* fix regression on content-type from v0.4
 

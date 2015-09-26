@@ -6,7 +6,7 @@ module Nephos
   # and the parameters.
   class Controller
 
-    attr_reader :env, :infos, :callpath, :params
+    attr_reader :env, :infos, :callpath, :params, :cookies
 
     # @param env [Hash] env extracted from the http request
     # @param parsed [Hash] pre-parsed env with parameters, ...
@@ -24,6 +24,7 @@ module Nephos
       @params.merge! Hash[callpath[:params].zip @infos[:path]]
       @params.select!{|k,v| not k.to_s.empty?}
       @params = Params.new(@params)
+      @cookies = Params.new()
     end
 
   end

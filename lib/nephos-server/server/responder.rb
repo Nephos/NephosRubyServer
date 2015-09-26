@@ -62,8 +62,10 @@ module Nephos
       params
     end
 
-    # @param params [Hash, Symbol]
-    def self.render params
+    # @param controller [Controller]
+    # @param method_to_call [Symbol]
+    def self.render controller, method_to_call, *opts
+      params = controller.send method_to_call
       return [204, ct_specific({type: PRESET_CT[:plain]}), [""]] if params == :empty
       return render(status: params) if params.is_a? Integer
       params = set_default_params(params)
@@ -71,7 +73,6 @@ module Nephos
       resp.status = params[:status]
       resp["Content-Type"] = params[:type]
       resp.body = [params[:content]]
-      #resp.set_cookies ...
       return resp
     end
 

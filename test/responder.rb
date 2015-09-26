@@ -79,11 +79,6 @@ class TestNephosServerResponder < Test::Unit::TestCase
     assert_equal json, p5[:type]
   end
 
-  def test_render_empty
-    assert_equal(
-      [204, Nephos::Responder.ct_specific({type: "text/plain"}), [""]],
-      Nephos::Responder.render(:empty)
-    )
-  end
+  # TODO: Lot of unitary tests for {#render}
 
 end

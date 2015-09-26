@@ -11,11 +11,11 @@ module Nephos
 
     ROUTES = []
 
-    # @param arg [Hash or Symbol]
+    # @param args Contain the controller and the method to call on it
     #
     # Shortcut to #{Nephos::Responder.render}
-    def self.render arg
-      Responder.render arg
+    def self.render *args
+      Responder.render *args
     end
 
     # @param path [Array]
@@ -46,8 +46,8 @@ module Nephos
       end
     end
 
-    # Interface which handle the client query (stored in env), calls the
-    # {Controller} method (using the routes) and render it's return
+    # Interface which handle the client query (stored in env), create a new
+    # {Controller} instance, and call the render on it
     def self.execute(env)
       begin
         route = URI.parse(env['REQUEST_URI'])
@@ -61,7 +61,7 @@ module Nephos
       return error(404, "404 not found \"#{route}\"") if call.nil?
       begin
         controller = Module.const_get(call[:controller]).new(env, parsed, call)
-        return render(controller.send(call[:method]))
+        return render(controller, call[:method])
       rescue => err
         return error(500, err)
       end
