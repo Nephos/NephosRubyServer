@@ -53,6 +53,7 @@ Theses guides will provide you knowlegde about everything you can use in the app
 - [Generator GUIDE](DOCUMENTATION/GUIDE_GENERATOR.md)
 - [Render API](DOCUMENTATION/API_RENDER.md)
 - [Router GUIDE](DOCUMENTATION/GUIDE_ROUTER.md)
+- [Controller GUIDE](DOCUMENTATION/GUIDE_CONTROLLER.md)
 - [Code documentation on RubyDoc.info](http://www.rubydoc.info/gems/nephos-server/toplevel) -> **Note: you can also generate local documentation via yard**
 
 ## Examples
@@ -70,7 +71,8 @@ The basic code of a controller can be generated via ``ngenerator controller NAME
 
 ```ruby
 class Example < Nephos::Controller
-  def root
+def root
+    cookies["last_visit"] = Time.now
     if params["index"] == "true"
       return {plain: "index"}
     else
@@ -116,7 +118,6 @@ end
 # Developers: Roadmap
 
 ## TODO v0.5
-- cookies, ...
 - usage of rack parsers (Rack::Request.new(env) etc.)
 - improved code documentation
 
