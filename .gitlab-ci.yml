@@ -1,5 +1,8 @@
 image: ruby:2.2
 
+before_script:
+  - bundle install
+
 test:
   script:
     - rake test
