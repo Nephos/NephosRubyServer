@@ -1,5 +1,7 @@
 # Nephos Ruby Server
 
+[![Gitlab Tests](https://gitlab.com/ci/projects/8973/status.png?ref=master)](https://gitlab.com/ci/projects/8973?ref=master)
+
 [![GitHub version](https://badge.fury.io/gh/pouleta%2FNephosRubyServer.svg)](http://badge.fury.io/gh/pouleta%2FNephosRubyServer)
 
 [![Gem Version](https://badge.fury.io/rb/nephos-server.svg)](http://badge.fury.io/rb/nephos-server)
