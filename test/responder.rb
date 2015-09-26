@@ -111,7 +111,4 @@ class TestNephosServerResponder < Test::Unit::TestCase
     assert_equal(["<p>p</p>"], r3.body)
   end
 
-  def test_render_controller
-  end
-
 end
