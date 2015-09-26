@@ -2,7 +2,7 @@ class TestNephosServerResponder < Test::Unit::TestCase
 
   def test_content_type
     assert_equal(
-      {'Content-type' => "KIND/TYPE" "; charset=" "CHARSET"},
+      "KIND/TYPE" "; charset=" "CHARSET",
       Nephos::Responder.content_type("KIND", "TYPE", "CHARSET")
     )
   end
