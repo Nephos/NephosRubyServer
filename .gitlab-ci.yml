@@ -1,0 +1,5 @@
+image: ruby:2.2
+
+test:
+  script:
+    - rake test
