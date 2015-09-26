@@ -73,6 +73,9 @@ module Nephos
       resp.status = params[:status]
       resp["Content-Type"] = params[:type]
       resp.body = [params[:content]]
+      controller.cookies.each do |k, v|
+        resp.set_cookie k, v
+      end
       return resp
     end
 

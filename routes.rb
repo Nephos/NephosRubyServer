@@ -20,3 +20,6 @@ get url: "/hello", controller: "MainController", method: "hello"
 get url: "/image", controller: "MainController", method: "image"
 get url: "/image/:image", controller: "MainController", method: "image"
 get url: "img/:image", controller: "MainController", method: "image"
+
+get url: "/get_cookies", controller: "MainController", method: "get_cookies"
+get url: "/add_cookie", controller: "MainController", method: "add_cookie"

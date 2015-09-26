@@ -50,6 +50,15 @@ class MainController < Nephos::Controller
     end
   end
 
+  def add_cookie
+    cookies["UN_COOKIE_VAUT:"] = "UN BON MOMENT !"
+    {plain: "cookie set"}
+  end
+
+  def get_cookies
+    {json: cookies.to_h}
+  end
+
   # require 'pry'
   def debug
     # binding.pry

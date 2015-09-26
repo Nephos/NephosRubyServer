@@ -7,6 +7,7 @@ module Nephos
   class Controller
 
     attr_reader :env, :infos, :callpath, :params, :cookies
+    attr_reader :req
 
     # @param env [Hash] env extracted from the http request
     # @param parsed [Hash] pre-parsed env with parameters, ...
@@ -18,13 +19,14 @@ module Nephos
       raise ArgumentError, "Invalid Parsed. :params must be associated with a Hash" unless parsed[:params].is_a? Hash
       raise ArgumentError, "Invalid Callpath. :params must be associated with an Array" unless callpath[:params].is_a? Array
       @env= env
+      @req= Rack::Request.new(env)
       @infos= parsed
       @callpath= callpath
       @params= parsed[:params]
       @params.merge! Hash[callpath[:params].zip @infos[:path]]
       @params.select!{|k,v| not k.to_s.empty?}
       @params = Params.new(@params)
-      @cookies = Params.new()
+      @cookies = Params.new(@req.cookies)
     end
 
   end
