@@ -66,6 +66,7 @@ module Nephos
       resp = Rack::Response.new
       resp.status = 204
       resp["Content-Type"] = ct_specific({type: PRESET_CT[:plain]})
+      resp
     end
 
     def self.render_from_controller controller, method_to_call

@@ -79,6 +79,25 @@ class TestNephosServerResponder < Test::Unit::TestCase
     assert_equal json, p5[:type]
   end
 
-  # TODO: Lot of unitary tests for {#render}
+  def test_render_simple
+    r1 = Nephos::Responder.render(:empty)
+    r2 = Nephos::Responder.render(200)
+    r3 = Nephos::Responder.render(201)
+    r4 = Nephos::Responder.render(status: 202)
+    r5 = Nephos::Responder.render(plain: "")
+    r6 = Nephos::Responder.render(json: "")
+    r7 = Nephos::Responder.render(html: "")
+    assert_equal(204, r1.status)
+    assert_equal(200, r2.status)
+    assert_equal(201, r3.status)
+    assert_equal(202, r4.status)
+    assert_equal(200, r5.status)
+    assert_equal(200, r6.status)
+    assert_equal(200, r7.status)
+  end
+
+  def t
+
+  end
 
 end
