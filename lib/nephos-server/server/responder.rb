@@ -62,20 +62,31 @@ module Nephos
       params
     end
 
-    # @param controller [Controller]
-    # @param method_to_call [Symbol]
-    def self.render controller, method_to_call, *opts
-      params = controller.send method_to_call
-      return [204, ct_specific({type: PRESET_CT[:plain]}), [""]] if params == :empty
-      return render(status: params) if params.is_a? Integer
-      params = set_default_params(params)
+    def self.empty_resp
       resp = Rack::Response.new
-      resp.status = params[:status]
-      resp["Content-Type"] = params[:type]
-      resp.body = [params[:content]]
+      resp.status = 204
+      resp["Content-Type"] = ct_specific({type: PRESET_CT[:plain]})
+    end
+
+    def self.render_from_controller controller, method_to_call
+      params = controller.send method_to_call
+      resp = Responder.render(params)
       controller.cookies.each do |k, v|
         resp.set_cookie k, v
       end
+      return resp
+    end
+
+    # @param controller [Controller]
+    # @param method_to_call [Symbol]
+    def self.render params
+      return Responder.empty_resp if params == :empty
+      return render(status: params) if params.is_a? Integer
+      resp = Rack::Response.new
+      params = set_default_params(params)
+      resp.status = params[:status]
+      resp["Content-Type"] = params[:type]
+      resp.body = [params[:content]]
       return resp
     end
 

@@ -15,7 +15,26 @@ module Nephos
     #
     # Shortcut to #{Nephos::Responder.render}
     def self.render *args
-      Responder.render *args
+      if args.first.is_a? Nephos::Controller
+        return Responder.render_from_controller *args
+      end
+      return Responder.render *args
+    end
+
+    def self.error(code, err=nil)
+      if ENV["ENVIRONMENT"].to_s.match(/prod(uction)?/)
+        return render(status: code)
+      elsif err
+        msg = err
+        if msg.is_a? Exception
+          msg = err.message + "\n"
+          msg += "--- Backtrace ---\n" + err.backtrace.join("\n") + "\n" if Nephos.env != "production"
+        end
+        return render(status: code,
+                      content: "Error: #{code}\n#{msg}")
+      else
+        return render(status: code)
+      end
     end
 
     # @param path [Array]
@@ -33,17 +52,6 @@ module Nephos
       params = Rack::Request.new(env).params
       # Hash[route.query.to_s.split("&").map{|e| e.split("=")}]
       return {route: route, verb: verb, from: from, path: path, params: params}
-    end
-
-    def self.error(code, err=nil)
-      if ENV["ENVIRONMENT"].to_s.match(/prod(uction)?/)
-        return render(status: code)
-      elsif err
-        #TODO: improve this
-        return render(status: code, content: "Error: #{code}\n" + (err.is_a?(String) ? err : err.message))
-      else
-        return render(status: code)
-      end
     end
 
     # Interface which handle the client query (stored in env), create a new
