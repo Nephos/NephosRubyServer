@@ -1,24 +1,19 @@
-v0.5.4
+v0.6.0
+
+
+v0.5
 	* fix regression on empty response
 	* add unitary tests
 	* improve gemspec
 	* fix severe regression on responder
 	* fix environment bug
-
-v0.5.3
 	* add continuous integration with gitlab
 	* fix executables requirements to be testable
 	* add cookies management
-
-v0.5.2
 	* fix regression on content-type from v0.4
-
-v0.5.1
 	* fix nephos gem (binaries can be used out of an application)
 	* improve code documentation (annotations above the methods and classes)
 	* fix content type for json to application/json
-
-v0.5.0
 	* improve executables: version taking in count
 
 v0.4

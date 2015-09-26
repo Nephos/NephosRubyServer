@@ -118,14 +118,13 @@ end
 # Developers: Roadmap
 
 ## TODO v0.5
-- usage of rack parsers (Rack::Request.new(env) etc.)
-- improved code documentation
 
 ## TODO v0.6
 - startable as daemon
 - hooks for controller
 - feature to change HTTP header from controller
 - customisable default 404 errors and 500 errors
+- functionnal tests
 
 ## v1 requierements
 - Environement, Daemons, Port, Listen Host, Routables, Arguments
