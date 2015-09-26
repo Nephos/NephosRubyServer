@@ -3,8 +3,8 @@
 require 'colorize'
 require 'optparse'
 
-require 'nephos-server/version'
-require 'nephos-server/bin-helpers'
+require_relative '../lib/nephos-server/version'
+require_relative '../lib/nephos-server/bin-helpers'
 
 class RoutingError < StandardError; end
 

@@ -3,7 +3,7 @@ class TestNephosServerGenerator < Test::Unit::TestCase
   def test_generator_application
     `rm -rf /tmp/nephos-server-test 2> /tmp/null`
 
-    `./bin/nephos-generator -a /tmp/nephos-server-test --no-build --no-git`
+    `./bin/nephos-generator --test -a /tmp/nephos-server-test --no-build --no-git`
     assert(Dir.exists? "/tmp/nephos-server-test")
     assert(File.exists? "/tmp/nephos-server-test/Gemfile")
     assert(File.exists? "/tmp/nephos-server-test/routes.rb")
