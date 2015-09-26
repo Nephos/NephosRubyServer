@@ -3,7 +3,13 @@ module Nephos
   VERSION = File.read(VERSION_FILE).strip
 
   @@env = $server_env
+
   def self.env
     @@env
   end
+
+  def self.env= env
+    @@env = env
+  end
+
 end

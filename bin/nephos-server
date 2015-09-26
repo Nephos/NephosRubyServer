@@ -3,8 +3,8 @@
 require 'colorize'
 require 'optparse'
 
-require_relative '../lib/nephos-server/version'
 require_relative '../lib/nephos-server/bin-helpers'
+require_relative '../lib/nephos-server/version'
 
 class RoutingError < StandardError; end
 
@@ -36,6 +36,8 @@ begin
     end
 
   end.parse!
+
+  Nephos.env = $server_env
 
   Dir.chdir(opts[0]) if not opts.empty?
 
