@@ -65,4 +65,8 @@ class MainController < Nephos::Controller
     {}
   end
 
+  def err500
+    tessssssssss
+  end
+
 end

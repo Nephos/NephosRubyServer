@@ -23,3 +23,4 @@ get url: "img/:image", controller: "MainController", method: "image"
 
 get url: "/get_cookies", controller: "MainController", method: "get_cookies"
 get url: "/add_cookie", controller: "MainController", method: "add_cookie"
+get url: "/err500", controller: "MainController", method: "err500"
