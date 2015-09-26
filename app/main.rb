@@ -1,6 +1,9 @@
 class MainController < Nephos::Controller
 
   def root
+    cookies["a"] = "b"
+    cookies.delete("b").to_h
+    puts cookies
     {
       json: {
         list: $dataset,
@@ -47,9 +50,10 @@ class MainController < Nephos::Controller
     end
   end
 
-  require 'pry'
+  # require 'pry'
   def debug
-    binding.pry
+    # binding.pry
+    {}
   end
 
 end
