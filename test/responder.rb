@@ -96,8 +96,22 @@ class TestNephosServerResponder < Test::Unit::TestCase
     assert_equal(200, r7.status)
   end
 
-  def t
+  def test_render_advanced
+    r1 = Nephos::Responder.render(status: 201, plain: "plaaaain")
+    r2 = Nephos::Responder.render(status: 201, json: {data: [1, 2]})
+    r3 = Nephos::Responder.render(status: 201, html: "<p>p</p>")
+    assert_equal(201, r1.status)
+    assert_equal("text/plain; charset=UTF-8", r1["Content-type"])
+    assert_equal(["plaaaain"], r1.body)
+    assert_equal(201, r2.status)
+    assert_equal("application/json; charset=UTF-8", r2["Content-type"])
+    assert_equal(["{\"data\":[1,2]}"], r2.body)
+    assert_equal(201, r3.status)
+    assert_equal("text/html; charset=UTF-8", r3["Content-type"])
+    assert_equal(["<p>p</p>"], r3.body)
+  end
 
+  def test_render_controller
   end
 
 end
