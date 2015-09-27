@@ -70,7 +70,9 @@ module Nephos
     end
 
     def self.render_from_controller controller, method_to_call
+      controller.execute_before_action(method_to_call)
       params = controller.send method_to_call
+      controller.execute_after_action(method_to_call)
       resp = Responder.render(params)
       controller.cookies.each do |k, v|
         resp.set_cookie k, v

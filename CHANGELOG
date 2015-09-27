@@ -1,5 +1,5 @@
 v0.6.0
-
+	* add hook before_action and after_action
 
 v0.5
 	* fix regression on empty response
