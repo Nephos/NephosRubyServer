@@ -33,5 +33,9 @@ module Nephos
       return @hash
     end
 
+    def to_s
+      return to_h.to_s
+    end
+
   end
 end

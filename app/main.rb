@@ -1,9 +1,26 @@
 class MainController < Nephos::Controller
 
+  before_action :fct_before_all
+  before_action :fct_before_root, :root
+  after_action :fct_after_root, :root
+
+  def fct_before_all
+    puts "BEFORE ALL"
+  end
+
+  def fct_before_root
+    puts "BEFORE"
+  end
+
+  def fct_after_root
+    puts "AFTER"
+  end
+
   def root
+    puts "ROOT"
     cookies["a"] = "b"
     cookies.delete("b").to_h
-    puts cookies
+    puts "Cookies from the root:", cookies
     {
       json: {
         list: $dataset,

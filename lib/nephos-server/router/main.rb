@@ -16,9 +16,9 @@ module Nephos
     # Shortcut to #{Nephos::Responder.render}
     def self.render *args
       if args.first.is_a? Nephos::Controller
-        return Responder.render_from_controller *args
+        return Responder.render_from_controller(*args)
       end
-      return Responder.render *args
+      return Responder.render(*args)
     end
 
     def self.error(code, err=nil)
