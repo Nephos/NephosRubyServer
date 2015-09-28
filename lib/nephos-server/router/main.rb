@@ -71,6 +71,8 @@ module Nephos
         controller = Module.const_get(call[:controller]).new(env, parsed, call)
         return render(controller, call[:method])
       rescue => err
+        STDERR.puts "Error: #{err.message}"
+        STDERR.puts err.backtrace
         return error(500, err)
       end
     end
