@@ -1,25 +1,30 @@
+class ReqWithWritableParams < Rack::Request
+  def params
+    return Hash[@env["REQUEST_URI"].gsub(/.*\?(.+)/, '\1').split('&').map{|d| d.split('=')}]
+  end
+end
+
 class TestNephosServerController < Test::Unit::TestCase
 
-  def test_initialize_success
-    assert Nephos::Controller.new()
-    assert Nephos::Controller.new(env={}, {path: [], params: {}}, {params: []})
-  end
+  def test_initialize
+    assert_raise do Nephos::Controller.new() end
+    assert_raise do Nephos::Controller.new({}) end
+    assert_raise do Nephos::Controller.new({}, {}) end
 
-  def test_initialize_failure
-    assert_raise do Nephos::Controller.new({}, {}, {}) end
-    assert_raise do Nephos::Controller.new({}, {path: nil}, {}) end
-    assert_raise do Nephos::Controller.new({}, {path: []}, {}) end
-    assert_raise do Nephos::Controller.new({}, {path: [], params: {}}, {}) end
-    assert_raise do Nephos::Controller.new({}, {path: [], params: {}}, {params: nil}) end
-    assert_raise do Nephos::Controller.new({}, {path: nil, params: nil}, params: nil) end
-    assert_raise do Nephos::Controller.new({}, {path: nil, params: {}}, {params: {}}) end
-    assert_raise do Nephos::Controller.new({}, {path: [], params: nil}, {params: {}}) end
+    r = Rack::Request.new({})
+    assert_raise do Nephos::Controller.new() end
+    assert_raise do Nephos::Controller.new(r) end
+    assert_raise do Nephos::Controller.new(r, {}) end
+    assert do Nephos::Controller.new(r, {params: []}) end
   end
 
   def test_controller_params
-    c = Nephos::Controller.new(env={}, {path: ["value"], params: {}}, {params: ["param"]})
-    assert_equal "value", c.params[:param]
-    assert_equal "value", c.params["param"]
+    r = ReqWithWritableParams.new({"REQUEST_METHOD"=>"GET",
+                                   "PATH_INFO"=>"/index",
+                                   "REQUEST_URI"=>"/uri?k=v"})
+    c = Nephos::Controller.new(r, {params: []})
+    assert_equal "v", c.params[:k]
+    assert_equal "v", c.params["k"]
   end
 
 end

@@ -1,4 +1,5 @@
 v0.6.0
+	* Big change on the architecture, massive usage of Rack::Request, review the global architecture, update all unitary tests
 	* add hook before_action and after_action
 	* improve params
 	* improve controller error handlement with STDERR message

@@ -59,7 +59,9 @@ begin
 rescue RoutingError => err
   puts "Routing Error: Check out the documentation and `routes.rb` file.".yellow
   puts "#{err.class}: #{err.message}".red
+  puts "#{err.backtrace.join("\n")}".yellow if $debug
 
 rescue => err
   puts "#{err.class}: #{err.message}".red
+  puts "#{err.backtrace.join("\n")}".yellow if $debug
 end
