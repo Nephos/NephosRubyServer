@@ -1,8 +1,9 @@
 v0.6.0
-	* Big change on the architecture, massive usage of Rack::Request, review the global architecture, update all unitary tests
+	* Big change (ea49dfb0b429f03327447477bfee9bef30dda7ad) on the architecture, massive usage of Rack::Request, review the global architecture, update all unitary tests
 	* add hook before_action and after_action
 	* improve params
 	* improve controller error handlement with STDERR message
+	* server can be daemonized
 
 v0.5
 	* fix regression on empty response

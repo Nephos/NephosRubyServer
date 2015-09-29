@@ -4,3 +4,4 @@
 # controllers/
 doc
 .yardoc/
+.pid

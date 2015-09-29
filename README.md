@@ -42,6 +42,8 @@ nserver -p 8080 -h 0.0.0.0 # start the server. port is not required, neither hos
 - ``-p``: port to listen
 - ``-h``: host to listen (network address)
 - ``-e``: environment (default is development, can be set to production)
+- ``-d``: daemonize the process
+- ``-k``: kill daemonized process
 
 
 # Documentation
