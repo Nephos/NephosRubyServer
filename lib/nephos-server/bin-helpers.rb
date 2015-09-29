@@ -1,4 +1,5 @@
 module Nephos
+
   module Bin
 
     # @param dir [String]
@@ -18,7 +19,40 @@ module Nephos
       return true
     end
 
+    module Daemon
+
+      def self.started?
+        get_pid != nil
+      end
+
+      def self.kill!
+        d = get_pid
+        return false unless d
+        Process::kill(10, d)
+        File.delete(get_pid_file)
+        return true
+      end
+
+      def self.detach!
+        Process::daemon(true, false)
+        File.write(get_pid_file, Process::pid.to_s)
+      end
+
+      def self.get_pid_file
+        return ".pid"
+      end
+
+      def self.get_pid
+        return nil if not File.exists?(get_pid_file)
+        v = File.read(get_pid_file)
+        v = Integer(v) rescue nil
+        return v
+      end
+
+    end
+
   end
+
 end
 
 class BinError < StandardError; end

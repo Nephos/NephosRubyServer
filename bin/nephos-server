@@ -8,17 +8,6 @@ require_relative '../lib/nephos-server/version'
 
 class RoutingError < StandardError; end
 
-def get_pid_file
-  ".pid"
-end
-
-def get_daemon
-  return nil if not File.exists?(get_pid_file)
-  v = File.read(get_pid_file)
-  v = Integer(v) rescue nil
-  return v
-end
-
 begin
   opts = OptionParser.new do |opts|
     opts.banner = "Usage<#{Nephos::VERSION}>: nephos-server <options>"
@@ -60,15 +49,14 @@ begin
 
   Dir.chdir(opts[0]) if not opts.empty?
 
-  d = get_daemon
   if $kill_daemon
-    raise "No daemon started" unless d
-    Process::kill(10, d)
-    File.delete(get_pid_file)
-    puts "Daemon #{d} stopped"
+    raise "No Daemon started" if not Nephos::Bin::Daemon.started?
+    puts "Daemon #{Nephos::Bin::Daemon.get_pid} stopped"
+    Nephos::Bin::Daemon.kill!
     exit
-  elsif $daemon
-    raise "Unable to start the server: the daemon #{d} already exists" if d
+  end
+  if $daemon and Nephos::Bin::Daemon.started?
+    raise "Unable to start the server: the daemon #{Nephos::Bin::Daemon.get_pid} already exists"
   end
 
   if $test
@@ -85,8 +73,7 @@ begin
 
   puts "Running Nephos::Server version #{Nephos::VERSION} (#{Nephos.env})"
   if $daemon
-    Process::daemon(true, false)
-    File.write(get_pid_file, Process::pid.to_s)
+    Nephos::Bin::Daemon.detach!
   end
   Nephos::Server.start($server_port, $server_host)
 
