@@ -53,7 +53,7 @@ begin
     raise "No Daemon started" if not Nephos::Bin::Daemon.started?
     puts "Daemon #{Nephos::Bin::Daemon.get_pid} stopped"
     Nephos::Bin::Daemon.kill!
-    exit
+    exit 0
   end
   if $daemon and Nephos::Bin::Daemon.started?
     raise "Unable to start the server: the daemon #{Nephos::Bin::Daemon.get_pid} already exists"
@@ -81,8 +81,10 @@ rescue RoutingError => err
   puts "Routing Error: Check out the documentation and `routes.rb` file.".yellow
   puts "#{err.class}: #{err.message}".red
   puts "#{err.backtrace.join("\n")}".yellow if $debug
+  exit 1
 
 rescue => err
   puts "#{err.class}: #{err.message}".red
   puts "#{err.backtrace.join("\n")}".yellow if $debug
+  exit 1
 end

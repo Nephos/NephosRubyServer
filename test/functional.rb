@@ -1,0 +1,7 @@
+require "test/unit"
+
+require_relative "../lib/nephos-server"
+
+require_relative 'functional/generator'
+require_relative 'functional/server'
+require_relative 'functional/global'

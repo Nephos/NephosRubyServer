@@ -28,8 +28,13 @@ module Nephos
       def self.kill!
         d = get_pid
         return false unless d
-        Process::kill(10, d)
-        File.delete(get_pid_file)
+        begin
+          Process::kill(10, d)
+        rescue => err
+          raise "Cannot kill #{d} !"
+        ensure
+          File.delete(get_pid_file)
+        end
         return true
       end
 
