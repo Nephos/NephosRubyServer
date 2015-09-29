@@ -1,5 +1,7 @@
-v0.6.0
+v0.6.1
 	* Improve daemons
+	* Add few functional tests and unitary tests
+	* Improve Rakefile and tests structure
 
 v0.6.0
 	* Big change (ea49dfb0b429f03327447477bfee9bef30dda7ad) on the architecture, massive usage of Rack::Request, review the global architecture, update all unitary tests
