@@ -1,16 +1,17 @@
 module Nephos
-  module Responder
+
+  class Responder
 
     class InvalidContentType < StandardError; end
 
     CT_CHARSET_PREFIX = '; charset='
 
-    def self.content_type(kind, type, charset='UTF-8')
+    def content_type(kind, type, charset='UTF-8')
       "#{kind}/#{type}" + CT_CHARSET_PREFIX + charset
     end
 
     # @param params [Hash] containing :type => "kind/type", example: "text/html"
-    def self.ct_specific(params)
+    def ct_specific(params)
       kind, type = params[:type].to_s.match(/^(\w+)\/(\w+)$/) && Regexp.last_match[1..2]
       if kind.nil? or type.nil?
         raise InvalidContentType, "params[:type] must match with \"kind/type\""
@@ -24,20 +25,19 @@ module Nephos
       json: "application/json",
     }
 
-    private
     # if not :status entry, set to 200
-    def self.set_default_params_status params
+    def set_default_params_status params
       params[:status] ||= 200
     end
 
-    def self.set_default_params_type params
+    def set_default_params_type params
       if params[:type].nil?
         params[:type] = PRESET_CT[(params.keys & [:plain, :html, :json]).first || :plain]
       end
       params[:type] = ct_specific(params)
     end
 
-    def self.set_default_params_content params
+    def set_default_params_content params
       type = (params.keys & [:plain, :html, :json, :content]).first
       if type.nil?
         if params[:status].to_s.match(/^[45]\d\d$/)
@@ -52,39 +52,44 @@ module Nephos
         params[:content] = params[type]
       end
     end
-    public
 
     # Fill params with default parameters (status, plain errors)
-    def self.set_default_params params
+    def set_default_params params
       set_default_params_status(params)
       set_default_params_type(params)
       set_default_params_content(params)
-      params
+      return params
     end
 
-    def self.empty_resp
+    def empty_resp
       resp = Rack::Response.new
       resp.status = 204
       resp["Content-Type"] = ct_specific({type: PRESET_CT[:plain]})
-      resp
+      return resp
     end
 
-    def self.render_from_controller controller, method_to_call
+    def render_from_controller req, call
+      controller = Module.const_get(call[:controller]).new(req, call)
+      method_to_call = call[:method]
+
       controller.execute_before_action(method_to_call)
-      params = controller.send method_to_call
+      # puts "Call #{controller} # #{method_to_call}"
+      params = controller.send(method_to_call)
       controller.execute_after_action(method_to_call)
-      resp = Responder.render(params)
+
+      # puts "--- Params #{params.class} ---", "<<", params, ">>"
+      resp = render(params)
       controller.cookies.each do |k, v|
         resp.set_cookie k, v
       end
       return resp
     end
 
-    # @param controller [Controller]
-    # @param method_to_call [Symbol]
-    def self.render params
-      return Responder.empty_resp if params == :empty
+    def render params
+      return empty_resp if params == :empty
       return render(status: params) if params.is_a? Integer
+      raise "Not a valid params argument" unless params.is_a? Hash
+
       resp = Rack::Response.new
       params = set_default_params(params)
       resp.status = params[:status]
@@ -94,4 +99,5 @@ module Nephos
     end
 
   end
+
 end

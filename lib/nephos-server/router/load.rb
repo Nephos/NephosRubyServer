@@ -1,5 +1,6 @@
 module Nephos
-  module Router
+
+  class Router
 
     def self.add(what, verb)
       Nephos::Router::ROUTES << what.merge(verb: verb)
@@ -9,15 +10,13 @@ module Nephos
     end
 
     # @param what [Hash]
-    #
-    # TODO: doc
     def self.add_params!(what)
       params = what[:url].split('/').map do |p|
         p.match(/:\w+/) ? {p: "[^\/]+", name: p} : {p: p, name: nil}
       end
       url = params.map{|e| e[:p]}.join("/")
       url = "/" if url.empty?
-      what[:match] = /^#{url}$/
+      what[:match] = /^#{url}\/*$/
       what[:params] = params.map{|e| e[:name] && e[:name][1..-1]}[1..-1] || []
     end
 
@@ -35,9 +34,6 @@ module Nephos
 
     # @param what [Hash]
     #
-    # TODO:
-    # - Improve instanciation test
-    #
     # Check if:
     # - the what parameter contains a :controller
     # - this controller exists
@@ -53,7 +49,7 @@ module Nephos
         raise InvalidRouteController, "Class \"#{what[:controller]}\" is not a Nephos::Controller"
       end
       begin
-        instance = controller.new
+        instance = controller.new(Rack::Request.new({}), {params: []})
       rescue => err
         raise InvalidRouteController, "Cannot initialize controller"
       end
@@ -77,6 +73,7 @@ module Nephos
     end
 
   end
+
 end
 
 require_relative 'helpers'

@@ -3,7 +3,7 @@ class TestNephosServerResponder < Test::Unit::TestCase
   def test_content_type
     assert_equal(
       "KIND/TYPE" "; charset=" "CHARSET",
-      Nephos::Responder.content_type("KIND", "TYPE", "CHARSET")
+      Nephos::Responder.new.content_type("KIND", "TYPE", "CHARSET")
     )
   end
 
@@ -18,16 +18,25 @@ class TestNephosServerResponder < Test::Unit::TestCase
     p7 = {type: []}
     p8 = {type: nil}
     p9 = {}
-    assert Nephos::Responder.ct_specific(p0)
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p1) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p2) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p3) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p4) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p5) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p6) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p7) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p8) end
-    assert_raise Nephos::Responder::InvalidContentType do Nephos::Responder.ct_specific(p9) end
+    assert Nephos::Responder.new.ct_specific(p0)
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p1) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p2) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p3) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p4) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p5) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p6) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p7) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p8) end
+    assert_raise Nephos::Responder::InvalidContentType do
+      Nephos::Responder.new.ct_specific(p9) end
   end
 
   def test_set_default_params_status
@@ -35,10 +44,10 @@ class TestNephosServerResponder < Test::Unit::TestCase
     p2 = {status: 300}
     p3 = {status: nil}
     p4 = {}
-    Nephos::Responder.set_default_params_status(p1)
-    Nephos::Responder.set_default_params_status(p2)
-    Nephos::Responder.set_default_params_status(p3)
-    Nephos::Responder.set_default_params_status(p4)
+    Nephos::Responder.new.set_default_params_status(p1)
+    Nephos::Responder.new.set_default_params_status(p2)
+    Nephos::Responder.new.set_default_params_status(p3)
+    Nephos::Responder.new.set_default_params_status(p4)
     assert_equal({status: 200}, p1)
     assert_equal({status: 300}, p2)
     assert_equal({status: 200}, p3)
@@ -46,15 +55,15 @@ class TestNephosServerResponder < Test::Unit::TestCase
   end
 
   def test_set_default_params_type_1
-    p_ref = {type: Nephos::Responder.ct_specific({type: "text/plain"})}
+    p_ref = {type: Nephos::Responder.new.ct_specific({type: "text/plain"})}
     p1 = {type: "text/plain"}
     p2 = {type: "text"}
     p3 = {type: "text/plain"}
-    Nephos::Responder.set_default_params_type(p1)
+    Nephos::Responder.new.set_default_params_type(p1)
     assert_equal p1, p_ref
     assert_raise Nephos::Responder::InvalidContentType do
-      Nephos::Responder.set_default_params_type(p2) end
-    Nephos::Responder.set_default_params_type(p3)
+      Nephos::Responder.new.set_default_params_type(p2) end
+    Nephos::Responder.new.set_default_params_type(p3)
     assert_equal p_ref, p3
   end
 
@@ -64,14 +73,14 @@ class TestNephosServerResponder < Test::Unit::TestCase
     p3 = {json: "bla", plain: "bla"}
     p4 = {json: "bla", html: "bla"}
     p5 = {json: "bla"}
-    Nephos::Responder.set_default_params_type(p1)
-    Nephos::Responder.set_default_params_type(p2)
-    Nephos::Responder.set_default_params_type(p3)
-    Nephos::Responder.set_default_params_type(p4)
-    Nephos::Responder.set_default_params_type(p5)
-    plain = Nephos::Responder.ct_specific({type: "text/plain"})
-    json = Nephos::Responder.ct_specific({type: "application/json"})
-    html = Nephos::Responder.ct_specific({type: "text/html"})
+    Nephos::Responder.new.set_default_params_type(p1)
+    Nephos::Responder.new.set_default_params_type(p2)
+    Nephos::Responder.new.set_default_params_type(p3)
+    Nephos::Responder.new.set_default_params_type(p4)
+    Nephos::Responder.new.set_default_params_type(p5)
+    plain = Nephos::Responder.new.ct_specific({type: "text/plain"})
+    json = Nephos::Responder.new.ct_specific({type: "application/json"})
+    html = Nephos::Responder.new.ct_specific({type: "text/html"})
     assert_equal plain, p1[:type]
     assert_equal html, p2[:type]
     assert_equal json, p3[:type]
@@ -80,13 +89,13 @@ class TestNephosServerResponder < Test::Unit::TestCase
   end
 
   def test_render_simple
-    r1 = Nephos::Responder.render(:empty)
-    r2 = Nephos::Responder.render(200)
-    r3 = Nephos::Responder.render(201)
-    r4 = Nephos::Responder.render(status: 202)
-    r5 = Nephos::Responder.render(plain: "")
-    r6 = Nephos::Responder.render(json: "")
-    r7 = Nephos::Responder.render(html: "")
+    r1 = Nephos::Responder.new.render(:empty)
+    r2 = Nephos::Responder.new.render(200)
+    r3 = Nephos::Responder.new.render(201)
+    r4 = Nephos::Responder.new.render(status: 202)
+    r5 = Nephos::Responder.new.render(plain: "")
+    r6 = Nephos::Responder.new.render(json: "")
+    r7 = Nephos::Responder.new.render(html: "")
     assert_equal(204, r1.status)
     assert_equal(200, r2.status)
     assert_equal(201, r3.status)
@@ -97,9 +106,9 @@ class TestNephosServerResponder < Test::Unit::TestCase
   end
 
   def test_render_advanced
-    r1 = Nephos::Responder.render(status: 201, plain: "plaaaain")
-    r2 = Nephos::Responder.render(status: 201, json: {data: [1, 2]})
-    r3 = Nephos::Responder.render(status: 201, html: "<p>p</p>")
+    r1 = Nephos::Responder.new.render(status: 201, plain: "plaaaain")
+    r2 = Nephos::Responder.new.render(status: 201, json: {data: [1, 2]})
+    r3 = Nephos::Responder.new.render(status: 201, html: "<p>p</p>")
     assert_equal(201, r1.status)
     assert_equal("text/plain; charset=UTF-8", r1["Content-type"])
     assert_equal(["plaaaain"], r1.body)
