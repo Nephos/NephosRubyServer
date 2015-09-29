@@ -10,13 +10,13 @@ module Nephos
       @port = Integer(port)
       @host = host.to_s
       @server = lambda {|env|
-        return @router.execute(Rack::Request.new(env))
+        router = Router.new
+        return router.execute(Rack::Request.new(env))
       }
     end
 
     # start the Rack server
     def start
-      @router = Router.new
       Rack::Server.start :app => @server, :Port => @port, :Host => @host
     end
 
