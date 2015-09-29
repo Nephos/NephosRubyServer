@@ -121,7 +121,6 @@ end
 
 ## TODO v0.6
 - startable as daemon
-- hooks for controller
 - feature to change HTTP header from controller
 - customisable default 404 errors and 500 errors
 - functionnal tests

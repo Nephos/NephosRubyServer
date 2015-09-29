@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-if File.exists? "Gemfile"
+if File.exists? "Gemfile.lock" and File.read("Gemfile.lock").include? "nephos-server"
   exec("bundle exec nephos-status #{ARGV.join ' '}")
 else
   puts "No in an application directory"
