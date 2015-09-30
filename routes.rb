@@ -17,7 +17,7 @@ get url: "/rm", controller: "MainController", method: "rm_url"
 get url: "/debug", controller: "MainController", method: "debug"
 get url: "/hello", controller: "MainController", method: "hello"
 
-get url: "/image", controller: "MainController", method: "image"
+# get url: "/image", controller: "MainController", method: "image"
 get url: "/image/:image", controller: "MainController", method: "image"
 get url: "img/:image", controller: "MainController", method: "image"
 

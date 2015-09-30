@@ -11,8 +11,9 @@ module Nephos
 
     ROUTES = []
 
-    def initialize
+    def initialize(opt={})
       @responder = Responder.new
+      @silent = opt[:silent]
     end
 
     def render_controller req, call
@@ -45,11 +46,11 @@ module Nephos
     # {Controller} instance, and call the render on it
     def execute(req)
       env = req.env
-      puts "#{req.env["REMOTE_ADDR"]} [#{req.request_method}] \t ---> \t #{req.path}"
+      puts "#{req.env["REMOTE_ADDR"]} [#{req.request_method}] \t ---> \t #{req.path}" unless @silent
       call = find_route(req)
       return render_error(req, 404, "404 not found \"#{req.path}\"") if call.nil?
       begin
-        render_controller(req, call)
+        return render_controller(req, call)
       rescue => err
         STDERR.puts "Error: #{err.message}"
         STDERR.puts err.backtrace

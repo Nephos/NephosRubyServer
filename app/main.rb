@@ -5,22 +5,22 @@ class MainController < Nephos::Controller
   after_action :fct_after_root, :root
 
   def fct_before_all
-    puts "BEFORE ALL"
+    # puts "BEFORE ALL"
   end
 
   def fct_before_root
-    puts "BEFORE"
+    # puts "BEFORE"
   end
 
   def fct_after_root
-    puts "AFTER"
+    # puts "AFTER"
   end
 
   def root
-    puts "ROOT"
+    # puts "ROOT"
     cookies["a"] = "b"
     cookies.delete("b").to_h
-    puts "Cookies from the root:", cookies
+    # puts "Cookies from the root:", cookies
     {
       json: {
         list: $dataset,
@@ -56,7 +56,7 @@ class MainController < Nephos::Controller
 
   AUTH_IMG_EXT = %w(.jpg .jpeg .png .gif)
   def image
-    dir = File.expand_path('controllers/')
+    dir = File.expand_path('app/')
     file = File.expand_path(params["image"], dir)
     if not file[0..(dir.size-1)] == dir or not AUTH_IMG_EXT.include?(File.extname(file))
       return {status: 500, content: "invalid path #{params['image']}"}
