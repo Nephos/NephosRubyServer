@@ -13,7 +13,7 @@ module Nephos
 
     def initialize(opt={})
       @responder = Responder.new
-      @silent = opt[:silent]
+      @silent = !!opt[:silent]
     end
 
     def render_controller req, call

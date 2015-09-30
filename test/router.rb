@@ -20,6 +20,21 @@ class TestNephosServerRouter < Test::Unit::TestCase
     Nephos::Router::ROUTES.first
   end
 
+  def test_init_router
+    r1= Nephos::Router.new
+    r2= Nephos::Router.new({})
+    r3= Nephos::Router.new({silent: false})
+    r4= Nephos::Router.new({silent: true})
+    assert r1
+    assert_equal(false, r1.instance_variable_get(:@silent))
+    assert r2
+    assert_equal(false, r2.instance_variable_get(:@silent))
+    assert r3
+    assert_equal(false, r3.instance_variable_get(:@silent))
+    assert r4
+    assert_equal(true, r4.instance_variable_get(:@silent))
+  end
+
   def test_multi_routes
     reset_routes!
     get url: "/a", controller: "TestController", method: "method", silent: true
