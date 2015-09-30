@@ -11,11 +11,16 @@ module Nephos
 
     ROUTES = []
 
+    # @param opt [Hash] it contains optional parameters, via the keys (Symbol only)
+    #   - :silent : if true, then there will be no puts on the stdin when a request is routed.
+    #     Else, or by default, there will be information printed on stdin
     def initialize(opt={})
       @responder = Responder.new
       @silent = !!opt[:silent]
     end
 
+    # render the return of a call to Controller.new.method.
+    # Controller and method are stored on call via the keys :controller and :method
     def render_controller req, call
       return @responder.render_from_controller(req, call)
     end
