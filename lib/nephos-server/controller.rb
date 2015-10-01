@@ -32,14 +32,17 @@ module Nephos
 
     def self.parse_action_opts(opt)
       if opt.nil?
-        return :'*'
+        if block_given? then yield :'*' else return [:'*'] end
       elsif opt.is_a? Hash
-        raise "No implemented yet"
+        only = Array(opt[:only])
+        if block_given? then only.each{|e| yield e} else return only end
+        except = opt[:except]
+        raise "No implemented yet (except)" if except
         # parse :only and :except
       elsif opt.is_a? String or opt.is_a? Symbol
-        return opt.to_sym
+        if block_given? then yield opt else return [opt] end
       else
-        raise ArgumentError, "Invalid opts"
+        raise ArgumentError, "Invalid opt"
       end
     end
 
@@ -49,16 +52,18 @@ module Nephos
     #   - if Hash, it will be parsed with rules :only and :except
     #   - if String or Symbol, it will be parsed as :only
     def self.before_action(method, opt=nil)
-      call = parse_action_opts(opt)
-      @@before_action[call] ||= []
-      @@before_action[call] << method.to_sym
+      parse_action_opts(opt) do |call|
+        @@before_action[call] ||= []
+        @@before_action[call] << method.to_sym
+      end
     end
 
     # see {#self.before_action}
     def self.after_action(method, opt=nil)
-      call = parse_action_opts(opt)
-      @@after_action[call] ||= []
-      @@after_action[call] << method.to_sym
+      parse_action_opts(opt) do |call|
+        @@after_action[call] ||= []
+        @@after_action[call] << method.to_sym
+      end
     end
 
     # It calls every registred hooks added to the @before_action list,
