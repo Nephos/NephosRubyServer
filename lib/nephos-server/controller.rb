@@ -61,6 +61,8 @@ module Nephos
       @@after_action[call] << method.to_sym
     end
 
+    # It calls every registred hooks added to the @before_action list,
+    # including '*'
     def execute_before_action(call)
       call = call.to_sym
       methods = []
@@ -71,6 +73,7 @@ module Nephos
       end
     end
 
+    # see {#self.execute_before_action}
     def execute_after_action(call)
       call = call.to_sym
       methods = []
