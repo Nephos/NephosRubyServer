@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name        = 'nephos'
-  s.version     = '1.0.2'
+  s.version     = '1.0.3'
   s.date        = Time.now.getgm.to_s.split.first
-  s.summary     = 'Executables versionned for nephos-server'
+  s.summary     = 'Lite fix'
   s.description = 'Fix usage out of an application'
   s.authors     = [
     'poulet_a'
