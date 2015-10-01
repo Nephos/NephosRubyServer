@@ -82,6 +82,7 @@ module Nephos
       controller.cookies.each do |k, v|
         resp.set_cookie k, v
       end
+      controller.alterate_header(resp, call[:method])
       return resp
     end
 

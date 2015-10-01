@@ -81,5 +81,9 @@ module Nephos
       end
     end
 
+    def alterate_header(resp, method_called)
+      resp
+    end
+
   end
 end
