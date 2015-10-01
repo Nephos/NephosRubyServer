@@ -14,10 +14,10 @@ module Nephos
       params = what[:url].split('/').map do |p|
         p.match(/:\w+/) ? {p: "[^\/]+", name: p} : {p: p, name: nil}
       end
-      url = params.map{|e| e[:p]}.join("/")
+      url = params.map{|e| e[:p]}.join("/+")
       url = "/" if url.empty?
       what[:match] = /^#{url}\/*$/
-      what[:params] = params.map{|e| e[:name] && e[:name][1..-1]}[1..-1] || []
+      what[:params] = params.map{|e| e[:name] && e[:name].gsub(/\/+/, '')}[1..-1] || []
     end
 
     # @param what [Hash]

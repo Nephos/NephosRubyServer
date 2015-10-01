@@ -59,7 +59,9 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert_equal "GET", first[:verb]
     assert_equal "TestController", first[:controller]
     assert_equal "method", first[:method]
-    assert_equal /^\/\/*$/, first[:match]
+    assert "/".match(first[:match])
+    assert "//".match(first[:match])
+    assert "///".match(first[:match])
 
     reset_routes!
     post url: "/", controller: "TestController", method: "method", silent: true
@@ -67,7 +69,9 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert_equal "POST", first[:verb]
     assert_equal "TestController", first[:controller]
     assert_equal "method", first[:method]
-    assert_equal /^\/\/*$/, first[:match]
+    assert "/".match(first[:match])
+    assert "//".match(first[:match])
+    assert "///".match(first[:match])
 
     reset_routes!
     put url: "/", controller: "TestController", method: "method", silent: true
@@ -75,14 +79,21 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert_equal "PUT", first[:verb]
     assert_equal "TestController", first[:controller]
     assert_equal "method", first[:method]
-    assert_equal /^\/\/*$/, first[:match]
+    assert "/".match(first[:match])
+    assert "//".match(first[:match])
+    assert "///".match(first[:match])
   end
 
   def test_valid_routes_params
     reset_routes!
     get url: "/:what", controller: "TestController", method: "method", silent: true
     assert_equal "/:what", first[:url]
-    assert_equal /^\/[^\/]+\/*$/, first[:match]
+    assert !"/".match(first[:match])
+    assert !"//".match(first[:match])
+    assert !"///".match(first[:match])
+    assert "/data".match(first[:match])
+    assert "/111".match(first[:match])
+    assert "/--_--".match(first[:match])
   end
 
   def test_valid_resources
@@ -102,7 +113,11 @@ class TestNephosServerRouter < Test::Unit::TestCase
       get url: "/:what", controller: "TestController", method: "method", silent: true
     end
     assert_equal "/home/:what", first[:url]
-    assert_equal /^\/home\/[^\/]+\/*$/, first[:match]
+    assert !"/JOME/data".match(first[:match])
+    assert !"/1".match(first[:match])
+    assert !"/home".match(first[:match])
+    assert "/home/data".match(first[:match])
+    assert "/home/1".match(first[:match])
   end
 
   def test_valid_resources_params2
@@ -111,9 +126,19 @@ class TestNephosServerRouter < Test::Unit::TestCase
       get url: "/show", controller: "TestController", method: "method", silent: true
     end
     assert_equal "/:id/show", first[:url]
-    assert_equal /^\/[^\/]+\/show\/*$/, first[:match]
+    assert !"/".match(first[:match])
+    assert !"/x".match(first[:match])
+    assert !"/xx".match(first[:match])
+    assert !"//1".match(first[:match])
+    assert !"/x/1".match(first[:match])
+    assert !"/1/x".match(first[:match])
+    assert !"/x//1".match(first[:match])
+    assert "/1/show".match(first[:match])
+    assert "/show/show".match(first[:match])
+    assert "/1//show".match(first[:match])
   end
 
+  REQ_GET_INDEX_ROOTx2 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"//index"})
   REQ_GET_INDEX = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/index"})
   REQ_POST_INDEX = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index"})
   REQ_PUT_INDEX = Rack::Request.new({"REQUEST_METHOD"=>"PUT", "PATH_INFO"=>"/index"})
@@ -124,6 +149,7 @@ class TestNephosServerRouter < Test::Unit::TestCase
     reset_routes!
     get url: "/index", controller: "TestController", method: "method", silent: true
     post url: "/index", controller: "TestController", method: "method", silent: true
+    assert(Nephos::Router.new.find_route(REQ_GET_INDEX_ROOTx2))
     assert(Nephos::Router.new.find_route(REQ_GET_INDEX))
     assert(Nephos::Router.new.find_route(REQ_POST_INDEX))
     assert(!Nephos::Router.new.find_route(REQ_PUT_INDEX))

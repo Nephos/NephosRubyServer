@@ -2,6 +2,7 @@ v0.6.2
         * Fix generator (bug when --application on current directory)
 	* Improve hooks (add the :only option)
 	* Improve documentation
+	* Improve routing (more tests, better duplicate / handlement)
 
 v0.6.1
 	* Improve daemons
