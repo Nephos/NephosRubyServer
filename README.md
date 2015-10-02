@@ -111,9 +111,7 @@ end
 # Developers: Roadmap
 
 ## TODO v0.6
-- startable as daemon
 - feature to change HTTP header from controller
-- customisable default 404 errors and 500 errors
 - functionnal tests
 
 ## TODO v0.7
