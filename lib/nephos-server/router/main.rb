@@ -40,6 +40,20 @@ module Nephos
       end
     end
 
+    def error_custom(req, code, default=nil)
+      if File.exists? "app/#{code}.html"
+        @responder.render(status: code, html: File.read("app/#{code}.html"))
+      else
+        render_error(req, code, default || "Error: #{req.status}")
+      end
+    end
+
+    def error_404(req)
+      out = error_custom(req, 404, "404 not found \"#{req.path}\"")
+      out.body[0].gsub!("INJECT_REQ_PATH", req.path)
+      return out
+    end
+
     # @param path [Array]
     #
     # Find the right route to use from the url
@@ -53,13 +67,13 @@ module Nephos
       env = req.env
       puts "#{req.env["REMOTE_ADDR"]} [#{req.request_method}] \t ---> \t #{req.path}" unless @silent
       call = find_route(req)
-      return render_error(req, 404, "404 not found \"#{req.path}\"") if call.nil?
+      return error_404(req) if call.nil?
       begin
         return render_controller(req, call)
       rescue => err
         STDERR.puts "Error: #{err.message}"
         STDERR.puts err.backtrace
-        return render_error(req, 500, err)
+        return error_custom(req, 500, "Error: 500\n#{err.message}\n---Backtrace---\n#{err.backtrace.join("\n")}\n")
       end
     end
 

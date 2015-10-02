@@ -22,7 +22,6 @@ module Nephos
       @params.merge! Hash[callpath[:params].zip(params)]
       @params.select!{|k,v| not k.to_s.empty?}
 
-
       @params = Params.new(@params)
       @cookies = Params.new(@req.cookies)
     end
