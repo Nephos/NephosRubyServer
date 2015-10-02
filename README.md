@@ -109,24 +109,30 @@ end
 
 # Developers: Roadmap
 
-## TODO v0.5
-
 ## TODO v0.6
 - startable as daemon
 - feature to change HTTP header from controller
 - customisable default 404 errors and 500 errors
 - functionnal tests
 
+## TODO v0.7
+- Documentation on architecture (UML)
+- Improved documentation (Tutorial, Improved guides)
+- Alias for routing
+
 ## v1 requierements
 - Environement, Daemons, Port, Listen Host, Routables, Arguments
+- Clear architecture
 - Generator readables and powerfull
 - At least 80% tests coverage
+- Performances benchmark
 - Guide about
   - Controllers
   - Routing
   - Api Creation
   - Database creation
   - Web HTML with templating
+- Clear documentation on the features using regexp, options, ...
 
 Gitlab Continuous Integration:
 [![Gitlab Tests](https://gitlab.com/ci/projects/8973/status.png?ref=master)](https://gitlab.com/ci/projects/8973?ref=master)
