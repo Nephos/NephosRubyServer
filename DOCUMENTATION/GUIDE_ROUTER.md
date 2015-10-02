@@ -62,6 +62,10 @@ It will generate the route ``/home/index``, calling the ``MainController#root`` 
 
 ## URL Parameters
 
-**TODO**
+**TODO: more documentation**
 
 place a ``/:param`` in your route. The parameter will be placed in the controller in the ``params`` method
+
+## Notes
+
+* When a request is done, duplicate / are not counted. So, ``/resource/id`` is equivalent to ``////resource//id`` etc.

@@ -1,8 +1,8 @@
 class MainController < Nephos::Controller
 
   before_action :fct_before_all
-  before_action :fct_before_root, :root
-  after_action :fct_after_root, :root
+  before_action :fct_before_root, only: [:root]
+  after_action :fct_after_root, only: :root
 
   def fct_before_all
     # puts "BEFORE ALL"

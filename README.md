@@ -128,10 +128,17 @@ end
   - Database creation
   - Web HTML with templating
 
+Gitlab Continuous Integration:
 [![Gitlab Tests](https://gitlab.com/ci/projects/8973/status.png?ref=master)](https://gitlab.com/ci/projects/8973?ref=master)
 
+Github version
 [![GitHub version](https://badge.fury.io/gh/pouleta%2FNephosRubyServer.svg)](http://badge.fury.io/gh/pouleta%2FNephosRubyServer)
 
+Released version on ruby-gems
+[![Gem Version](https://badge.fury.io/rb/nephos-server.svg)](http://badge.fury.io/rb/nephos-server)
+
+Code Quality
 [![Code Climate](https://codeclimate.com/github/pouleta/NephosRubyServer/badges/gpa.svg)](https://codeclimate.com/github/pouleta/NephosRubyServer)
 
+Nephos gem version
 [![Nephos Executables](https://badge.fury.io/rb/nephos.svg)](http://badge.fury.io/rb/nephos)

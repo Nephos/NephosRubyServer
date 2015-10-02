@@ -43,7 +43,13 @@ class TestNephosServerAppRouter < Test::Unit::TestCase
     r.each_with_index do |rep, idx|
       # puts ENV_ALL_VALID_ROUTES[idx]
       # puts rep
-      assert_equal(200, rep.status)
+      begin
+        assert_equal(200, rep.status)
+      rescue => err
+        puts rep
+        puts err
+        raise
+      end
     end
 
   end
