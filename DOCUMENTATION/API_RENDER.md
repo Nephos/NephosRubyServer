@@ -1,7 +1,6 @@
 # Render API
 
 ## Understand the API
-
 The render API is a simple system to allows you to render HTTP responses to a client.
 The API allows you to customize differents parts of the response:
 
@@ -13,22 +12,21 @@ The API use the returns of the Controllers methods to build the HTTP responses.
 
 
 ## Use the API
-
 To use the API, you have to create a new controller.
-The controller must be placed or requires in the ``app/`` directory,
-via a ``file.rb`` file.
-It must contain a class, wich inherit from ``Nephos::Controller``.
-Each public method can be an entry point, defined in the ``routes.rb`` file.
-[Routing doc](GUIDE_ROUTING.md).
+The controller must be placed or requires in the ``app/`` directory. Check the
+[Guide about the controller](GUIDE_CONTROLLER.md).
+
+It must contain a class, inheriting from ``Nephos::Controller``.
+Each public method **can** be an entry point, defined in the ``routes.rb`` file.
+[Routing documentation](GUIDE_ROUTING.md).
 
 In the controller, you can use few helpers,
-like the method ``params()``, ``env()``, and ``infos()``
+like the method ``params()`` and ``cookies``
 
 The methods used as entry point must return a ``Hash`` described in the following lines.
 It may optionnaly be an ``Integer``, to return only a status, or ``:empty``.
 
 ## Options
-
 The returns of a Controller method can include the following keys:
 
 - :plain
@@ -57,14 +55,12 @@ end
 The following sections will describe how each key works and modify the HTTP response.
 
 ### Content
-
 The ``:content`` key must be associated with a ``String`` (or ``Hash`` is json).
 
 **Optionnal**:
 a default value is provided, based on the ``:status`` if no ``:content`` if specified.
 
 ### Type
-
 The ``:type`` key has to be associated with a ``String`` matching with **"kind/type"**.
 
 **Optionnal**:
@@ -74,13 +70,11 @@ Kinds and Types (called type and sub-type by w3c) are described here:
 [the w3c documentation](http://www.w3.org/Protocols/rfc1341/4_Content-Type.html)
 
 #### Kind:
-
 - image
 - text
 - ...
 
 #### Type:
-
 - plain
 - javascript
 - jpeg
@@ -88,7 +82,6 @@ Kinds and Types (called type and sub-type by w3c) are described here:
 
 
 ### Status
-
 The ``:status`` key is associable with an Integer. It must represent the HTTP status code.
 
 **Optionnal**:
@@ -98,7 +91,6 @@ The default value is 200.
 
 
 ### Plain, HTML, JSON
-
 The keys ``:plain``, ``:html``, ``:json`` can replace both ``:content`` ``:type``.
 It is associated like ``:content`` and **replace automaticaly the type**.
 

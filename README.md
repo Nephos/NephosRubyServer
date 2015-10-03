@@ -19,7 +19,6 @@ Features which will not be provided by nserver:
   - [Sequel](DOCUMENTATION/DATABASE/SEQUEL.md)
 
 # Start
-
 ```sh
 gem install nephos # download the server and executables
 ngenerator application MyApp # generate the application
@@ -39,7 +38,6 @@ nserver -p 8080 -h 0.0.0.0 # start the server. port is not required, neither hos
 # Documentation
 
 ## Guides
-
 Theses guides will provide you knowlegde about everything you can use in the application.
 
 - [Generator GUIDE](DOCUMENTATION/GUIDE_GENERATOR.md)
@@ -51,16 +49,16 @@ Theses guides will provide you knowlegde about everything you can use in the app
 
 ## Examples
 
-### Production
-
-To avoid information leaks from your application, set the environment variable ``export ENVIRONMENT=production``,
-or run the server with ``-e production`` parameter.
-It will disable ruby error messages when an error occurs in the controller.
+### Production and environment
+To avoid information leaks from your application, set the environment variable
+``export ENVIRONMENT=production``, or run the server with ``-e production``
+parameter. When an error occurs, the backtrace will be print to the client in
+the rendered page, unless the server runs in production environment.
 
 ### Controller
-
+Every routes will call a method from a controller.
 To create a controller, add a ruby file to ``app/``, with a class inherited by ``Nephos::Controller``
-The basic code of a controller can be generated via ``ngenerator controller NAME``.
+You should user ``ngenerator --controller NAME`` to generate a new controller.
 
 ```ruby
 class Example < Nephos::Controller
@@ -76,7 +74,6 @@ end
 ```
 
 ### Rendering
-
 To render a content to the client, you can return informations from a Controller method:
 
 ```ruby
@@ -91,7 +88,6 @@ return :empty
 ```
 
 ### Routing
-
 The routing (rules to execute the action the user wants), you have to write the ``/routes.rb`` file.
 If the user try to access an url not described in the file, it will automaticaly render a 404 not found.
 
@@ -111,13 +107,13 @@ end
 # Developers: Roadmap
 
 ## TODO v0.6
-- feature to change HTTP header from controller
+- Alias for routing
 - functionnal tests
 
 ## TODO v0.7
+- feature to change HTTP header from controller
 - Documentation on architecture (UML)
 - Improved documentation (Tutorial, Improved guides)
-- Alias for routing
 
 ## v1 requierements
 - Environement, Daemons, Port, Listen Host, Routables, Arguments
