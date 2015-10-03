@@ -73,7 +73,7 @@ module Nephos
       rescue => err
         STDERR.puts "Error: #{err.message}"
         STDERR.puts err.backtrace
-        return error_custom(req, 500, "Error: 500\n#{err.message}\n---Backtrace---\n#{err.backtrace.join("\n")}\n")
+        return error_custom(req, 500, "#{err.message}\n---Backtrace---\n#{err.backtrace.join("\n")}\n")
       end
     end
 
