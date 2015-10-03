@@ -9,7 +9,7 @@ require_relative '../lib/nephos-server/bin-helpers'
 GEMFILE = <<EOF
 source 'https://rubygems.org'
 
-gem 'nephos-server'
+gem 'nephos'
 EOF
 
 ROUTE_RB = <<EOF

@@ -1,3 +1,7 @@
+v0.6.4
+	* Fix application generator (replace in the gemfile nephos-server by nephos)
+        * Improve guides (more doc, corrections, update)
+
 v0.6.3
         * Add customisable default error page
 
