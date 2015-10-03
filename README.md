@@ -109,6 +109,7 @@ end
 ## TODO v0.6
 - Alias for routing
 - functionnal tests
+- extension for urls (optional .xxx, with controller effect)
 
 ## TODO v0.7
 - feature to change HTTP header from controller
