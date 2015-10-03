@@ -9,7 +9,23 @@ class TestNephosServerGenerator < Test::Unit::TestCase
     assert(File.exists? "/tmp/nephos-server-test/routes.rb")
     assert(Dir.exists? "/tmp/nephos-server-test/app")
     gemfile_data = File.read("/tmp/nephos-server-test/Gemfile").split("\n")
-    assert(gemfile_data.include? "gem 'nephos-server'")
+    assert(gemfile_data.include? "gem 'nephos'")
+    `rm -rf /tmp/nephos-server-test 2> /tmp/null`
+  end
+
+  def test_generator_application_with_build
+    `rm -rf /tmp/nephos-server-test 2> /tmp/null`
+
+    `./bin/nephos-generator --test -a /tmp/nephos-server-test --no-git`
+    assert(Dir.exists? "/tmp/nephos-server-test")
+    assert(File.exists? "/tmp/nephos-server-test/Gemfile")
+    assert(File.exists? "/tmp/nephos-server-test/routes.rb")
+    assert(Dir.exists? "/tmp/nephos-server-test/app")
+    gemfile_data = File.read("/tmp/nephos-server-test/Gemfile").split("\n")
+    assert(gemfile_data.include? "gem 'nephos'")
+    gemfile_lock_data = File.read("/tmp/nephos-server-test/Gemfile.lock").split
+    assert(gemfile_lock_data.include? "nephos")
+    assert(gemfile_lock_data.include? "nephos-server")
     `rm -rf /tmp/nephos-server-test 2> /tmp/null`
   end
 

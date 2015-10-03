@@ -26,8 +26,8 @@ The hooks are defined by calling the methods ``after_action`` or
 Hooks take 1 or 2 arguments.
 - The first is the name of the method to call.
 - The second, **optional**, is a hash, containing ``:only`` or ``:except``
-  keys, associated to an Array or Symbol or one Symbol. Every symbols
-  represents the methods triggering the hook.
+  keys, associated to an Array or Symbol or one Symbol. Each symbol represents
+  a method triggering the hook.
 
 **Note: If there is no 2sd argument, then the hook is triggered every times.**
 
