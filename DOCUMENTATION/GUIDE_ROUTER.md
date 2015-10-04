@@ -41,6 +41,13 @@ As example, yuo can write:
 add_route "GET", url: "/tmp", controller: "MyController", method: "tmp"
 ```
 
+**Note: if you are as lazy as me, you also can specifie the url out of the hash (option).
+It can be done by putting the url as second argument, like in the following example.
+This note is also valid for the next helpers (get, post, put)**
+```ruby
+add_route "GET", "/tmp", controller: "MyController", method: "tmp"
+```
+
 ### get post put
 Theses 3 helpers allows you to use ``add_route`` without the first argument.
 
