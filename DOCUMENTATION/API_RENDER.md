@@ -1,14 +1,18 @@
 # Render API
 
-## Understand the API
+## What is the Render API ?
 The render API is a simple system to allows you to render HTTP responses to a client.
+It is a simple way to render data to the user and choose it's type.
+
 The API allows you to customize differents parts of the response:
 
 - HTTP status
 - HTTP Content-Type
 - Content
 
-The API use the returns of the Controllers methods to build the HTTP responses.
+Based on the returns of your Controller's methods, it will render to the user
+a HTTP response.
+You can actually returns HTML, JSON, or PLAIN text, and custom formats if needed.
 
 
 ## Use the API
@@ -20,14 +24,13 @@ It must contain a class, inheriting from ``Nephos::Controller``.
 Each public method **can** be an entry point, defined in the ``routes.rb`` file.
 [Routing documentation](GUIDE_ROUTING.md).
 
-In the controller, you can use few helpers,
-like the method ``params()`` and ``cookies``
+Theses methods, described as "entry points" by your routing rules, must **return** a ``Hash``.
+It's format will be described in the following parts.
 
-The methods used as entry point must return a ``Hash`` described in the following lines.
-It may optionnaly be an ``Integer``, to return only a status, or ``:empty``.
+*Notes: The return may optionnaly be an ``Integer``, to return only a status, or ``:empty``.*
 
-## Options
-The returns of a Controller method can include the following keys:
+## Returned hash
+The return of a Controller method can include the following keys:
 
 - :plain
 - :html
@@ -52,7 +55,7 @@ class MyController < Nephos::Controller
 end
 ```
 
-The following sections will describe how each key works and modify the HTTP response.
+The following sections will describe how each key works, and modify the HTTP response.
 
 ### Content
 The ``:content`` key must be associated with a ``String`` (or ``Hash`` is json).
