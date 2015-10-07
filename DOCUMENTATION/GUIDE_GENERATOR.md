@@ -2,7 +2,7 @@
 
 The ``ngenerator`` is a lite application designed to make easier the application management.
 
-Actually, it allows you to create new application and controller.
+Actually, it allows you to create new application, controller, or route.
 
 ## Usage
 

@@ -51,7 +51,16 @@ class TestNephosServerAppRouter < Test::Unit::TestCase
         raise
       end
     end
+  end
 
+  def test_router_on_invalid
+    router = Nephos::Router.new(silent: true)
+    not_valid = {"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/not_a_valid_route"}
+    almost_valid = {"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/get_cookie"}
+    bad_verb = {"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/get_cookies"}
+    assert_equal(404, router.execute(Rack::Request.new(not_valid)).status)
+    assert_equal(404, router.execute(Rack::Request.new(almost_valid)).status)
+    assert_equal(404, router.execute(Rack::Request.new(bad_verb)).status)
   end
 
 end
