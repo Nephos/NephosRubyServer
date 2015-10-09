@@ -29,8 +29,16 @@ module Nephos
     # - :method
     def self.check_keys! what
       raise InvalidRouteUrl, "Missing URL" unless what.keys.include? :url
-      raise InvalidRouteController, "Missing Controller" unless what.keys.include? :controller
-      raise InvalidRouteMethod, "Missing Method" unless what.keys.include? :method
+      if what.keys.include? :to
+        match = what[:to].match(/(?<controller>\w+)\#(?<method>\w+)/)
+        raise InvalidRouteTo, "Invalid Controller#Method" unless match
+        what[:controller] = match["controller"]
+        what[:method] = match["method"]
+        what.delete :to
+      else
+        raise InvalidRouteController, "Missing Controller" unless what.keys.include? :controller
+        raise InvalidRouteMethod, "Missing Method" unless what.keys.include? :method
+      end
     end
 
     # @param what [Hash]

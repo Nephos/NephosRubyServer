@@ -100,6 +100,7 @@ put url: "/rm/:url", controller: "MainController", method: "rm_url"   # /rm with
 resource "infos" do
   get url: "/", controller: "MainController", method: "root" # generate /infos
   get url: "/about", controller: "MainController", method: "root" # generate /infos/about
+  get url: "/notice", to: "MainController#notice" # generate /infos/notice
 end
 ```
 

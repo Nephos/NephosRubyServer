@@ -1,3 +1,4 @@
+
 # Routing Guide
 
 ### How the routes are inputed by the client ?
@@ -96,5 +97,5 @@ end
 ## Notes
 
 * When a request is done, duplicate / are not counted. So, ``/resource/id`` is equivalent to ``////resource//id`` etc.
-* It is possible, by default, to add a postfixed extension (like .html) to your rules.
-	it is accessible via the controller (``extension`` method). It can be disabled by adding the option ``postfix: false``
+* It is possible, by default, to add a postfixed extension (like .html) to your rules. It is accessible via the controller (``extension`` method). It can be disabled by adding the option ``postfix: false``
+* You can replace the both keys ``:controller`` and ``:method`` by ``:to``, which has to be associated with a string like ``Controller#method``

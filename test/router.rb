@@ -231,4 +231,11 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert(!Nephos::Router.new.find_route(ko4))
   end
 
+  def test_routing_eze_router
+    reset_routes!
+    get url: "/index", controller: "TestController", method: "method1", silent: true
+    get url: "/index", to: "TestController#method1", method: "method1", silent: true
+    assert_equal Nephos::Router::ROUTES[0], Nephos::Router::ROUTES[1]
+  end
+
 end

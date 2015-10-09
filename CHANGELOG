@@ -2,6 +2,7 @@ v0.6.5
 	* Improve routing helpers (optional url parameter)
 	* Add new functional tests (router)
 	* Add extension for url (.html, ...)
+	* Add improved router helper (simple destination)
 
 v0.6.4
 	* Fix application generator (replace in the gemfile nephos-server by nephos)
