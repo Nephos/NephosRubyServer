@@ -238,4 +238,19 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert_equal Nephos::Router::ROUTES[0], Nephos::Router::ROUTES[1]
   end
 
+  def test_routing_multiple_url
+    reset_routes!
+    get url: ["/index"], controller: "TestController", method: "method1", silent: true
+    get url: "/index", controller: "TestController", method: "method1", silent: true
+    reset_routes!
+    get url: ["/index", "/index"], controller: "TestController", method: "method1"
+    get url: ["/index", "/index"], controller: "TestController", method: "method1"
+    assert_equal Nephos::Router::ROUTES[0], Nephos::Router::ROUTES[1]
+    assert_equal Nephos::Router::ROUTES[1], Nephos::Router::ROUTES[2]
+    assert_equal Nephos::Router::ROUTES[2], Nephos::Router::ROUTES[3]
+    reset_routes!
+    get url: ["/index", "/me", "/other"], controller: "TestController", method: "method1"
+    assert_equal 3, Nephos::Router::ROUTES.size
+  end
+
 end

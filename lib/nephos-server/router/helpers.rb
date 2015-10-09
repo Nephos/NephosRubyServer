@@ -20,10 +20,14 @@ end
 def add_route(verb, url=nil, what)
   raise InvalidRoute, "what must be a hash" unless what.is_a? Hash
   what[:url] ||= url
-  what[:url] = File.expand_path File.join(route_prefix, what[:url])
-  Nephos::Router.check!(what)
-  Nephos::Router.add_params!(what)
-  Nephos::Router.add(what, verb)
+  Array(what[:url]).each do |url|
+    route = what.dup
+    route[:url] = url
+    route[:url] = File.expand_path File.join(route_prefix, route[:url])
+    Nephos::Router.check!(route)
+    Nephos::Router.add_params!(route)
+    Nephos::Router.add(route, verb)
+  end
 end
 
 # @param url [String] see {#add_route}

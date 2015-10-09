@@ -108,7 +108,6 @@ end
 # Developers: Roadmap
 
 ## TODO v0.6
-- Alias for routing
 - functionnal tests
 
 ## TODO v0.7

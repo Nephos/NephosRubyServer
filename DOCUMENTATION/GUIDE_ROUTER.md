@@ -94,6 +94,15 @@ resource "static" do
 end
 ```
 
+## Alias
+You can create many routes to the same entry point. Each of theses rules can be
+specified simply by placing an Array of String instead of a simple String in the
+hash passed to the helper (get, ... , add_route).
+Example:
+```ruby
+get url: ["/", "/index"], controller: "UserController", method: "show" # / and /index
+```
+
 ## Notes
 
 * When a request is done, duplicate / are not counted. So, ``/resource/id`` is equivalent to ``////resource//id`` etc.
