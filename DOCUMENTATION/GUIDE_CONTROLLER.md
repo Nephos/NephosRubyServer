@@ -21,6 +21,13 @@ Example:
     params[:id] # access to the :id value, for exemple in the url /show/:id
 ```
 
+### Requested format
+You can request a format by adding a ``.ext`` to the url you request.
+This format is accessible via the ``format`` method. (alias for ``extension``)
+
+It is also provided few helpers ``html?`` ``json?`` ``plain?``
+
+
 ### Hooks
 
 A hook is a method, triggered automatically after an action.

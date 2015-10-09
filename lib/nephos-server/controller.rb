@@ -7,6 +7,7 @@ module Nephos
   class Controller
 
     attr_reader :req, :callpath, :params, :cookies, :extension
+    alias :format :extension
 
     # @param env [Hash] env extracted from the http request
     # @param parsed [Hash] pre-parsed env with parameters, ...
