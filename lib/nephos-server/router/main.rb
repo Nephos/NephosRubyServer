@@ -67,6 +67,8 @@ module Nephos
       env = req.env
       puts "#{req.env["REMOTE_ADDR"]} [#{req.request_method}] \t ---> \t #{req.path}" unless @silent
       call = find_route(req)
+      # require 'pry'
+      # binding.pry
       return error_404(req) if call.nil?
       begin
         return render_controller(req, call)

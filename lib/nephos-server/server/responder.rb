@@ -69,7 +69,8 @@ module Nephos
     end
 
     def render_from_controller req, call
-      controller = Module.const_get(call[:controller]).new(req, call)
+      extension = req.path.match(call[:match])['extension']
+      controller = Module.const_get(call[:controller]).new(req, call, extension)
       method_to_call = call[:method]
 
       controller.execute_before_action(method_to_call)

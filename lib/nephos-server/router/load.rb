@@ -16,7 +16,7 @@ module Nephos
       end
       url = params.map{|e| e[:p]}.join("/+")
       url = "/" if url.empty?
-      what[:match] = /^#{url}\/*$/
+      what[:match] = /^(?<url>#{url})(?<extension>\.\w+)?\/*$/
       # remove : in :param, and / in /param
       what[:params] = params.map{|e| e[:name] && e[:name][1..-1]}[1..-1] || []
     end

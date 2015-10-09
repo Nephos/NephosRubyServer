@@ -6,11 +6,12 @@ module Nephos
   # and the parameters.
   class Controller
 
-    attr_reader :req, :callpath, :params, :cookies
+    attr_reader :req, :callpath, :params, :cookies, :extension
 
     # @param env [Hash] env extracted from the http request
     # @param parsed [Hash] pre-parsed env with parameters, ...
-    def initialize req, callpath
+    # @param extension [String] extension ".json", ".html", ...
+    def initialize req, callpath, extension=nil
       raise ArgumentError, "req must be a Rack::Request" unless req.is_a? Rack::Request
       raise ArgumentError, "call must be a Hash" unless callpath.is_a? Hash
       @req= req
@@ -24,6 +25,18 @@ module Nephos
 
       @params = Params.new(@params)
       @cookies = Params.new(@req.cookies)
+
+      @extension = extension.to_s.split(".").last
+    end
+
+    def html?
+      %w(htm html xhtml).include? extension
+    end
+    def json?
+      %w(json).include? extension
+    end
+    def plain?
+      %w(txt raw).include? extension
     end
 
     @@before_action = {:'*' =>  []}

@@ -187,7 +187,6 @@ class TestNephosServerRouter < Test::Unit::TestCase
   REQ_POST_INDEX_XXX_ID = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index/XXX/id"})
   REQ_POST_INDEX_XXX_XXX = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index/XXX/XXX"})
 
-  # TODO : FIX
   def test_routing_matching_simple_with_arguments2
     reset_routes!
     get url: "/index", controller: "TestController", method: "method1", silent: true
@@ -206,6 +205,17 @@ class TestNephosServerRouter < Test::Unit::TestCase
     assert(!Nephos::Router.new.find_route(REQ_GET_INDEX_XXX_INDEX))
     assert(!Nephos::Router.new.find_route(REQ_POST_INDEX_XXX_ID))
     assert(!Nephos::Router.new.find_route(REQ_POST_INDEX_XXX_XXX))
+  end
+
+  def test_routing_extension
+    reset_routes!
+    get url: "/index", controller: "TestController", method: "method1", silent: true
+    r1ok = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index"})
+    r1ko = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index/html"})
+    r2ok = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index.html"})
+    assert(Nephos::Router.new.find_route r1ok)
+    assert(Nephos::Router.new.find_route r2ok)
+    assert(!Nephos::Router.new.find_route r1ko)
   end
 
 end
