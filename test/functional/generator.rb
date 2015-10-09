@@ -23,9 +23,13 @@ class TestNephosServerGenerator < Test::Unit::TestCase
     assert(Dir.exists? "/tmp/nephos-server-test/app")
     gemfile_data = File.read("/tmp/nephos-server-test/Gemfile").split("\n")
     assert(gemfile_data.include? "gem 'nephos'")
+
+    # if connected to internet only
+    assert(File.exists? "/tmp/nephos-server-test/Gemfile.lock")
     gemfile_lock_data = File.read("/tmp/nephos-server-test/Gemfile.lock").split
     assert(gemfile_lock_data.include? "nephos")
     assert(gemfile_lock_data.include? "nephos-server")
+
     `rm -rf /tmp/nephos-server-test 2> /tmp/null`
   end
 
