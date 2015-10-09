@@ -96,3 +96,5 @@ end
 ## Notes
 
 * When a request is done, duplicate / are not counted. So, ``/resource/id`` is equivalent to ``////resource//id`` etc.
+* It is possible, by default, to add a postfixed extension (like .html) to your rules.
+	it is accessible via the controller (``extension`` method). It can be disabled by adding the option ``postfix: false``

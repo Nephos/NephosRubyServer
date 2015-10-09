@@ -210,12 +210,25 @@ class TestNephosServerRouter < Test::Unit::TestCase
   def test_routing_extension
     reset_routes!
     get url: "/index", controller: "TestController", method: "method1", silent: true
-    r1ok = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index"})
-    r1ko = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index/html"})
-    r2ok = Rack::Request.new({"REQUEST_METHOD"=>"POST", "PATH_INFO"=>"/index.html"})
-    assert(Nephos::Router.new.find_route r1ok)
-    assert(Nephos::Router.new.find_route r2ok)
-    assert(!Nephos::Router.new.find_route r1ko)
+    get url: "/indexno", controller: "TestController", method: "method1", silent: true, postfix: false
+    ok1 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/index"})
+    ok2 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/index.html"})
+    ok3 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/index.json"})
+    ok4 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/index.xhr"})
+    ok5 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/indexno"})
+    ko1 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/index/html"})
+    ko2 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/indexno.html"})
+    ko3 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/indexno.json"})
+    ko4 = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/indexno.xhr"})
+    assert(Nephos::Router.new.find_route(ok1))
+    assert(Nephos::Router.new.find_route(ok2))
+    assert(Nephos::Router.new.find_route(ok3))
+    assert(Nephos::Router.new.find_route(ok4))
+    assert(Nephos::Router.new.find_route(ok5))
+    assert(!Nephos::Router.new.find_route(ko1))
+    assert(!Nephos::Router.new.find_route(ko2))
+    assert(!Nephos::Router.new.find_route(ko3))
+    assert(!Nephos::Router.new.find_route(ko4))
   end
 
 end
