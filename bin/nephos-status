@@ -28,8 +28,10 @@ begin
        not File.read($gfl).split.index("nephos-server")
       raise "\"#{$dir}\" is not a valid nephos-server application"
     else
-      i = File.read($gfl).split.index("nephos-server") + 1
-      version = File.read($gfl).split[i]
+      data = File.read($gfl).split("\n").map(&:strip)
+      version = data.map{|e| e.match /nephos-server \((?<version>\d+(\.\d+)+)\)/ }.compact.first
+      raise "\"#{$gfl}\" doesn't contain a valid nephos-server version" unless version
+      version = version["version"]
       path = $gfl.gsub(/Gemfile\.lock$/, "")
       n_controllers = 0
       Dir[File.expand_path 'app/*.rb'].each do |f|
@@ -38,6 +40,8 @@ begin
       puts "Full path: #{path}"
       puts "Installed nephos-version: #{version}"
       puts "Controllers (#{n_controllers})"
+      daemon = $dir + "/.pid"
+      puts "The application is deploye as daemon (#{File.read(daemon)})" if File.exists? daemon
     end
   else
     raise "\"#{$dir}\" is not a valid directory"
