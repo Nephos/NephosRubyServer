@@ -3,5 +3,5 @@
 if File.exists? "Gemfile.lock" and File.read("Gemfile.lock").include? "nephos-server"
   exec("bundle exec nephos-status #{ARGV.join ' '}")
 else
-  puts "Not in an application directory"
+  exec("nephos-status #{ARGV.join ' '}")
 end
