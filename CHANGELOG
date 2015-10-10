@@ -1,4 +1,10 @@
 v0.6.5
+	* Improve functional tests (router)
+	* Improve executables (status)
+	* Fix executables (status)
+	* Update "nephos" gem to 1.0.4
+
+v0.6.5
 	* Improve routing helpers (optional url parameter)
 	* Add new functional tests (router)
 	* Add extension for url (.html, ...)
