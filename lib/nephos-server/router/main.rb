@@ -73,8 +73,8 @@ module Nephos
       begin
         return render_controller(req, call)
       rescue => err
-        STDERR.puts "Error: #{err.message}"
-        STDERR.puts err.backtrace
+        STDERR.puts "Error: #{err.message}" unless @silent
+        STDERR.puts err.backtrace unless @silent
         return error_custom(req, 500, "#{err.message}\n---Backtrace---\n#{err.backtrace.join("\n")}\n")
       end
     end
