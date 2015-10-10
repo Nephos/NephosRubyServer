@@ -51,6 +51,8 @@ class TestNephosServerAppRouter < Test::Unit::TestCase
         raise
       end
     end
+    rep = router.execute(Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/err500"}))
+    assert_equal(500, rep.status)
   end
 
   def test_router_on_invalid
