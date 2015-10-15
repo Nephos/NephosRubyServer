@@ -7,6 +7,7 @@ require_relative '../lib/nephos-server/version'
 require_relative '../lib/nephos-server/bin-helpers'
 
 GEMFILE = <<EOF
+source 'http://0.0.0.0:8808'
 source 'https://rubygems.org'
 
 gem 'nephos'
