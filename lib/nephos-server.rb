@@ -3,6 +3,7 @@
 # require 'yaml'
 require 'json'
 require 'open-uri'
+require 'uri'
 require 'rack'
 require 'colorize'
 

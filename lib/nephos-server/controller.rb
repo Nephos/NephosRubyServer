@@ -40,6 +40,11 @@ module Nephos
       %w(txt raw).include? extension
     end
 
+    # @return [String] an url formated as "scheme://host:port/path"
+    def url_for(path="")
+      (URI(req.env["rack.url_scheme"] + "://" + req.env['HTTP_HOST'] + "/") + path).to_s
+    end
+
     @@before_action = {:'*' =>  []}
     @@after_action = {:'*' =>  []}
 

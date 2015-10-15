@@ -11,6 +11,7 @@ Example:
     cookies.delete("b") # remove a cookie named "b"
 ```
 
+
 ### Params
 You can access to the parameters (defined by http or via the URI, based on your
 routing rules).
@@ -28,8 +29,11 @@ This format is accessible via the ``format`` method. (alias for ``extension``)
 It is also provided few helpers ``html?`` ``json?`` ``plain?``
 
 
-### Hooks
+### Environment
+From your controllers, you can access to the HTTP request via ``req.env``.
+You can also generate valid url via ``url_for("/resource")``.
 
+### Hooks
 A hook is a method, triggered automatically after an action.
 
 Actually, NephosServer allows you to create 2 kinds of triggers for your hooks:

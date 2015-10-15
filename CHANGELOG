@@ -3,6 +3,7 @@ v0.6.6
 	* Improve executables (status)
 	* Fix executables (status)
 	* Update "nephos" gem to 1.0.4
+	* Add new feature Controller.url_for
 
 v0.6.5
 	* Improve routing helpers (optional url parameter)
