@@ -109,6 +109,7 @@ end
 
 ## TODO v0.6
 - functionnal tests
+- logs in files
 
 ## TODO v0.7
 - feature to change HTTP header from controller
