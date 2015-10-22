@@ -12,9 +12,15 @@ gem install slim
 ## Usage in Nephos Server
 
 ```ruby
+require 'slim'
+
 class UserController < Nephos::Controller
+
+  # /user/:id
   def show
-    #TODO: read a file, use slim with parameters
+    user = User.find(params[:id])
+    Slim::Template.new() { File.read('app/views/user/show.slim') }.render(nil, {login: user.login})
   end
+
 end
 ```
