@@ -1,3 +1,6 @@
+v0.6.7
+	* Fix gemspec
+
 v0.6.6
 	* Improve functional tests (router)
 	* Improve executables (status)

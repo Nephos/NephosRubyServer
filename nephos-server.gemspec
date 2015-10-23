@@ -15,6 +15,7 @@ lib/nephos-server/params.rb
 lib/nephos-server/router/main.rb
 lib/nephos-server/router/load.rb
 lib/nephos-server/router/helpers.rb
+lib/nephos-server/server/logger.rb
 lib/nephos-server/server/main.rb
 lib/nephos-server/server/responder.rb
 lib/nephos-server/version.rb
@@ -39,7 +40,9 @@ test/test.rb
 test/responder.rb
 test/router.rb
 test/params.rb
+test/logger.rb
 test/controller.rb
+
 test/functional.rb
 test/functional/generator.rb
 test/functional/global.rb
