@@ -82,6 +82,11 @@ class MainController < Nephos::Controller
     {}
   end
 
+  def log_param_x
+    Logger.fd = File.open '/tmp/nephos_ftest.log', 'w'
+    log "#{params[:x]}"
+  end
+
   def err500
     tessssssssss
   end
