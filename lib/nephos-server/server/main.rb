@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require_relative 'responder'
 
 module Nephos
@@ -26,4 +28,5 @@ module Nephos
     end
 
   end
+
 end

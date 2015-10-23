@@ -62,13 +62,13 @@ You should user ``ngenerator --controller NAME`` to generate a new controller.
 
 ```ruby
 class Example < Nephos::Controller
-def root
+  def root
     cookies["last_visit"] = Time.now
     if params["index"] == "true"
       return {plain: "index"}
     else
-	  return :empty
-	end
+      return :empty
+    end
   end
 end
 ```

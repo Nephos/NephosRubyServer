@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module Nephos
 
   class Responder

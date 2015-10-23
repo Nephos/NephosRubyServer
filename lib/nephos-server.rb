@@ -14,5 +14,7 @@ require_relative 'nephos-server/basic_errors'
 require_relative 'nephos-server/params'
 require_relative 'nephos-server/controller'
 require_relative 'nephos-server/router/main'
+
 # server
+require_relative 'nephos-server/server/logger'
 require_relative 'nephos-server/server/main'
