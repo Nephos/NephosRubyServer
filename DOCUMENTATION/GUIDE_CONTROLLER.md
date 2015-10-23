@@ -93,3 +93,11 @@ class MainController < Nephos::Controller
 
 end
 ```
+
+### Log
+You can log errors, particular data, etc, simply by using the helper ```log(...)```
+
+You can set the fd the of file via
+```ruby
+Nephos::Logger.fd = File.open("/tmp/app_#{Time.now}.log", "a")
+```
