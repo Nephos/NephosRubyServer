@@ -1,9 +1,11 @@
 v0.6.6
 	* Improve functional tests (router)
 	* Improve executables (status)
+	* Improve router (disable verbose)
 	* Fix executables (status)
 	* Update "nephos" gem to 1.0.4
 	* Add new feature Controller.url_for
+	* Add new feature log
 
 v0.6.5
 	* Improve routing helpers (optional url parameter)
