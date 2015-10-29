@@ -62,7 +62,7 @@ nephos-server
 nephos-generator
 nephos-status
 )
-  s.homepage    = 'https://github.com/pouleta/NephosRubyServer'
+  s.homepage    = 'https://github.com/Nephos/NephosRubyServer'
   s.license     = 'GNU/GPLv3'
 
   s.cert_chain  = ['certs/nephos.pem']

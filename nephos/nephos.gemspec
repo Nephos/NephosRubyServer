@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'nephos'
-  s.version     = '1.0.4'
+  s.version     = '1.0.5'
   s.date        = Time.now.getgm.to_s.split.first
-  s.summary     = 'Lite fix'
-  s.description = 'Fix nstatus'
+  s.summary     = 'Update'
+  s.description = 'Update deps'
   s.authors     = [
     'poulet_a'
   ]
@@ -18,7 +18,7 @@ nserver
 ngenerator
 nstatus
 )
-  s.homepage    = 'https://github.com/pouleta/NephosRubyServer'
+  s.homepage    = 'https://github.com/Nephos/NephosRubyServer'
   s.license     = 'GNU/GPLv3'
 
   s.cert_chain  = ['certs/nephos.pem']
