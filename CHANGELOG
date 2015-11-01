@@ -1,5 +1,6 @@
 v0.6.8
 	* Update urls and links
+	* Important fix for cookies
 
 v0.6.7
 	* Fix gemspec

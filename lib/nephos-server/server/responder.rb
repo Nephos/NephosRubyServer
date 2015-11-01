@@ -82,7 +82,7 @@ module Nephos
 
       # puts "--- Params #{params.class} ---", "<<", params, ">>"
       resp = render(params)
-      controller.cookies.each do |k, v|
+      controller.cookies.to_h.each do |k, v|
         resp.set_cookie k, v
       end
       return resp

@@ -32,6 +32,7 @@ module Nephos
     def to_h
       return @hash
     end
+    alias :to_hash :to_h
 
     def to_s
       return to_h.to_s
