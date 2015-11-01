@@ -107,5 +107,9 @@ module Nephos
       end
     end
 
+    def log *args
+      Logger.write(*args)
+    end
+
   end
 end
