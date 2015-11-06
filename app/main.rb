@@ -60,7 +60,7 @@ class MainController < Nephos::Controller
     file = File.expand_path(params["image"], dir)
     if not file[0..(dir.size-1)] == dir or not AUTH_IMG_EXT.include?(File.extname(file))
       return {status: 500, content: "invalid path #{params['image']}"}
-    elsif not File.exists? file
+    elsif not File.exist? file
       return {status: 404, content: "invalid path #{params['image']}"}
     else
       return {type: 'image/jpeg', content: File.read(file)}

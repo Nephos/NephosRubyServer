@@ -24,7 +24,7 @@ $dir = opt[0] || "."
 begin
   if Dir.exists? $dir
     $gfl = File.expand_path "Gemfile.lock", $dir
-    if not File.exists? $gfl or
+    if not File.exist? $gfl or
        not File.read($gfl).split.index("nephos-server")
       raise "\"#{$dir}\" is not a valid nephos-server application"
     else
@@ -41,7 +41,7 @@ begin
       puts "Installed nephos-version: #{version}"
       puts "Controllers (#{n_controllers})"
       daemon = $dir + "/.pid"
-      puts "The application is deploye as daemon (#{File.read(daemon)})" if File.exists? daemon
+      puts "The application is deploye as daemon (#{File.read(daemon)})" if File.exist? daemon
     end
   else
     raise "\"#{$dir}\" is not a valid directory"

@@ -5,8 +5,8 @@ class TestNephosServerGenerator < Test::Unit::TestCase
 
     `./bin/nephos-generator --test -a /tmp/nephos-server-test --no-build --no-git`
     assert(Dir.exists? "/tmp/nephos-server-test")
-    assert(File.exists? "/tmp/nephos-server-test/Gemfile")
-    assert(File.exists? "/tmp/nephos-server-test/routes.rb")
+    assert(File.exist? "/tmp/nephos-server-test/Gemfile")
+    assert(File.exist? "/tmp/nephos-server-test/routes.rb")
     assert(Dir.exists? "/tmp/nephos-server-test/app")
     gemfile_data = File.read("/tmp/nephos-server-test/Gemfile").split("\n")
     assert(gemfile_data.include? "gem 'nephos'")
@@ -18,14 +18,14 @@ class TestNephosServerGenerator < Test::Unit::TestCase
 
     `./bin/nephos-generator --test -a /tmp/nephos-server-test --no-git`
     assert(Dir.exists? "/tmp/nephos-server-test")
-    assert(File.exists? "/tmp/nephos-server-test/Gemfile")
-    assert(File.exists? "/tmp/nephos-server-test/routes.rb")
+    assert(File.exist? "/tmp/nephos-server-test/Gemfile")
+    assert(File.exist? "/tmp/nephos-server-test/routes.rb")
     assert(Dir.exists? "/tmp/nephos-server-test/app")
     gemfile_data = File.read("/tmp/nephos-server-test/Gemfile").split("\n")
     assert(gemfile_data.include? "gem 'nephos'")
 
     # if connected to internet only
-    assert(File.exists? "/tmp/nephos-server-test/Gemfile.lock")
+    assert(File.exist? "/tmp/nephos-server-test/Gemfile.lock")
     gemfile_lock_data = File.read("/tmp/nephos-server-test/Gemfile.lock").split
     assert(gemfile_lock_data.include? "nephos")
     assert(gemfile_lock_data.include? "nephos-server")
@@ -37,17 +37,17 @@ class TestNephosServerGenerator < Test::Unit::TestCase
     `rm -f app/test_controller.rb`
 
     `./bin/nephos-generator --test -c test`
-    assert File.exists? "app/test_controller.rb"
+    assert File.exist? "app/test_controller.rb"
     assert_equal "class TestController < Nephos::Controller", File.read("app/test_controller.rb").split("\n").first
     `rm -f app/test_controller.rb`
 
     `./bin/nephos-generator -c test --test`
-    assert File.exists? "app/test_controller.rb"
+    assert File.exist? "app/test_controller.rb"
     assert_equal "class TestController < Nephos::Controller", File.read("app/test_controller.rb").split("\n").first
     `rm -f app/test_controller.rb`
 
     `./bin/nephos-generator -c testController --test`
-    assert File.exists? "app/test_controller.rb"
+    assert File.exist? "app/test_controller.rb"
     assert_equal "class TestController < Nephos::Controller", File.read("app/test_controller.rb").split("\n").first
     `rm -f app/test_controller.rb`
   end

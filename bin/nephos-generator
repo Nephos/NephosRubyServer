@@ -78,14 +78,14 @@ module Nephos
         file = "app/#{lname}.rb"
         raise_invalid_appli
         if $remove
-          if File.exists?(file) and File.read(file).include? "class #{uname} < Nephos::Controller"
+          if File.exist?(file) and File.read(file).include? "class #{uname} < Nephos::Controller"
             File.delete(file)
             puts "Success: ".yellow + "\"#{file}\" removed"
           else
             raise BinError, "\"#{file}\" is not a valid Controller file."
           end
         else
-          if File.exists? file
+          if File.exist? file
             print "Warning: ".yellow + "The file #{file} already exists. Are you sure to erase it ? (y/N) : "
             r = STDIN.gets.to_s.chomp
             raise BinError, "File #{file} already exists" unless r.match(/y(es)?/)

@@ -41,7 +41,7 @@ module Nephos
     end
 
     def error_custom(req, code, default=nil)
-      if File.exists? "app/#{code}.html"
+      if File.exist? "app/#{code}.html"
         @responder.render(status: code, html: File.read("app/#{code}.html"))
       else
         render_error(req, code, default || "Error: #{req.status}")

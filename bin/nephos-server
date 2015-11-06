@@ -67,7 +67,7 @@ begin
   end
 
   if not $test and
-    (not File.exists? "Gemfile.lock" or
+    (not File.exist? "Gemfile.lock" or
      not File.read("Gemfile.lock").split.index("nephos-server"))
     raise InvalidApplication
   end

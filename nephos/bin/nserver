@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-if File.exists? "Gemfile.lock" and File.read("Gemfile.lock").include? "nephos-server"
+if File.exist? "Gemfile.lock" and File.read("Gemfile.lock").include? "nephos-server"
   exec("bundle exec nephos-server #{ARGV.join ' '}")
 else
   exec("nephos-server #{ARGV.join ' '}")
