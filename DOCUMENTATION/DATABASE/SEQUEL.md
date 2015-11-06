@@ -8,12 +8,12 @@ It handles connection with DB, sql request creation, caching, etc.
 [Sequel documentation](http://sequel.jeremyevans.net/documentation.html)
 
 ## Installation
-
 ```bash
 gem install sequel
 ```
 
 ## Usage
+You can add the following code in ``/sequel.rb``:
 
 ```ruby
 require 'sequel'
