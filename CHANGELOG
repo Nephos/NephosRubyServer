@@ -1,17 +1,14 @@
-v0.6.9
+v0.7.0
+        * Remove depreciated method
+
+v0.6
         * Fix unitary tests
         * Fix binary server to handle daemons better
         * Add unitary test to test the server globaly
         * Log can be called from the controller
-
-v0.6.8
 	* Update urls and links
 	* Important fix for cookies
-
-v0.6.7
 	* Fix gemspec
-
-v0.6.6
 	* Improve functional tests (router)
 	* Improve executables (status)
 	* Improve router (disable verbose)
@@ -19,34 +16,22 @@ v0.6.6
 	* Update "nephos" gem to 1.0.4
 	* Add new feature Controller.url_for
 	* Add new feature log
-
-v0.6.5
 	* Improve routing helpers (optional url parameter)
 	* Add new functional tests (router)
 	* Add extension for url (.html, ...)
 	* Add improved router helper (simple destination, alias)
-
-v0.6.4
 	* Fix application generator (replace in the gemfile nephos-server by nephos)
         * Improve guides (more doc, corrections, update)
 	* Certificate for sign the gem
-
-v0.6.3
         * Add customisable default error page
-
-v0.6.2
         * Fix generator (bug when --application on current directory)
 	* Improve hooks (add the :only option)
 	* Improve documentation
 	* Improve routing (more tests, better duplicate / handlement)
-
-v0.6.1
 	* Improve daemons
 	* Improve Rakefile and tests structure
 	* Add few functional (router, server, generator) tests
 	* Add new unitary tests
-
-v0.6.0
 	* Big change (ea49dfb0b429f03327447477bfee9bef30dda7ad) on the architecture, massive usage of Rack::Request, review the global architecture, update all unitary tests
 	* add hook before_action and after_action
 	* improve params
