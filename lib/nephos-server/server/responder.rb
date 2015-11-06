@@ -97,7 +97,7 @@ module Nephos
       params = set_default_params(params)
       resp.status = params[:status]
       resp["Content-Type"] = params[:type]
-      resp.body = [params[:content]]
+      resp.body = [params[:content] + "\n"]
       return resp
     end
 

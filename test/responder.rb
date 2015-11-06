@@ -111,13 +111,13 @@ class TestNephosServerResponder < Test::Unit::TestCase
     r3 = Nephos::Responder.new.render(status: 201, html: "<p>p</p>")
     assert_equal(201, r1.status)
     assert_equal("text/plain; charset=UTF-8", r1["Content-type"])
-    assert_equal(["plaaaain"], r1.body)
+    assert_equal(["plaaaain\n"], r1.body)
     assert_equal(201, r2.status)
     assert_equal("application/json; charset=UTF-8", r2["Content-type"])
-    assert_equal(["{\"data\":[1,2]}"], r2.body)
+    assert_equal(["{\"data\":[1,2]}\n"], r2.body)
     assert_equal(201, r3.status)
     assert_equal("text/html; charset=UTF-8", r3["Content-type"])
-    assert_equal(["<p>p</p>"], r3.body)
+    assert_equal(["<p>p</p>\n"], r3.body)
   end
 
 end
