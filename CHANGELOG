@@ -2,6 +2,7 @@ v0.6.9
         * Fix unitary tests
         * Fix binary server to handle daemons better
         * Add unitary test to test the server globaly
+        * Log can be called from the controller
 
 v0.6.8
 	* Update urls and links
