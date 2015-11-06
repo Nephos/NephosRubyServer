@@ -44,6 +44,7 @@ test/logger.rb
 test/controller.rb
 
 test/functional.rb
+test/functional/controller.rb
 test/functional/generator.rb
 test/functional/global.rb
 test/functional/router.rb
