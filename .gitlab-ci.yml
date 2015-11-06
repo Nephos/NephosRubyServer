@@ -7,3 +7,4 @@ test:
   script:
     - rake test
     - rake test:functional
+    - rake test:functional:internet
