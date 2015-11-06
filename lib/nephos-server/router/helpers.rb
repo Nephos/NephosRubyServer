@@ -17,9 +17,9 @@ end
 # if the client request match with the verb and the url provided.
 #
 # Checkout the documentation about the parameters and API for more informations
-def add_route(verb, url=nil, what)
+def add_route(verb, option_url=nil, what)
   raise InvalidRoute, "what must be a hash" unless what.is_a? Hash
-  what[:url] ||= url
+  what[:url] ||= option_url
   Array(what[:url]).each do |url|
     route = what.dup
     route[:url] = url
