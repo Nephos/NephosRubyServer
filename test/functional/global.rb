@@ -19,6 +19,25 @@ class TestGlobal < Test::Unit::TestCase
     assert_equal "{\"list\":[],\"add\":\"/add\",\"rm\":\"/rm\"}", r.read
     assert_equal "application/json; charset=UTF-8", r.meta["content-type"]
     assert_equal "a=b", r.meta["set-cookie"]
+    assert_equal ["200", "OK"], r.status
+
+    r = open("http://127.0.0.1:8080/home")
+    assert_equal "{\"list\":[],\"add\":\"/add\",\"rm\":\"/rm\"}", r.read
+    assert_equal "application/json; charset=UTF-8", r.meta["content-type"]
+    assert_equal "a=b", r.meta["set-cookie"]
+    assert_equal ["200", "OK"], r.status
+
+    r = open("http://127.0.0.1:8080/home/")
+    assert_equal "{\"list\":[],\"add\":\"/add\",\"rm\":\"/rm\"}", r.read
+    assert_equal "application/json; charset=UTF-8", r.meta["content-type"]
+    assert_equal ["200", "OK"], r.status
+
+    r = open("http://127.0.0.1:8080/hello")
+    assert_equal "<html><body><h1>hello world</h1><p>lol</p></body></html>", r.read
+    assert_equal ["200", "OK"], r.status
+
+    assert_raise do open("http://127.0.0.1:8080/err500") end
+
     stop_server
   end
 
