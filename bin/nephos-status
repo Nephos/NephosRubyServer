@@ -29,7 +29,7 @@ begin
       raise "\"#{$dir}\" is not a valid nephos-server application"
     else
       data = File.read($gfl).split("\n").map(&:strip)
-      version = data.map{|e| e.match /nephos-server \((?<version>\d+(\.\d+)+)\)/ }.compact.first
+      version = data.map{|e| e.match(/nephos-server \((?<version>\d+(\.\d+)+)\)/) }.compact.first
       raise "\"#{$gfl}\" doesn't contain a valid nephos-server version" unless version
       version = version["version"]
       path = $gfl.gsub(/Gemfile\.lock$/, "")
