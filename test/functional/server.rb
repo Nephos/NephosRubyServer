@@ -2,9 +2,11 @@ class TestNephosServerBinServer < Test::Unit::TestCase
 
   def test_daemon
     # WARNING: be sure there is no instance before running theses tests
+    `./bin/nephos-server --test -k`
 
     # test start and kill
     `./bin/nephos-server --test -d`
+    sleep 1
     assert_equal 0, $?.exitstatus
     `./bin/nephos-server --test -k`
     assert_equal 0, $?.exitstatus
@@ -17,6 +19,7 @@ class TestNephosServerBinServer < Test::Unit::TestCase
 
     # test start after killed
     `./bin/nephos-server --test -d`
+    sleep 1
     assert_equal 0, $?.exitstatus
 
     # test start after started

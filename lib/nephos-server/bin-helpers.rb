@@ -29,8 +29,9 @@ module Nephos
         d = get_pid
         return false unless d
         begin
-          Process::kill(10, d)
+          Process::kill(2, d)
         rescue => err
+          raise "Cannot kill #{d} ! (#{err.message})" if $debug
           raise "Cannot kill #{d} !"
         ensure
           File.delete(get_pid_file)

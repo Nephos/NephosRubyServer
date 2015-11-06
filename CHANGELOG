@@ -1,3 +1,8 @@
+v0.6.9
+        * Fix unitary tests
+        * Fix binary server to handle daemons better
+        * Add unitary test to test the server globaly
+
 v0.6.8
 	* Update urls and links
 	* Important fix for cookies

@@ -51,8 +51,9 @@ begin
 
   if $kill_daemon
     raise "No Daemon started" if not Nephos::Bin::Daemon.started?
-    puts "Daemon #{Nephos::Bin::Daemon.get_pid} stopped"
+    pid = Nephos::Bin::Daemon.get_pid
     Nephos::Bin::Daemon.kill!
+    puts "Daemon #{pid} stopped"
     exit 0
   end
   if $daemon and Nephos::Bin::Daemon.started?
