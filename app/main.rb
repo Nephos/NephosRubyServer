@@ -76,9 +76,9 @@ class MainController < Nephos::Controller
     {json: cookies.to_h}
   end
 
-  # require 'pry'
+  require 'pry'
   def debug
-    # binding.pry
+    binding.pry
     {}
   end
 

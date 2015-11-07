@@ -9,38 +9,44 @@ require_relative '../lib/nephos-server/version'
 class RoutingError < StandardError; end
 
 begin
-  opts = OptionParser.new do |opts|
-    opts.banner = "Usage<#{Nephos::VERSION}>: nephos-server <options>"
+  opts = OptionParser.new do |opt|
+    opt.banner = "Usage<#{Nephos::VERSION}>: nephos-server <options>"
 
     $server_port = ENV["SERVER_PORT"] || 8080
-    opts.on("-p=nb", "--port=nb", "Port to listen") do |port|
+    opt.on("-p=nb", "--port=nb", "Port to listen") do |port|
       $server_port = Integer(port)
     end
 
     $server_host = ENV["SERVER_HOST"] || "0.0.0.0"
-    opts.on("-h=listen", "--host=listen", "Listen on the network") do |host|
+    opt.on("-h=listen", "--host=listen", "Listen on the network") do |host|
       $server_host = host
     end
 
     $server_env = ENV["ENVIRONMENT"] || "development"
-    opts.on("-e=env", "--env=env", "Environment") do |env|
+    opt.on("-e=env", "--env=env", "Environment") do |env|
       $server_env = env
     end
 
-    opts.on("--debug", "Enable debugging mode") do
+    opt.on("--debug", "Enable debugging mode") do
       $debug = true
     end
 
-    opts.on("--test", "Enable testing mode (for nephos developpers)") do
+    opt.on("--test", "Enable testing mode (for nephos developpers)") do
       $test = true
     end
 
-    opts.on("-d", "--daemon", "Start in background") do
+    opt.on("-d", "--daemon", "Start in background") do
       $daemon = true
     end
 
-    opts.on("-k", "--kill", "Kill the daemon if started") do
+    opt.on("-k", "--kill", "Kill the daemon if started") do
       $kill_daemon = true
+    end
+
+    opt.on("-r", "--restart", "Restart the daemon if started") do
+      $restart_daemon = true
+      $kill_daemon = true
+      $daemon = true
     end
 
   end.parse!
@@ -54,7 +60,7 @@ begin
     pid = Nephos::Bin::Daemon.get_pid
     Nephos::Bin::Daemon.kill!
     puts "Daemon #{pid} stopped"
-    exit 0
+    exit 0 unless $restart_daemon
   end
   if $daemon and Nephos::Bin::Daemon.started?
     raise "Unable to start the server: the daemon #{Nephos::Bin::Daemon.get_pid} already exists"
