@@ -3,7 +3,6 @@ GEM
   specs:
     colorize (0.7.7)
     nomorebeer (1.1)
-    puma (2.14.0)
     rack (1.6.4)
 
 PLATFORMS
@@ -12,8 +11,7 @@ PLATFORMS
 DEPENDENCIES
   colorize
   nomorebeer
-  puma
   rack
 
 BUNDLED WITH
-   1.10.5
+   1.10.6

@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = File.read("version")
   s.date        = Time.now.getgm.to_s.split.first
   s.summary     = File.read("CHANGELOG").match(/^v[^\n]+\n((\t[^\n]+\n)+)/m)[1].split("\t").join
-  s.description = ' a minimalist server, based on rack/puma, with routing, rendering, and controllers. Designed for quick api.'
+  s.description = ' a minimalist server, based on rack, with routing, rendering, and controllers. Designed for quick api.'
   s.authors     = ['poulet_a']
   s.email       = ['poulet_a@epitech.eu']
   s.files       = %w(
@@ -74,6 +74,5 @@ nephos-status
   s.add_dependency 'nomorebeer', '~> 1.1'
   s.add_dependency 'rack', '~> 1.6'
   s.add_dependency 'colorize', '~> 0.7'
-  s.add_dependency 'puma', '~> 2.13'
 
 end

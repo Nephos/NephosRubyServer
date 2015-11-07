@@ -1,3 +1,7 @@
+v0.7.1
+        * Fix cookies
+        * Remove puma requirement
+
 v0.7.0
         * Remove depreciated method
         * Large cookie improvement (can change the path)
