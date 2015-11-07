@@ -23,7 +23,8 @@ module Nephos
     end
 
     def [] i
-      @hash[i.to_s][:content]
+      c = @hash[i.to_s]
+      c && c[:content]
     end
 
     def []= i, v, path="/"
