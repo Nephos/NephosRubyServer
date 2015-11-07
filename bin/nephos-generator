@@ -105,7 +105,7 @@ EOF
 
     module Application
       def self.create_application_dir dir
-        raise BinError, "Directory #{dir} already exists" if Dir.exists? dir and dir != "."
+        raise BinError, "Directory #{dir} already exists" if Dir.exist? dir and dir != "."
         Dir.mkdir dir
       end
 

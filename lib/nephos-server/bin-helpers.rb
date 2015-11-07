@@ -12,7 +12,7 @@ module Nephos
     # note: if the Gemfile includes nephos and not nephos-server,
     # it will work anyway, because nephos require nephos-server
     def self.is_a_valid_application? dir="."
-      return false if not Dir.exists? dir
+      return false if not Dir.exist? dir
       gfl = File.expand_path "Gemfile.lock", dir
       return false if not File.exist? gfl
       return false if not File.read(gfl).split.index("nephos-server")

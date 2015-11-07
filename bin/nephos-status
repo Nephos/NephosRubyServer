@@ -22,7 +22,7 @@ end.parse!
 $dir = opt[0] || "."
 
 begin
-  if Dir.exists? $dir
+  if Dir.exist? $dir
     $gfl = File.expand_path "Gemfile.lock", $dir
     if not File.exist? $gfl or
        not File.read($gfl).split.index("nephos-server")
