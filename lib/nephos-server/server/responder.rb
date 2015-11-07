@@ -83,7 +83,8 @@ module Nephos
       # puts "--- Params #{params.class} ---", "<<", params, ">>"
       resp = render(params)
       controller.cookies.to_h.each do |k, v|
-        resp.set_cookie k, v
+        resp.set_cookie k, v[:content]
+        resp.header["Set-Cookie"] += ";path=" + v[:path]
       end
       return resp
     end

@@ -33,7 +33,7 @@ class TestController < Test::Unit::TestCase
     router = Nephos::Router.new(silent: true)
     r = Rack::Request.new({"REQUEST_METHOD"=>"GET", "PATH_INFO"=>"/add_cookie"})
     out = router.execute(r)
-    assert_equal "UN_COOKIE_VAUT%3A=UN+BON+MOMENT+%21", out.header["Set-Cookie"]
+    assert_equal "UN_COOKIE_VAUT%3A=UN+BON+MOMENT+%21;path=/", out.header["Set-Cookie"]
   end
 
 end

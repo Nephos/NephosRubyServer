@@ -25,7 +25,7 @@ module Nephos
       @params.select!{|k,v| not k.to_s.empty?}
 
       @params = Params.new(@params)
-      @cookies = Params.new(@req.cookies)
+      @cookies = Cookies.new(@req.cookies)
 
       @extension = extension.to_s.split(".").last
     end

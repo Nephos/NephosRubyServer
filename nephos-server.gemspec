@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.files       = %w(
 lib/nephos-server.rb
 lib/nephos-server/basic_errors.rb
+lib/nephos-server/cookies.rb
 lib/nephos-server/bin-helpers.rb
 lib/nephos-server/controller.rb
 lib/nephos-server/params.rb

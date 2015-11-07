@@ -18,13 +18,13 @@ class TestGlobal < Test::Unit::TestCase
     r = open("http://127.0.0.1:8080/")
     assert_equal "{\"list\":[],\"add\":\"/add\",\"rm\":\"/rm\"}\n", r.read
     assert_equal "application/json; charset=UTF-8", r.meta["content-type"]
-    assert_equal "a=b", r.meta["set-cookie"]
+    assert_equal "a=b;path=/", r.meta["set-cookie"]
     assert_equal ["200", "OK"], r.status
 
     r = open("http://127.0.0.1:8080/home")
     assert_equal "{\"list\":[],\"add\":\"/add\",\"rm\":\"/rm\"}\n", r.read
     assert_equal "application/json; charset=UTF-8", r.meta["content-type"]
-    assert_equal "a=b", r.meta["set-cookie"]
+    assert_equal "a=b;path=/", r.meta["set-cookie"]
     assert_equal ["200", "OK"], r.status
 
     r = open("http://127.0.0.1:8080/home/")

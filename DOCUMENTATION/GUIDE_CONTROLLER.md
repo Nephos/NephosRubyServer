@@ -9,7 +9,11 @@ Example:
 ```ruby
     cookies["a"] = "b" # add a cookie named "a"
     cookies.delete("b") # remove a cookie named "b"
+    cookies.set_path("a", "/a")
 ```
+
+* TODO: Change expiration date, domain, ...
+* Note: By default, every cookie's path is "/"
 
 
 ### Params

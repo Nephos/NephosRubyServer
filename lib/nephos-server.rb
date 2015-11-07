@@ -12,6 +12,7 @@ require_relative 'nephos-server/version'
 # lib
 require_relative 'nephos-server/basic_errors'
 require_relative 'nephos-server/params'
+require_relative 'nephos-server/cookies'
 require_relative 'nephos-server/controller'
 require_relative 'nephos-server/router/main'
 

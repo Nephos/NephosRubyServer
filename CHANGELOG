@@ -1,5 +1,6 @@
 v0.7.0
         * Remove depreciated method
+        * Large cookie improvement (can change the path)
 
 v0.6
         * Fix unitary tests
