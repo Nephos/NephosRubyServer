@@ -31,6 +31,10 @@ begin
       $debug = true
     end
 
+    opt.on("--verbose=mode", "Enable verbosity [output|none=default]") do |mode|
+      $verbose = mode
+    end
+
     opt.on("--test", "Enable testing mode (for nephos developpers)") do
       $test = true
     end

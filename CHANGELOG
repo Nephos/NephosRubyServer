@@ -1,3 +1,6 @@
+v0.7.2
+        * add verbosity option
+
 v0.7.1
         * Fix cookies
         * Remove puma requirement

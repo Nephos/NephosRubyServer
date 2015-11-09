@@ -22,10 +22,13 @@ module Nephos
     # render the return of a call to Controller.new.method.
     # Controller and method are stored on call via the keys :controller and :method
     def render_controller req, call
-      return @responder.render_from_controller(req, call)
+      out = @responder.render_from_controller(req, call)
+      STDERR.puts "<--- #{out.body}" if $verbose == "output"
+      return out
     end
 
     def render_error(req, code, err=nil)
+      STDERR.puts "Error #{code}" if $verbose == "output"
       if Nephos.env == "production"
         return @responder.render(status: code)
       elsif err
@@ -41,6 +44,7 @@ module Nephos
     end
 
     def error_custom(req, code, default=nil)
+      STDERR.puts "Error #{code}" if $verbose == "output"
       if File.exist? "app/#{code}.html"
         @responder.render(status: code, html: File.read("app/#{code}.html"))
       else
@@ -49,6 +53,7 @@ module Nephos
     end
 
     def error_404(req)
+      STDERR.puts "Error 404" if $verbose == "output"
       out = error_custom(req, 404, "404 not found \"#{req.path}\"")
       out.body[0].gsub!("INJECT_REQ_PATH", req.path)
       return out
