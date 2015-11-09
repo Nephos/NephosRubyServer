@@ -64,7 +64,7 @@ module Nephos
     # Interface which handle the client query (stored in env), create a new
     # {Controller} instance, and call the render on it
     def execute(req)
-      env = req.env
+      #env = req.env
       puts "#{req.env["REMOTE_ADDR"]} [#{req.request_method}] \t ---> \t #{req.path}" unless @silent
       call = find_route(req)
       # require 'pry'

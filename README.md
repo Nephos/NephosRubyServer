@@ -107,9 +107,6 @@ end
 
 # Developers: Roadmap
 
-## TODO v0.6
-- functionnal tests
-
 ## TODO v0.7
 - feature to change HTTP header from controller
 - Documentation on architecture (UML)

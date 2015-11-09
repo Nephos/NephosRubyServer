@@ -18,7 +18,6 @@ module Nephos
 
     def method_missing m, *a
       @hash.send(m, *(a.map(&:to_s)))
-      @hash.send(m, *a)
     end
 
     def [] i
