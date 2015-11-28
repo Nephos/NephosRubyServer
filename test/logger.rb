@@ -13,16 +13,16 @@ class TestNephosServerLogger < Test::Unit::TestCase
 
     fd = File.open(FILE, "w")
     Nephos::Logger.fd = fd
-    Nephos::Logger.write %w(hello wôrld)
-    assert_equal("hello\nwôrld\n", File.read(FILE))
+    Nephos::Logger.write %w(hello world)
+    assert_equal("hello\nworld\n", File.read(FILE))
     File.delete FILE
   end
 
   def test_basic_shortcut
     fd = File.open(FILE, "w")
     Nephos::Logger.fd = fd
-    Nephos.log %w(hello wôrld)
-    assert_equal("hello\nwôrld\n", File.read(FILE))
+    Nephos.log %w(hello world)
+    assert_equal("hello\nworld\n", File.read(FILE))
     File.delete FILE
   end
 

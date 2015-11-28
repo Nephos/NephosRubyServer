@@ -111,6 +111,7 @@ end
 - feature to change HTTP header from controller
 - Documentation on architecture (UML)
 - Improved documentation (Tutorial, Improved guides)
+- Improved daemon (/tmp/.../.pid) + multi port
 
 ## v1 requierements
 - Environement, Daemons, Port, Listen Host, Routables, Arguments
