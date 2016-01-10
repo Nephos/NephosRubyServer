@@ -1,7 +1,7 @@
 # Render API
 
 ## What is the Render API ?
-The render API is a simple system to allows you to render HTTP responses to a client.
+A simple API allows you to render HTTP responses to a client.
 It is a simple way to render data to the user and choose it's type.
 
 The API allows you to customize differents parts of the response:
